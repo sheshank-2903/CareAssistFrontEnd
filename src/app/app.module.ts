@@ -8,10 +8,17 @@ import { AppComponent } from './app.component';
 import { HealthCareProviderComponent } from './components/HealthCareProviderComponents/health-care-provider/health-care-provider.component';
 import { ClaimComponent } from './components/ClaimComponents/claim/claim.component';
 import { InsuranceCompanyComponent } from './components/InsuranceCompanyComponents/insurance-company/insurance-company.component';
-import { AdminComponent } from './components/AdminComponent/admin/admin.component';
+import { AdminComponent } from './components/AdminComponents/admin/admin.component';
 import { InvoicesComponent } from './components/InvoicesComponents/invoices/invoices.component';
 import { PatientComponent } from './components/PatientComponent/patient/patient.component';
 import { PlansComponent } from './components/PlansComponents/plans/plans.component';
+import { AdminHomeComponent } from './components/AdminComponents/admin-home/admin-home.component';
+import { AdminPatientComponent } from './components/AdminComponents/admin-patient/admin-patient.component';
+import { AdminHealthCareProviderComponent } from './components/AdminComponents/admin-health-care-provider/admin-health-care-provider.component';
+import { AdminInsuranceCompanyComponent } from './components/AdminComponents/admin-insurance-company/admin-insurance-company.component';
+import { AdminPlansComponent } from './components/AdminComponents/admin-plans/admin-plans.component';
+import { AdminClaimsComponent } from './components/AdminComponents/admin-claims/admin-claims.component';
+import { AdminInvoicesComponent } from './components/AdminComponents/admin-invoices/admin-invoices.component';
 
 
 
@@ -21,10 +28,17 @@ import { PlansComponent } from './components/PlansComponents/plans/plans.compone
     AdminComponent,
     HealthCareProviderComponent,
     ClaimComponent,
-    InsuranceCompanyComponent
+    InsuranceCompanyComponent,
     InvoicesComponent,
     PatientComponent,
-    PlansComponent
+    PlansComponent,
+    AdminHomeComponent,
+    AdminPatientComponent,
+    AdminHealthCareProviderComponent,
+    AdminInsuranceCompanyComponent,
+    AdminPlansComponent,
+    AdminClaimsComponent,
+    AdminInvoicesComponent
   ],
   imports: [
     BrowserModule,
