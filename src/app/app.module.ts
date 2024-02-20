@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HealthCareProviderComponent } from './components/HealthCareProviderComponents/health-care-provider/health-care-provider.component';
 import { ClaimComponent } from './components/ClaimComponents/claim/claim.component';
 import { InsuranceCompanyComponent } from './components/InsuranceCompanyComponents/insurance-company/insurance-company.component';
-import { AdminComponent } from './components/AdminComponent/admin/admin.component';
+import { AdminComponent } from './components/AdminComponents/admin/admin.component';
 import { InvoicesComponent } from './components/InvoicesComponents/invoices/invoices.component';
 import { PatientComponent } from './components/PatientComponent/patient/patient.component';
 import { PlansComponent } from './components/PlansComponents/plans/plans.component';
@@ -21,7 +21,7 @@ import { PlansComponent } from './components/PlansComponents/plans/plans.compone
     AdminComponent,
     HealthCareProviderComponent,
     ClaimComponent,
-    InsuranceCompanyComponent
+    InsuranceCompanyComponent,
     InvoicesComponent,
     PatientComponent,
     PlansComponent
