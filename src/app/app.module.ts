@@ -19,6 +19,9 @@ import { AdminInsuranceCompanyComponent } from './components/AdminComponents/adm
 import { AdminPlansComponent } from './components/AdminComponents/admin-plans/admin-plans.component';
 import { AdminClaimsComponent } from './components/AdminComponents/admin-claims/admin-claims.component';
 import { AdminInvoicesComponent } from './components/AdminComponents/admin-invoices/admin-invoices.component';
+import { InsuranceCompanyPlansComponent } from './components/InsuranceCompanyComponents/insurance-company-plans/insurance-company-plans.component';
+import { InsuranceCompanyClaimsComponent } from './components/InsuranceCompanyComponents/insurance-company-claims/insurance-company-claims.component';
+import { InsuranceCompanyProfileComponent } from './components/InsuranceCompanyComponents/insurance-company-profile/insurance-company-profile.component';
 
 
 
@@ -38,7 +41,10 @@ import { AdminInvoicesComponent } from './components/AdminComponents/admin-invoi
     AdminInsuranceCompanyComponent,
     AdminPlansComponent,
     AdminClaimsComponent,
-    AdminInvoicesComponent
+    AdminInvoicesComponent,
+    InsuranceCompanyPlansComponent,
+    InsuranceCompanyClaimsComponent,
+    InsuranceCompanyProfileComponent
   ],
   imports: [
     BrowserModule,

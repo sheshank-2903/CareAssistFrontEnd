@@ -12,6 +12,9 @@ import { AdminInvoicesComponent } from './components/AdminComponents/admin-invoi
 import { AdminInsuranceCompanyComponent } from './components/AdminComponents/admin-insurance-company/admin-insurance-company.component';
 import { AdminClaimsComponent } from './components/AdminComponents/admin-claims/admin-claims.component';
 import { AdminHealthCareProviderComponent } from './components/AdminComponents/admin-health-care-provider/admin-health-care-provider.component';
+import { InsuranceCompanyPlansComponent } from './components/InsuranceCompanyComponents/insurance-company-plans/insurance-company-plans.component';
+import { InsuranceCompanyClaimsComponent } from './components/InsuranceCompanyComponents/insurance-company-claims/insurance-company-claims.component';
+import { InsuranceCompanyProfileComponent } from './components/InsuranceCompanyComponents/insurance-company-profile/insurance-company-profile.component';
 
 const routes: Routes = [
   {path:'admin/home',component:AdminHomeComponent},
@@ -23,7 +26,11 @@ const routes: Routes = [
   {path:'admin/claims',component:AdminClaimsComponent},
 
   {path:'healthCareProvider',component:HealthCareProviderComponent},
-  {path:'insuranceCompany',component:InsuranceCompanyComponent},
+
+  {path:'insuranceCompany/home',component:InsuranceCompanyPlansComponent},
+  {path:'insuranceCompany/claims',component:InsuranceCompanyClaimsComponent},
+  {path:'insuranceCompany/profile',component:InsuranceCompanyProfileComponent},
+
   {path:'patient',component:PatientComponent},
   {path:'',redirectTo:'admin/home',pathMatch:'full'},
 ];
