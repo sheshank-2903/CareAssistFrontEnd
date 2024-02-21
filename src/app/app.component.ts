@@ -12,11 +12,11 @@ export class AppComponent {
   if(role=="ADMIN")
     this.router.navigate(['/admin/home']);
   else if(role == "PATIENT")
-    this.router.navigate(['/patient']);
+    this.router.navigate(['/patient/home']);
   else if(role=="INSURANCE_COMPANY")
     this.router.navigate(['/insuranceCompany/home']);
   else if(role=="HEALTH_CARE_PROVIDER")
-    this.router.navigate(['/healthCareProvider']);
+    this.router.navigate(['/healthCareProvider/home']);
 }
-  title = 'careAssist';
+  title = 'CareAssist';
 }
