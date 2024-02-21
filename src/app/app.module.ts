@@ -19,9 +19,16 @@ import { AdminInsuranceCompanyComponent } from './components/AdminComponents/adm
 import { AdminPlansComponent } from './components/AdminComponents/admin-plans/admin-plans.component';
 import { AdminClaimsComponent } from './components/AdminComponents/admin-claims/admin-claims.component';
 import { AdminInvoicesComponent } from './components/AdminComponents/admin-invoices/admin-invoices.component';
+
+import { InsuranceCompanyPlansComponent } from './components/InsuranceCompanyComponents/insurance-company-plans/insurance-company-plans.component';
+import { InsuranceCompanyClaimsComponent } from './components/InsuranceCompanyComponents/insurance-company-claims/insurance-company-claims.component';
+import { InsuranceCompanyProfileComponent } from './components/InsuranceCompanyComponents/insurance-company-profile/insurance-company-profile.component';
+
 import { HealthCareProviderHomeComponent } from './components/HealthCareProviderComponents/health-care-provider-home/health-care-provider-home.component';
 import { HealthCareProviderPatientComponent } from './components/HealthCareProviderComponents/health-care-provider-patient/health-care-provider-patient.component';
 import { HealthCareProviderInvoiceHistoryComponent } from './components/HealthCareProviderComponents/health-care-provider-invoice-history/health-care-provider-invoice-history.component';
+
+
 import { PatientHomeComponent } from './components/PatientComponent/patient-home/patient-home.component';
 import { PatientPlansComponent } from './components/PatientComponent/patient-plans/patient-plans.component';
 import { PatientPurchasedPlansComponent } from './components/PatientComponent/patient-purchased-plans/patient-purchased-plans.component';
@@ -29,6 +36,7 @@ import { PatientRequestInvoiceComponent } from './components/PatientComponent/pa
 import { PatientInvoicesComponent } from './components/PatientComponent/patient-invoices/patient-invoices.component';
 import { PatientClaimsComponent } from './components/PatientComponent/patient-claims/patient-claims.component';
 import { HealthCareProviderProfileComponent } from './components/HealthCareProviderComponents/health-care-provider-profile/health-care-provider-profile.component';
+
 
 
 
@@ -50,6 +58,11 @@ import { HealthCareProviderProfileComponent } from './components/HealthCareProvi
     AdminPlansComponent,
     AdminClaimsComponent,
     AdminInvoicesComponent,
+
+    InsuranceCompanyPlansComponent,
+    InsuranceCompanyClaimsComponent,
+    InsuranceCompanyProfileComponent
+
     HealthCareProviderHomeComponent,
     HealthCareProviderPatientComponent,
     HealthCareProviderInvoiceHistoryComponent,
@@ -60,6 +73,7 @@ import { HealthCareProviderProfileComponent } from './components/HealthCareProvi
     PatientInvoicesComponent,
     PatientClaimsComponent,
     HealthCareProviderProfileComponent
+
   ],
   imports: [
     BrowserModule,
