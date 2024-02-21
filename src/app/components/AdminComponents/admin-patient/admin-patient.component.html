@@ -5,6 +5,7 @@
     <button type="button" class="btn btn-outline-info ml-3">Search By Id</button>
     <button type="button" class="btn btn-outline-info ml-3">Search By Name</button>
 </div>
+<div style="min-width: 100%; overflow-x: scroll; max-width: 100vh; width: 100vh;">
     <table class="table mt-10% table-hover table-bordered text-center">
         <thead class="thead-dark">
           <tr>
@@ -19,39 +20,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>Status</th>
+          <tr *ngFor="let patient of patientList">
+            <th>{{patient.patientId}}</th>
+            <td>{{patient.patientName}}</td>
+            <th>{{patient.dob}}</th>
+            <th>{{patient.contact}}</th>
+            <td>{{patient.address}}</td>
+            <th>{{patient.descriptionOfTreatment}}</th>
+            <th>{{patient.email}}</th>
             <td>
                 <button type="button" class="btn btn-danger">Delete</button>
             </td>
           </tr>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>Status</th>
-            <td><button type="button" class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>Status</th>
-            <td><button type="button" class="btn btn-danger">Delete</button></td>
-          </tr>
         </tbody>
       </table>
+    </div>
 </div >
 

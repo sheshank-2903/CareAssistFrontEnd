@@ -61,7 +61,7 @@ import { HealthCareProviderProfileComponent } from './components/HealthCareProvi
 
     InsuranceCompanyPlansComponent,
     InsuranceCompanyClaimsComponent,
-    InsuranceCompanyProfileComponent
+    InsuranceCompanyProfileComponent,
 
     HealthCareProviderHomeComponent,
     HealthCareProviderPatientComponent,
