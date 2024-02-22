@@ -12,7 +12,7 @@ export class AppComponent {
   if(role=="ADMIN")
     this.router.navigate(['/admin/home']);
   else if(role == "PATIENT")
-    this.router.navigate(['/patient/home']);
+    this.router.navigate(['/patient/browsePlans']);
   else if(role=="INSURANCE_COMPANY")
     this.router.navigate(['/insuranceCompany/home']);
   else if(role=="HEALTH_CARE_PROVIDER")
