@@ -1,5 +1,51 @@
 
-/* Style for the tab content */
+.main-container{
+    margin-top: 4%;
+    padding-left: 2%;
+    padding-right: 2%;
+   
+}
+
+
+.tab-container{
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    
+}
+
+
+.tab-container button{
+    box-shadow: none;
+    outline: none;
+}
+
+.tab{
+    width: 100%;
+    color:rgb(23,162,184);
+    border-color:rgb(23,162,184);
+    background-color: rgb(255, 255, 255);
+    padding: 1.5%;
+    border-radius: 10px;
+
+}
+
+
+
+#button-healthCare{
+   margin-right: 2%; 
+   margin-left: 2%;
+}
+
+
+.tab:hover{
+    color:rgb(255, 255, 255);
+    border-color:rgb(23,162,184);
+    background-color: rgb(23,162,184);
+
+}
+
+
 .tab-content {
     display: none;
     padding: 20px;
@@ -7,11 +53,18 @@
     width: 100%;
 }
 
-/* Show the active tab content */
+
 .tab-content.active {
     display: block;
+    border:none;
 }
 
+
 .tab.active{
-    color: red;
+    color:rgb(255, 255, 255);
+    border-color:rgb(23,162,184);
+    background-color: rgb(23,162,184);
+    border: none;
 }
+
+
