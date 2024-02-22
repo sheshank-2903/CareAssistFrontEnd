@@ -39,6 +39,10 @@ import { PatientInvoicesComponent } from './components/PatientComponent/patient-
 import { PatientClaimsComponent } from './components/PatientComponent/patient-claims/patient-claims.component';
 import { HealthCareProviderProfileComponent } from './components/HealthCareProviderComponents/health-care-provider-profile/health-care-provider-profile.component';
 import { AdminProfileComponent } from './components/AdminComponents/admin-profile/admin-profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 
 
 
@@ -76,7 +80,11 @@ import { AdminProfileComponent } from './components/AdminComponents/admin-profil
     PatientInvoicesComponent,
     PatientClaimsComponent,
     HealthCareProviderProfileComponent,
-    AdminProfileComponent
+    AdminProfileComponent,
+    LoginComponent,
+    RegistrationComponent,
+    AboutUsComponent,
+    FeedbackComponent
 
   ],
   imports: [

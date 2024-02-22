@@ -28,6 +28,10 @@ import { PatientPurchasedPlansComponent } from './components/PatientComponent/pa
 import { PatientClaimsComponent } from './components/PatientComponent/patient-claims/patient-claims.component';
 import { HealthCareProviderProfileComponent } from './components/HealthCareProviderComponents/health-care-provider-profile/health-care-provider-profile.component';
 import { AdminProfileComponent } from './components/AdminComponents/admin-profile/admin-profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 
 
 const routes: Routes = [
@@ -72,10 +76,14 @@ const routes: Routes = [
 
 
 
-
-
-
   {path:'',redirectTo:'admin/home',pathMatch:'full'},
+
+  {path:'login',component:LoginComponent},
+  {path:'registration',component:RegistrationComponent},
+  {path:'aboutUs',component:AboutUsComponent},
+  {path:'feedback',component:FeedbackComponent},
+
+
 ];
 
 @NgModule({

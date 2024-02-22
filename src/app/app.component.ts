@@ -17,6 +17,14 @@ export class AppComponent {
     this.router.navigate(['/insuranceCompany/home']);
   else if(role=="HEALTH_CARE_PROVIDER")
     this.router.navigate(['/healthCareProvider/home']);
+  else if(role=="LOGIN")
+    this.router.navigate(['/login'])
+  else if(role=="REGISTRATION")
+    this.router.navigate(['/registration'])
+  else if(role=="ABOUT_US")
+    this.router.navigate(['/aboutUs'])
+  else if(role=="FEEDBACK")
+    this.router.navigate(['/feedback'])
 }
   title = 'CareAssist';
 }

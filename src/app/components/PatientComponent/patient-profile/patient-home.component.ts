@@ -13,7 +13,7 @@ export class PatientHomeComponent {
   updateForm !: FormGroup;
 
   constructor(private formBuilder: FormBuilder){
-
+    
   }
 
   ngOnInit(){
@@ -28,7 +28,7 @@ export class PatientHomeComponent {
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
       confirm_password: ['', Validators.required] 
-    },{ validator: this.passwordMatchValidator });
+    },{validator: this.passwordMatchValidator});
   }
 
 

@@ -1,0 +1,17 @@
+
+/* Style for the tab content */
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+/* Show the active tab content */
+.tab-content.active {
+    display: block;
+}
+
+.tab.active{
+    color: red;
+}

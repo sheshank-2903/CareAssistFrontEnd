@@ -16,4 +16,6 @@ export interface Patient {
     
     password: string;
 
+    patientGender:string;
+
 }
