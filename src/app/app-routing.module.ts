@@ -21,7 +21,7 @@ import { HealthCareProviderHomeComponent } from './components/HealthCareProvider
 import { HealthCareProviderPatientComponent } from './components/HealthCareProviderComponents/health-care-provider-patient/health-care-provider-patient.component';
 import { HealthCareProviderInvoiceHistoryComponent } from './components/HealthCareProviderComponents/health-care-provider-invoice-history/health-care-provider-invoice-history.component';
 import { PatientRequestInvoiceComponent } from './components/PatientComponent/patient-request-invoice/patient-request-invoice.component';
-import { PatientHomeComponent } from './components/PatientComponent/patient-home/patient-home.component';
+import { PatientHomeComponent } from './components/PatientComponent/patient-profile/patient-home.component';
 import { PatientPlansComponent } from './components/PatientComponent/patient-plans/patient-plans.component';
 import { PatientInvoicesComponent } from './components/PatientComponent/patient-invoices/patient-invoices.component';
 import { PatientPurchasedPlansComponent } from './components/PatientComponent/patient-purchased-plans/patient-purchased-plans.component';

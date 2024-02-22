@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule}  from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 import { HealthCareProviderComponent } from './components/HealthCareProviderComponents/health-care-provider/health-care-provider.component';
@@ -29,7 +31,7 @@ import { HealthCareProviderPatientComponent } from './components/HealthCareProvi
 import { HealthCareProviderInvoiceHistoryComponent } from './components/HealthCareProviderComponents/health-care-provider-invoice-history/health-care-provider-invoice-history.component';
 
 
-import { PatientHomeComponent } from './components/PatientComponent/patient-home/patient-home.component';
+import { PatientHomeComponent } from './components/PatientComponent/patient-profile/patient-home.component';
 import { PatientPlansComponent } from './components/PatientComponent/patient-plans/patient-plans.component';
 import { PatientPurchasedPlansComponent } from './components/PatientComponent/patient-purchased-plans/patient-purchased-plans.component';
 import { PatientRequestInvoiceComponent } from './components/PatientComponent/patient-request-invoice/patient-request-invoice.component';
@@ -80,7 +82,9 @@ import { AdminProfileComponent } from './components/AdminComponents/admin-profil
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
