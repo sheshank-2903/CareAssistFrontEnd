@@ -27,6 +27,7 @@ import { PatientInvoicesComponent } from './components/PatientComponent/patient-
 import { PatientPurchasedPlansComponent } from './components/PatientComponent/patient-purchased-plans/patient-purchased-plans.component';
 import { PatientClaimsComponent } from './components/PatientComponent/patient-claims/patient-claims.component';
 import { HealthCareProviderProfileComponent } from './components/HealthCareProviderComponents/health-care-provider-profile/health-care-provider-profile.component';
+import { AdminProfileComponent } from './components/AdminComponents/admin-profile/admin-profile.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,8 @@ const routes: Routes = [
   {path:'admin/invoices',component:AdminInvoicesComponent},
   {path:'admin/plans',component:AdminPlansComponent},
   {path:'admin/claims',component:AdminClaimsComponent},
+  {path:'admin/profile',component:AdminProfileComponent},
+
 
 
   {path:'healthCareProvider',component:HealthCareProviderComponent},
