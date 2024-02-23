@@ -1,0 +1,8 @@
+
+.home-content{
+    display: none;
+}
+
+.home-content.active{
+    display: block;
+}
