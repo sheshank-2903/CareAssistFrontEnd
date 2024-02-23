@@ -1,9 +1,7 @@
-
 .main-container{
-    margin-top: 4%;
+    padding-top: 4%;
     padding-left: 2%;
     padding-right: 2%;
-   
 }
 
 
@@ -14,10 +12,9 @@
     
 }
 
-
 .tab-container button{
-    box-shadow: none;
     outline: none;
+    box-shadow: #ffffff;
 }
 
 .tab{
@@ -66,5 +63,3 @@
     background-color: rgb(23,162,184);
     border: none;
 }
-
-

@@ -3,12 +3,12 @@
     <i class="bi bi-pencil-square btn btn-primary" (click)="toggleEditable()" style=" position: fixed;bottom: 8%;right: 10%;"></i>
  <form style="width: 60%;">
      <div class="form-group">
-       <label for="insuranceCompanyId">Admin ID:</label>
-       <input type="number" readonly="true" placeholder="sheshank" class="form-control" id="insuranceCompanyId" formControlName="insuranceCompanyId" required>
+       <label for="adminId">Admin ID:</label>
+       <input type="number" readonly="true" class="form-control" id="adminId" formControlName="adminId" required>
      </div>
      <div class="form-group">
-       <label for="companyName">Name:</label>
-       <input type="text" [readOnly]="editable" class="form-control" id="companyName" formControlName="companyName" required>
+       <label for="adminName">Name:</label>
+       <input type="text" [readOnly]="editable" class="form-control" id="adminName" formControlName="adminName" required>
      </div>
      <div class="form-group">
        <label for="email">Email:</label>
@@ -20,7 +20,7 @@
      </div>
      <div class="form-group" *ngIf="!editable">
          <label for="confirm_password">Confirm Password:</label>
-         <input type="password" [readOnly]="editable" class="form-control" id="confirm_password" formControlName="confirm_password" required>
+         <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password" required>
        </div>
      <button type="submit" *ngIf="!editable" class="btn btn-primary" style="width: 100%;">Submit Profile</button>
    </form>

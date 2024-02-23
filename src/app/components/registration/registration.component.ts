@@ -10,6 +10,15 @@ export class RegistrationComponent {
 
   patientRegistrationForm !: FormGroup;
   insuranceRegistrationForm !:FormGroup;
+  HealthCareRegistrationForm !:FormGroup;
+
+  selectedGender: string="";
+
+  genderOptions = ['Male', 'Female'];
+
+  selectGender(gender: string): void {
+    this.selectedGender = gender;
+  }
 
   constructor(private formBuilder: FormBuilder){
     
@@ -37,12 +46,29 @@ export class RegistrationComponent {
       password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
       confirm_password: ['', Validators.required] 
     },{ validator: this.passwordMatchValidator });
+
+    this.HealthCareRegistrationForm=this.formBuilder.group({
+      healthCareProviderName:['',[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
+      contact:['',[Validators.required,Validators.pattern('\\d{10}')]],
+      dob:['',[Validators.required]],
+      address:['',[Validators.required]],
+      descriptionOfTreatment:['',[Validators.required]],
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
+      confirm_password: ['', Validators.required] 
+    },{validator: this.passwordMatchValidator});
   }
 
   get getInsuranceForm(){
   
     return this.insuranceRegistrationForm.controls;
   }
+
+  get getHealthCareProvider(){
+  
+    return this.HealthCareRegistrationForm.controls;
+  }
+
 
   get f(){
   
