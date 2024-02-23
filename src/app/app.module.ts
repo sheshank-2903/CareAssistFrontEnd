@@ -41,8 +41,9 @@ import { HealthCareProviderProfileComponent } from './components/HealthCareProvi
 import { AdminProfileComponent } from './components/AdminComponents/admin-profile/admin-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { FeedbackComponent } from './components/feedback/feedback.component';
+import { AboutUsComponent } from './components/HomeComponents/about-us/about-us.component';
+import { FeedbackComponent } from './components/HomeComponents/feedback/feedback.component';
+import { HomeComponent } from './components/HomeComponents/home/home.component';
 
 
 
@@ -84,7 +85,8 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
     LoginComponent,
     RegistrationComponent,
     AboutUsComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    HomeComponent
 
   ],
   imports: [

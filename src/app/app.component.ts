@@ -25,6 +25,8 @@ export class AppComponent {
     this.router.navigate(['/aboutUs'])
   else if(role=="FEEDBACK")
     this.router.navigate(['/feedback'])
+  else if(role=="HOMEPAGE")
+    this.router.navigate(['/homePage'])
 }
   title = 'CareAssist';
 }
