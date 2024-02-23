@@ -13,32 +13,32 @@
               <div class="form-group">
                 <label for="patientName">Patient Name:</label>
                 <input type="text"   class="form-control" id="patientName" formControlName="patientName"
-                  required [ngClass]="{'is-invalid':f['patientName'].errors,'is-valid': !f['patientName'].errors}">
+                  required [ngClass]="{'is-invalid':getPatientForm['patientName'].errors,'is-valid': !getPatientForm['patientName'].errors}">
           
-                  <div *ngIf="f['patientName'].errors && !f['patientName'].errors?.['required']" class="invalid-feedback">Patient Name can have only alphabets and length has to be between 3 to 20 letters</div>
-                  <div *ngIf="!f['patientName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-                  <div *ngIf="f['patientName'].errors?.['required']" style="color: red;">Patient name cannot be empty</div>
+                  <div *ngIf="getPatientForm['patientName'].errors && !getPatientForm['patientName'].errors?.['required']" class="invalid-feedback">Patient Name can have only alphabets and length has to be between 3 to 20 letters</div>
+                  <div *ngIf="!getPatientForm['patientName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                  <div *ngIf="getPatientForm['patientName'].errors?.['required']" style="color: red;">Patient name cannot be empty</div>
               </div>
         
         
               <div class="form-group">
                 <label for="contact">Contact Number:</label>
                 <input type="tel"   class="form-control" id="contact"
-                  formControlName="contact" required [ngClass]="{'is-invalid':f['contact'].errors,'is-valid':!f['contact'].errors}">
+                  formControlName="contact" required [ngClass]="{'is-invalid':getPatientForm['contact'].errors,'is-valid':!getPatientForm['contact'].errors}">
           
-                  <div *ngIf="f['contact'].errors && !f['contact'].errors?.['required']" class="invalid-feedback">Contact Number must have 10 digits</div>
-                  <div *ngIf="!f['contact'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-                  <div *ngIf="f['contact'].errors?.['required']" style="color: red;">Contact number cannot be empty</div>
+                  <div *ngIf="getPatientForm['contact'].errors && !getPatientForm['contact'].errors?.['required']" class="invalid-feedback">Contact Number must have 10 digits</div>
+                  <div *ngIf="!getPatientForm['contact'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                  <div *ngIf="getPatientForm['contact'].errors?.['required']" style="color: red;">Contact number cannot be empty</div>
               </div>
         
         
               <div class="form-group">
                 <label for="dob">Date Of Birth: </label>
                 <input type="date"   class="form-control" id="dob"  [max]="getYesterdayDate()"
-                  formControlName="dob" required [ngClass]="{'is-invalid':f['dob'].errors,'is-valid':!f['dob'].errors}">
+                  formControlName="dob" required [ngClass]="{'is-invalid':getPatientForm['dob'].errors,'is-valid':!getPatientForm['dob'].errors}">
           
-                  <div *ngIf="!f['dob'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-                  <div *ngIf="f['dob'].errors?.['required']" style="color: red;">Please enter a date</div>
+                  <div *ngIf="!getPatientForm['dob'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                  <div *ngIf="getPatientForm['dob'].errors?.['required']" style="color: red;">Please enter a date</div>
               </div>
         
         
@@ -46,48 +46,48 @@
               <div class="form-group">
                 <label for="address">Address</label>
                 <textarea style="resize: none;" class="form-control"   id="address"
-                  formControlName="address" required [ngClass]="{'is-invalid':f['address'].errors,'is-valid': !f['address'].errors}"></textarea>
+                  formControlName="address" required [ngClass]="{'is-invalid':getPatientForm['address'].errors,'is-valid': !getPatientForm['address'].errors}"></textarea>
         
-                  <div *ngIf="!f['address'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-                  <div *ngIf="f['address'].errors?.['required']" style="color: red;">Address cannot be empty</div>
+                  <div *ngIf="!getPatientForm['address'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                  <div *ngIf="getPatientForm['address'].errors?.['required']" style="color: red;">Address cannot be empty</div>
               </div>
         
         
               <div class="form-group">
                 <label for="address">Description Of Treatment: </label>
                 <textarea style="resize: none;" class="form-control"   id="descriptionOfTreatment"
-                  formControlName="descriptionOfTreatment" required [ngClass]="{'is-invalid':f['descriptionOfTreatment'].errors,'is-valid': !f['descriptionOfTreatment'].errors}"></textarea>
+                  formControlName="descriptionOfTreatment" required [ngClass]="{'is-invalid':getPatientForm['descriptionOfTreatment'].errors,'is-valid': !getPatientForm['descriptionOfTreatment'].errors}"></textarea>
         
-                  <div *ngIf="!f['descriptionOfTreatment'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-                  <div *ngIf="f['descriptionOfTreatment'].errors?.['required']" style="color: red;">Description Of Treatment cannot be empty</div>
+                  <div *ngIf="!getPatientForm['descriptionOfTreatment'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                  <div *ngIf="getPatientForm['descriptionOfTreatment'].errors?.['required']" style="color: red;">Description Of Treatment cannot be empty</div>
               </div>
           
           
               <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email"   class="form-control" id="email" formControlName="email" required [ngClass]="{'is-invalid':f['email'].errors,'is-valid':!f['email'].errors}">
+                <input type="email"   class="form-control" id="email" formControlName="email" required [ngClass]="{'is-invalid':getPatientForm['email'].errors,'is-valid':!getPatientForm['email'].errors}">
           
-                <div *ngIf=" f['email'].errors" class="invalid-feedback"></div>
-                <div *ngIf="!f['email'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-                <div *ngIf="f['email'].errors?.['required']" style="color: red;">Email cannot be empty</div>
-                <div *ngIf="f['email'].errors?.['email']" style="color: red;">Email must be valid</div>
+                <div *ngIf=" getPatientForm['email'].errors" class="invalid-feedback"></div>
+                <div *ngIf="!getPatientForm['email'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                <div *ngIf="getPatientForm['email'].errors?.['required']" style="color: red;">Email cannot be empty</div>
+                <div *ngIf="getPatientForm['email'].errors?.['email']" style="color: red;">Email must be valid</div>
               </div>
           
               <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password"   class="form-control" id="password" formControlName="password"
-                  required [ngClass]="{'is-invalid':f['password'].errors,'is-valid':!f['password'].errors}">
-                    <div *ngIf="f['password'].errors && !f['password'].errors?.['required']" class="invalid-feedback">Password must have at least 1 upper case, 1 lower case,1 special character, 1 digit and must be of minimum length 8</div>
-                    <div *ngIf="!f['password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-                    <div *ngIf="f['password'].errors?.['required']" style="color: red;">Password cannot be empty</div>
+                  required [ngClass]="{'is-invalid':getPatientForm['password'].errors,'is-valid':!getPatientForm['password'].errors}">
+                    <div *ngIf="getPatientForm['password'].errors && !getPatientForm['password'].errors?.['required']" class="invalid-feedback">Password must have at least 1 upper case, 1 lower case,1 special character, 1 digit and must be of minimum length 8</div>
+                    <div *ngIf="!getPatientForm['password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                    <div *ngIf="getPatientForm['password'].errors?.['required']" style="color: red;">Password cannot be empty</div>
               </div>
           
               <div class="form-group"   >
                 <label for="confirm_password">Confirm Password:</label>
                 <input type="password"   class="form-control" id="confirm_password"
-                  formControlName="confirm_password" required [ngClass]="{'is-invalid':f['confirm_password'].errors,'is-valid':!f['confirm_password'].errors}">
-                  <div *ngIf="f['confirm_password'].errors?.['passwordMismatch']" class="invalid-feedback">Passwords do not match</div>
-                  <div *ngIf="!f['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+                  formControlName="confirm_password" required [ngClass]="{'is-invalid':getPatientForm['confirm_password'].errors,'is-valid':!getPatientForm['confirm_password'].errors}">
+                  <div *ngIf="getPatientForm['confirm_password'].errors?.['passwordMismatch']" class="invalid-feedback">Passwords do not match</div>
+                  <div *ngIf="!getPatientForm['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
               </div>
           
               <button type="submit" [disabled]=" patientRegistrationForm.invalid" class="btn btn-primary" style="width: 100%;">Add Profile</button>
