@@ -70,7 +70,7 @@ export class RegistrationComponent {
   }
 
 
-  get f(){
+  get getPatientForm(){
   
     return this.patientRegistrationForm.controls;
   }
@@ -82,7 +82,7 @@ export class RegistrationComponent {
   }
   
   alert('Form submitted successfully');
-  console.log(this.f['companyName'].value);
+  console.log(this.getPatientForm['companyName'].value);
   
   }
 
@@ -93,7 +93,7 @@ export class RegistrationComponent {
   }
   
   alert('Form submitted successfully');
-  console.log(this.f['companyName'].value);
+  console.log(this.getPatientForm['companyName'].value);
   
   }
 
