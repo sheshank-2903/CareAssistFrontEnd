@@ -8,7 +8,7 @@
     <div id="patient" class="tab-content active">
         <div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;">
             
-            <form  [formGroup]="patientRegistrationForm" (ngSubmit)="onSubmit()"  style="width: 60%;">
+            <form  [formGroup]="patientRegistrationForm" (ngSubmit)="onSubmit()"  style="width: 80%;">
         
               <div class="form-group">
                 <label for="patientName">Patient Name:</label>
@@ -110,7 +110,7 @@
 
     <div id="healthCare" class="tab-content">
       <div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;">
-        <form  [formGroup]="HealthCareRegistrationForm" (ngSubmit)="onSubmit()"  style="width: 60%;">
+        <form  [formGroup]="HealthCareRegistrationForm" (ngSubmit)="onSubmit()"  style="width: 80%;">
           <div class="form-group">
             <label for="healthCareProviderName">Health Care Provider Name:</label>
             <input type="text"   class="form-control" id="healthCareProviderName" formControlName="healthCareProviderName"
@@ -170,7 +170,7 @@
 
     <div id="insurance" class="tab-content">
       <div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;">
-        <form  [formGroup]=" insuranceRegistrationForm" (ngSubmit)="registerInsuranceCompany()"  style="width: 60%;">
+        <form  [formGroup]=" insuranceRegistrationForm" (ngSubmit)="registerInsuranceCompany()"  style="width: 80%;">
           <div class="form-group">
             <label for="companyName">Company Name:</label>
             <input type="text"   class="form-control" id="companyName" formControlName="companyName"

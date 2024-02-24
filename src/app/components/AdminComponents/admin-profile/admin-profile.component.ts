@@ -10,13 +10,7 @@ export class AdminProfileComponent {
   editable:boolean=true;
 
   updateForm !: FormGroup;
-  selectedGender: string="";
 
-  genderOptions = ['Male', 'Female'];
-
-  selectGender(gender: string): void {
-    this.selectedGender = gender;
-  }
   constructor(private formBuilder: FormBuilder){
   }
 
