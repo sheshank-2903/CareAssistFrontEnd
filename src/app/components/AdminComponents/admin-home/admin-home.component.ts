@@ -12,15 +12,24 @@ export class AdminHomeComponent {
   isAddAdminModelVisible: boolean=false;
    addAdminForm !: FormGroup;
 
-toggleAddAdmin() {
+toggleAddAdmin(input?:boolean) {
   let addModel=document.getElementById("addAdminFormModel");
-  if(this.isAddAdminModelVisible){
-    addModel?.classList.remove("active");
-    this.isAddAdminModelVisible=false;
+  if(input!==undefined){
+    if(!input){
+      addModel?.classList.remove("active");
+      this.isAddAdminModelVisible=false;
+    }
   }
   else{
-    addModel?.classList.add("active");
-    this.isAddAdminModelVisible=true;
+    this.closeDeleteModel();
+    if(this.isAddAdminModelVisible){
+      addModel?.classList.remove("active");
+      this.isAddAdminModelVisible=false;
+    }
+    else{
+      addModel?.classList.add("active");
+      this.isAddAdminModelVisible=true;
+    }
   }
 }
 
@@ -68,6 +77,23 @@ toggleAddAdmin() {
     } else {
       return null;
     }
+  }
+
+  confirmDelete(){
+    let content=document.getElementById('confirmDeleteDisplay');
+    this.toggleAddAdmin(false);
+    content?.classList.add('active');
+  }
+
+  closeDeleteModel(){
+    let content=document.getElementById('confirmDeleteDisplay');
+    content?.classList.remove('active');
+  }
+
+  submitConfirmDelete(){
+    alert('Congratulations Purchase completed');
+    let content=document.getElementById('confirmDeleteDisplay');
+    content?.classList.remove('active');
   }
 
 

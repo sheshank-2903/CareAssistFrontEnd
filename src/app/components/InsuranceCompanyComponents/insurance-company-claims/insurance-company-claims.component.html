@@ -27,63 +27,15 @@
           <tr>
             <td>1</td>
             <td>Mark</td>
-            <td>17700</td>
-            <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger">
-                  <i class="bi bi-bag-x"></i>
-                   Reject
-                </button> /
-                <button type="button" class="btn btn-success">
-                  <i class="bi bi-bag-check"></i>
-                   Approve
-                </button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>15000</td>
-            <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-danger">
-                <i class="bi bi-bag-x"></i>
-                 Reject
-              </button> /
-              <button type="button" class="btn btn-success">
-                <i class="bi bi-bag-check"></i>
-                 Approve
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
             <td>10000</td>
             <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
+              <button type="button" class="btn btn-info" (click)="showPatientModel()"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
+              <button type="button" class="btn btn-info" (click)="showInvoiceModel()"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
-              <button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button>
+              <button type="button" class="btn btn-info" (click)="showPlanModel()"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
               <button type="button" class="btn btn-danger">
@@ -100,3 +52,113 @@
       </table>
 </div >
 
+  <!--Plan Form Modal -->
+  <div id="showPlanModel" class="planDisplay">
+    <div style="width: 60%; margin-left: auto; margin-right: auto;">
+      <div class="form-group">
+        <label for="PlanId">Plan Id:</label><br>
+        <input type="number" class="form-control" id="PlanId" readonly>
+      </div>
+    <div class="form-group">
+      <label for="PlanName">Plan Name:</label><br>
+      <input type="number" class="form-control" id="PlanName" readonly>
+    </div>
+    <div class="form-group">
+      <label for="descriptionOfPlan">Description Of Plan: </label>
+      <textarea style="resize: none;" class="form-control"  id="descriptionOfPlan" readonly></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dateOfIssue">Date Of Issue:</label>
+      <input type="number" class="form-control" id="dateOfIssue" readonly>
+    </div>
+    <div class="form-group">
+      <label for="PlanAmount">Plan Amount:</label>
+      <input type="number" class="form-control" id="PlanAmount" readonly>
+    </div>
+  </div>
+  <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closePlanModel()">
+    <i class="bi bi-x-circle"></i>
+  </button>
+  </div>
+
+  <!--Plan Form Modal -->
+  <div id="showPatientModel" class="patientDisplay">
+    <div style="width: 60%; margin-left: auto; margin-right: auto;">
+      <div class="form-group">
+        <label for="patientId">Patient Id :</label><br>
+        <input type="number" class="form-control" id="patientId" readonly>
+      </div>
+    <div class="form-group">
+      <label for="dob">Date Of Birth :</label><br>
+      <input type="number" class="form-control" id="dob" readonly>
+    </div>
+    <div class="form-group">
+      <label for="contact">Contact : </label>
+      <textarea style="resize: none;" class="form-control"  id="contact" readonly></textarea>
+    </div>
+    <div class="form-group">
+      <label for="address">Address :</label>
+      <input type="number" class="form-control" id="address" readonly>
+    </div>
+    <div class="form-group">
+      <label for="patientName">Patient Name :</label>
+      <input type="number" class="form-control" id="patientName" readonly>
+    </div>
+    <div class="form-group">
+      <label for="descriptionOfTreatment">Description Of Treatment :</label>
+      <input type="number" class="form-control" id="descriptionOfTreatment" readonly>
+    </div>
+    <div class="form-group">
+      <label for="email">Email :</label>
+      <input type="number" class="form-control" id="email" readonly>
+    </div>
+  </div>
+  <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closePatientModel()">
+    <i class="bi bi-x-circle"></i>
+  </button>
+  </div>
+
+  <!--Plan Form Modal -->
+  <div id="showInvoiceModel" class="invoiceDisplay">
+    <div style="width: 60%; margin-left: auto; margin-right: auto;">
+      <div class="form-group">
+        <label for="invoiceId">Invoice Id :</label><br>
+        <input type="number" class="form-control" id="invoiceId" readonly>
+      </div>
+    <div class="form-group">
+      <label for="invoiceDate">Invoice Date :</label><br>
+      <input type="number" class="form-control" id="invoiceDate" readonly>
+    </div>
+    <div class="form-group">
+      <label for="invoiceDueDate">Invoice Due Date : </label>
+      <textarea style="resize: none;" class="form-control"  id="invoiceDueDate" readonly></textarea>
+    </div>
+    <div class="form-group">
+      <label for="invoicetax">Invoice Tax :</label>
+      <input type="number" class="form-control" id="invoicetax" readonly>
+    </div>
+    <div class="form-group">
+      <label for="consultingFees">Consulting Fees :</label>
+      <input type="number" class="form-control" id="consultingFees" readonly>
+    </div>
+    <div class="form-group">
+      <label for="diagnosticTestFees">Diagnostic Test Fees :</label>
+      <input type="number" class="form-control" id="diagnosticTestFees" readonly>
+    </div>
+    <div class="form-group">
+      <label for="diagnosticScanFees">Diagnostic Scan Fees :</label>
+      <input type="number" class="form-control" id="diagnosticScanFees" readonly>
+    </div>
+    <div class="form-group">
+      <label for="calculatedAmount">Calculated Amount :</label>
+      <input type="number" class="form-control" id="calculatedAmount" readonly>
+    </div>
+    <div class="form-group">
+      <label for="invoiceStatus">Invoice Status :</label>
+      <input type="number" class="form-control" id="invoiceStatus" readonly>
+    </div>
+  </div>
+  <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closeInvoiceModel()">
+    <i class="bi bi-x-circle"></i>
+  </button>
+  </div>
