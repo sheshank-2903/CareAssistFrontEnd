@@ -14,14 +14,18 @@
                 <a  (click)="openTab('feedback')" id="button-feedback" class="nav-link">Feedback</a>
 
                 <a  routerLink="/admin/home" class="nav-link">Admin </a>
-                <a  routerLink="/healthCareProvider/home" class="nav-link">Healtth Care</a>
+                <a  routerLink="/healthCareProvider/home" class="nav-link">Health Care</a>
                 <a  routerLink="/insuranceCompany/home" class="nav-link">Insurnace</a>
                 <a  routerLink="/patient/browsePlans"  class="nav-link">patients</a>
             </div> 
         </div>
     </nav>
-    <div style="min-height: 100%; padding-bottom: 5%; padding-top: 5%;  background-image: url('../../../../assets/bghome.png'); background-size: contain;">
-        <div class="home-content active" id="home">home ka data</div>
+
+    <div style="min-height: 100%; background-color: red; padding-bottom: 5%; padding-top: 5%;  background-image: url('../../../../assets/bghome.jpg'); background-size: cover;">
+        <div class="home-content active" id="home">
+            home ka data
+        </div>
+
         <app-login class="home-content" id="login"></app-login>
         <app-registration class="home-content" id="register"></app-registration>
         <app-feedback class="home-content" id="feedback"></app-feedback>

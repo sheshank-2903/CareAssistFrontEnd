@@ -2,8 +2,14 @@
 <div class="container" style="margin-top: 2%;">
   <div class="d-flex" style="margin-bottom: 2%;">
     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-    <button type="button" class="btn btn-outline-info ml-3">Search By Id</button>
-    <button type="button" class="btn btn-outline-info ml-3">Search By Name</button>
+    <button type="button" class="btn btn-outline-info ml-3">
+      <i class="bi bi-search"></i>
+      Search By Id
+    </button>
+    <button type="button" class="btn btn-outline-info ml-3">
+      <i class="bi bi-search"></i>
+      Search By Name
+    </button>
 </div>
 <div style="min-width: 100%; overflow-x: scroll; max-width: 100vh; width: 100vh;">
     <table class="table mt-10% table-hover table-bordered text-center">
@@ -29,7 +35,10 @@
             <th>{{patient.descriptionOfTreatment}}</th>
             <th>{{patient.email}}</th>
             <td>
-                <button type="button" class="btn btn-danger">Delete</button>
+              <button type="button" class="btn btn-danger">
+                <i class="bi bi-trash3"></i>
+                 Delete
+              </button>
             </td>
           </tr>
         </tbody>
