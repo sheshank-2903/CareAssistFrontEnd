@@ -54,7 +54,7 @@ toggleAddAdmin() {
   
   alert('Form submitted successfully');
   console.log(this. addAdminForm);
-  this. addAdminForm.reset();
+  this.addAdminForm.reset();
   
   }
 
