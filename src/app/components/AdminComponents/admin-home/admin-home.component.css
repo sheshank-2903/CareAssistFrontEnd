@@ -2,7 +2,6 @@
     display: flex;
     position: absolute; 
     background-color: rgb(247, 242, 242);
-    border: outset 4px rgb(204, 204, 207);
     top: 9%; 
     left: 30%; 
     width: 40%;
@@ -13,4 +12,21 @@
 }
 .addAdminDisplay{
     display: none;
+}
+
+.confirm-delete-popup{
+    display: none;
+}
+
+
+.confirm-delete-popup.active{
+    display: flex;
+    position: absolute;
+    top:30%;
+    left: 30%;
+    width: 40%;
+    border-radius: 5%;
+    padding: 2%;
+    background-color: rgb(247, 242, 242);
+    
 }

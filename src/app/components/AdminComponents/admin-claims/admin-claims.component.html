@@ -26,31 +26,30 @@
             <td>Mark</td>
             <th>Status</th>
             <td>
-              <button type="button" class="btn btn-danger">
+              <button type="button" class="btn btn-danger" (click)="confirmDelete()">
                 <i class="bi bi-trash3"></i>
                  Delete
               </button>
             </td>
           </tr>
-          <tr>
-            <th>2</th>
-            <td>Jacob</td>
-            <th>Status</th>
-            <td><button type="button" class="btn btn-danger">
-              <i class="bi bi-trash3"></i>
-               Delete
-            </button></td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Larry</td>
-            <td>Otto</td>
-            <td><button type="button" class="btn btn-danger">
-              <i class="bi bi-trash3"></i>
-               Delete
-            </button></td>
-          </tr>
         </tbody>
       </table>
 </div >
+<!-- Delete Model -->
+<div class="confirm-delete-popup" id="confirmDeleteDisplay">
+  <form #purchaseForm="ngForm">
+    <label style="display: block; ">Please confirm your purchase by typing "DELETE" below: </label>
+    <input type="text" style="margin: 2%;  width: 82%;" name="confirmation" ngModel required>
+    <div>
+      <button class="btn btn-success" style="margin-right: 2%; margin-top:2% ; width: 40%;"
+        (click)="submitConfirmDelete()" [disabled]="purchaseForm.value.confirmation!=='DELETE'">Confirm Delete</button>
+      <button class="btn btn-danger" style=" width: 40%; margin-top:2% ;"
+        (click)="closeDeleteModel()">Cancel</button>
+    </div>
+    <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger"
+      (click)="closeDeleteModel()">
+      <i class="bi bi-x-circle"></i>
+    </button>
+  </form>
+</div>
 

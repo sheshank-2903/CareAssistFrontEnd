@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class PatientClaimsComponent {
 
+
   showPlanDetails(){
     let content=document.getElementById('planDetailsDisplay');
     content?.classList.add('active');

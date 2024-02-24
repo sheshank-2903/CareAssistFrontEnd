@@ -28,71 +28,82 @@
         <td>Mark</td>
         <td>Otto</td>
         <td>
-          <button type="button" class="btn btn-danger">
+          <button type="button" class="btn btn-danger" (click)="confirmDelete()">
             <i class="bi bi-trash3"></i>
             Delete
           </button>
         </td>
       </tr>
-      <tr>
-        <th>2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td><button type="button" class="btn btn-danger">
-            <i class="bi bi-trash3"></i>
-            Delete
-          </button></td>
-      </tr>
-      <tr>
-        <th>3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td><button type="button" class="btn btn-danger">
-            <i class="bi bi-trash3"></i>
-            Delete
-          </button></td>
-      </tr>
     </tbody>
   </table>
 
   <!-- Modal -->
-  <div id="addAdminFormModel" class="addAdminDisplay" >
+  <div id="addAdminFormModel" class="addAdminDisplay">
     <form style="margin: auto; width: 80%;" [formGroup]="addAdminForm">
       <div class="form-group">
         <label for="adminName">Name:</label>
-        <input type="text"   class="form-control" id="adminName" formControlName="adminName"
-           required [ngClass]="{'is-invalid':getAdminForm['adminName'].errors,'is-valid': !getAdminForm['adminName'].errors}">
-        <div *ngIf="getAdminForm['adminName'].errors && !getAdminForm['adminName'].errors?.['required']" class="invalid-feedback">Admin Name can have only alphabets and length has to be between 3 to 20 letters</div>
-           <div *ngIf="!getAdminForm['adminName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-           <div *ngIf="getAdminForm['adminName'].errors?.['required']" style="color: red;">Admin name cannot be empty</div>
+        <input type="text" class="form-control" id="adminName" formControlName="adminName" required
+          [ngClass]="{'is-invalid':getAdminForm['adminName'].errors,'is-valid': !getAdminForm['adminName'].errors}">
+        <div *ngIf="getAdminForm['adminName'].errors && !getAdminForm['adminName'].errors?.['required']"
+          class="invalid-feedback">Admin Name can have only alphabets and length has to be between 3 to 20 letters</div>
+        <div *ngIf="!getAdminForm['adminName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks
+          good!</div>
+        <div *ngIf="getAdminForm['adminName'].errors?.['required']" style="color: red;">Admin name cannot be empty</div>
       </div>
       <div class="form-group">
-       <label for="email">Email:</label>
-       <input type="email"   class="form-control" id="email" formControlName="email" required [ngClass]="{'is-invalid':getAdminForm['email'].errors,'is-valid':!getAdminForm['email'].errors}">
-       <div *ngIf=" getAdminForm['email'].errors" class="invalid-feedback"></div>
-       <div *ngIf="!getAdminForm['email'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-       <div *ngIf="getAdminForm['email'].errors?.['required']" style="color: red;">Email cannot be empty</div>
-       <div *ngIf="getAdminForm['email'].errors?.['email']" style="color: red;">Email must be valid</div>
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" formControlName="email" required
+          [ngClass]="{'is-invalid':getAdminForm['email'].errors,'is-valid':!getAdminForm['email'].errors}">
+        <div *ngIf=" getAdminForm['email'].errors" class="invalid-feedback"></div>
+        <div *ngIf="!getAdminForm['email'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!
+        </div>
+        <div *ngIf="getAdminForm['email'].errors?.['required']" style="color: red;">Email cannot be empty</div>
+        <div *ngIf="getAdminForm['email'].errors?.['email']" style="color: red;">Email must be valid</div>
       </div>
       <div class="form-group">
-       <label for="password">Password:</label>
-       <input type="password"   class="form-control" id="password" formControlName="password"
-         required [ngClass]="{'is-invalid':getAdminForm['password'].errors,'is-valid':!getAdminForm['password'].errors}">
-           <div *ngIf="getAdminForm['password'].errors && !getAdminForm['password'].errors?.['required']" class="invalid-feedback">Password must have at least 1 upper case, 1 lower case,1 special character, 1 digit and must be of minimum length 8</div>
-           <div *ngIf="!getAdminForm['password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-           <div *ngIf="getAdminForm['password'].errors?.['required']" style="color: red;">Password cannot be empty</div>
-     </div>
-     <div class="form-group"  >
-       <label for="confirm_password">Confirm Password:</label>
-       <input type="password"   class="form-control" id="confirm_password"
-         formControlName="confirm_password" required [ngClass]="{'is-invalid':getAdminForm['confirm_password'].errors,'is-valid':!getAdminForm['confirm_password'].errors}">
-         <div *ngIf="getAdminForm['confirm_password'].errors?.['passwordMismatch']" class="invalid-feedback">Passwords do not match</div>
-         <div *ngIf="!getAdminForm['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
-     </div>
-      <button type="submit" [disabled]="addAdminForm.invalid"  (click)="onSubmit()" class="btn btn-primary" style="width: 100%;">Create New Admin</button>
-      <button type="button" style=" border-radius: 25px; position: absolute; top: 1%; right: 1%;" class="btn btn-danger" (click)="toggleAddAdmin()">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" formControlName="password" required
+          [ngClass]="{'is-invalid':getAdminForm['password'].errors,'is-valid':!getAdminForm['password'].errors}">
+        <div *ngIf="getAdminForm['password'].errors && !getAdminForm['password'].errors?.['required']"
+          class="invalid-feedback">Password must have at least 1 upper case, 1 lower case,1 special character, 1 digit
+          and must be of minimum length 8</div>
+        <div *ngIf="!getAdminForm['password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!
+        </div>
+        <div *ngIf="getAdminForm['password'].errors?.['required']" style="color: red;">Password cannot be empty</div>
+      </div>
+      <div class="form-group">
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password" required
+          [ngClass]="{'is-invalid':getAdminForm['confirm_password'].errors,'is-valid':!getAdminForm['confirm_password'].errors}">
+        <div *ngIf="getAdminForm['confirm_password'].errors?.['passwordMismatch']" class="invalid-feedback">Passwords do
+          not match</div>
+        <div *ngIf="!getAdminForm['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">
+          Looks good!</div>
+      </div>
+      <button type="submit" [disabled]="addAdminForm.invalid" (click)="onSubmit()" class="btn btn-primary"
+        style="width: 100%;">Create New Admin</button>
+      <button type="button" style="  position: absolute; top: 0%; right: 0%;" class="btn btn-danger"
+        (click)="toggleAddAdmin()">
         <i class="bi bi-x-circle"></i>
       </button>
     </form>
   </div>
+</div>
+
+<!-- Delete Model -->
+<div class="confirm-delete-popup" id="confirmDeleteDisplay">
+  <form #purchaseForm="ngForm">
+    <label style="display: block; ">Please confirm your purchase by typing "DELETE" below: </label>
+    <input type="text" style="margin: 2%;  width: 82%;" name="confirmation" ngModel required>
+    <div>
+      <button class="btn btn-success" style="margin-right: 2%; margin-top:2% ; width: 40%;"
+        (click)="submitConfirmDelete()" [disabled]="purchaseForm.value.confirmation!=='DELETE'">Confirm Delete</button>
+      <button class="btn btn-danger" style=" width: 40%; margin-top:2% ;"
+        (click)="closeDeleteModel()">Cancel</button>
+    </div>
+    <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger"
+      (click)="closeDeleteModel()">
+      <i class="bi bi-x-circle"></i>
+    </button>
+  </form>
 </div>
