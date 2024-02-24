@@ -10,6 +10,7 @@
         <i class="bi bi-search"></i>
         Search By Name
       </button>
+      <button type="button" class="btn btn-success ml-3" (click)="toggleAddPlan()">+ Add Plan</button>
   </div>
   <table class="table mt-10% table-hover table-bordered text-center">
       <thead class="thead-dark">
@@ -34,7 +35,7 @@
                 <i class="bi bi-trash3"></i>
                 Delete
               </button> /
-              <button type="button" class="btn btn-success">
+              <button type="button" class="btn btn-success" (click)="toggleEditPlan()">
                 <i class="bi bi-pencil-square"></i>
                 Edit
               </button>
@@ -75,5 +76,72 @@
         </td>
         </tr>
       </tbody>
-    </table>
+  </table>
+  <!--Add Plan Modal -->
+  <div id="addPlanFormModel" class="addPlanDisplay">
+    <form  [formGroup]="addPlanForm" (ngSubmit)="SubmitPlan()"  style="width: 60%; margin-left: auto; margin-right: auto;">
+    <div class="form-group">
+      <label for="PlanName">Plan Name:</label>
+      <input type="text" class="form-control" id="PlanName" formControlName="PlanName"
+        required [ngClass]="{'is-invalid':getPlanForm['PlanName'].errors,'is-valid': !getPlanForm['PlanName'].errors}">
+        <div *ngIf="getPlanForm['PlanName'].errors && !getPlanForm['PlanName'].errors?.['required']" class="invalid-feedback">Plan Name can have only alphabets and length has to be between 3 to 20 letters</div>
+        <div *ngIf="!getPlanForm['PlanName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+        <div *ngIf="getPlanForm['PlanName'].errors?.['required']" style="color: red;">Plan name cannot be empty</div>
+    </div>
+    <div class="form-group">
+      <label for="PlanAmount">Plan Amount:</label>
+      <input type="number" class="form-control" id="PlanAmount" formControlName="PlanAmount"
+        required [ngClass]="{'is-invalid':getPlanForm['PlanAmount'].errors,'is-valid': !getPlanForm['PlanAmount'].errors}">
+        <div *ngIf="getPlanForm['PlanAmount'].errors && !getPlanForm['PlanAmount'].errors?.['required']" class="invalid-feedback">Plan Amount should be greater then 10000</div>
+        <div *ngIf="!getPlanForm['PlanAmount'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+        <div *ngIf="getPlanForm['PlanAmount'].errors?.['required']" style="color: red;">Plan amount cannot be empty</div>
+    </div>
+    <div class="form-group">
+      <label for="address">Description Of Plan: </label>
+      <textarea style="resize: none;" class="form-control"  id="descriptionOfPlan"
+        formControlName="descriptionOfPlan" required [ngClass]="{'is-invalid':getPlanForm['descriptionOfPlan'].errors,'is-valid': !getPlanForm['descriptionOfPlan'].errors}"></textarea>
+
+        <div *ngIf="!getPlanForm['descriptionOfPlan'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+        <div *ngIf="getPlanForm['descriptionOfPlan'].errors?.['required']" style="color: red;">Description Of Plan </div>
+    </div>
+    <button type="submit" [disabled]="addPlanForm.invalid" class="btn btn-primary" style="width: 100%;">Add Plan</button>
+  </form>
+  <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="toggleAddPlan()">
+    <i class="bi bi-x-circle"></i>
+  </button>
+  </div>
+
+  <!--Edit Form Modal -->
+  <div id="editPlanFormModel" class="editPlanDisplay">
+    <form  [formGroup]="addPlanForm" (ngSubmit)="SubmitEditedPlan()"  style="width: 60%; margin-left: auto; margin-right: auto;">
+    <div class="form-group">
+      <label for="PlanName">Plan Name:</label>
+      <input type="text" class="form-control" id="PlanName" formControlName="PlanName"
+        required [ngClass]="{'is-invalid':getPlanForm['PlanName'].errors,'is-valid': !getPlanForm['PlanName'].errors}">
+        <div *ngIf="getPlanForm['PlanName'].errors && !getPlanForm['PlanName'].errors?.['required']" class="invalid-feedback">Plan Name can have only alphabets and length has to be between 3 to 20 letters</div>
+        <div *ngIf="!getPlanForm['PlanName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+        <div *ngIf="getPlanForm['PlanName'].errors?.['required']" style="color: red;">Plan name cannot be empty</div>
+    </div>
+    <div class="form-group">
+      <label for="PlanAmount">Plan Amount:</label>
+      <input type="number" class="form-control" id="PlanAmount" formControlName="PlanAmount"
+        required [ngClass]="{'is-invalid':getPlanForm['PlanAmount'].errors,'is-valid': !getPlanForm['PlanAmount'].errors}">
+        <div *ngIf="getPlanForm['PlanAmount'].errors && !getPlanForm['PlanAmount'].errors?.['required']" class="invalid-feedback">Plan Amount should be greater then 10000</div>
+        <div *ngIf="!getPlanForm['PlanAmount'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+        <div *ngIf="getPlanForm['PlanAmount'].errors?.['required']" style="color: red;">Plan amount cannot be empty</div>
+    </div>
+    <div class="form-group">
+      <label for="address">Description Of Plan: </label>
+      <textarea style="resize: none;" class="form-control"  id="descriptionOfPlan"
+        formControlName="descriptionOfPlan" required [ngClass]="{'is-invalid':getPlanForm['descriptionOfPlan'].errors,'is-valid': !getPlanForm['descriptionOfPlan'].errors}"></textarea>
+
+        <div *ngIf="!getPlanForm['descriptionOfPlan'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
+        <div *ngIf="getPlanForm['descriptionOfPlan'].errors?.['required']" style="color: red;">Description Of Plan </div>
+    </div>
+    <button type="submit" [disabled]="addPlanForm.invalid" class="btn btn-primary" style="width: 100%;">Save Plan</button>
+  </form>
+  <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="toggleEditPlan()">
+    <i class="bi bi-x-circle"></i>
+  </button>
+  </div>
 </div >
