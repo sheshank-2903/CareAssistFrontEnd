@@ -7,6 +7,19 @@
     background-color: #fff;
     border-color:  black;
     border-radius: 15px;
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .login-form h2 {
