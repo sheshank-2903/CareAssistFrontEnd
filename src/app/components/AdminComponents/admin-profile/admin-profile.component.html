@@ -38,7 +38,7 @@
         <div *ngIf="getAdminForm['confirm_password'].errors?.['passwordMismatch']" class="invalid-feedback">Passwords do not match</div>
         <div *ngIf="!getAdminForm['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
     </div>
-     <button type="submit" *ngIf="!editable" class="btn btn-primary" style="width: 100%;">Submit Profile</button>
+     <button type="submit" *ngIf="!editable" [disabled]="updateForm.invalid" class="btn btn-primary" style="width: 100%;">Submit Profile</button>
    </form>
  </div>
 
