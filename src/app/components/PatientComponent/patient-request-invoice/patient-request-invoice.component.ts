@@ -7,6 +7,13 @@ import { Component } from '@angular/core';
 })
 export class PatientRequestInvoiceComponent {
 
+  currentDate: Date = new Date();
+
+  isDueDateInvalid(formValue: any): boolean {
+    const invoiceDueDate = new Date(formValue.invoiceDueDate);
+    return invoiceDueDate < this.currentDate;
+  }
+
   openInvoiceRequest(){
     let content=document.getElementById('requestInvoiceDisplay');
     content?.classList.add('active');
@@ -24,5 +31,7 @@ export class PatientRequestInvoiceComponent {
     content?.classList.remove('active');
 
   }
+
+
 
 }
