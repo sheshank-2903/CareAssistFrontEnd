@@ -23,7 +23,7 @@
               <th>1</th>
               <td>Mark</td>
               <th>Status</th>
-              <td><button type="button" class="btn btn-info"><i class="bi bi-info-circle"></i></button></td>
+              <td><button type="button" class="btn btn-info"><i class="bi bi-info-circle" (click)="showPlanDetails()"></i></button></td>
             </tr>
             <tr>
               <th>2</th>
@@ -40,5 +40,17 @@
           </tbody>
         </table>
   </div >
+
+
+  <div class="plan-details" id="planDetailsDisplay">
+    <p>Plan ID: 123</p> 
+    <p>Plan Name: JeevanBima</p>
+    <p>Plan Description: asaasasasa</p>
+    <p>Plan Coverage Amount: 13000</p>
+    <p>Date Of Issue: 22/01/2023</p>
+    <button type="button" style=" border-radius: 25px; position: absolute; top: 1%; right: 1%;" class="btn btn-danger" (click)="closePlanDetails()">
+      <i class="bi bi-x-circle"></i>
+    </button>
+    </div>
   
   

@@ -28,7 +28,7 @@
               <td>Otto</td>
               <td>Otto</td>
               <td>
-                  <button type="button" class="btn btn-info">
+                  <button type="button" class="btn btn-info" (click)="openInvoiceRequest()">
                     +
                      Request Invoice
                   </button>
@@ -59,3 +59,41 @@
           </tbody>
         </table>
   </div >
+
+
+
+  <div class="request-invoice" id="requestInvoiceDisplay">
+    <form #requestInvoiceForm="ngForm" style="width: 100%;" >
+  
+      <label style="display: block; ">Please enter Invoice Date </label>
+      <input type="date" style="margin: 2%; width: 82%;" name="invoiceDate" ngModel  required >
+  
+      <label style="display: block; ">Please enter Invoice Due Date </label>
+      <input type="date" style="margin: 2%; width: 82%;" name="invoiceDueDate" ngModel required>
+      <div *ngIf="requestInvoiceForm.value.invoiceDueDate<requestInvoiceForm.value.invoiceDate" style="color: red; margin-bottom: 2%;">Invalid Due Date</div>
+  
+      <label style="display: block; ">Invoice Tax </label>
+      <input type="number" style="margin: 2%; width: 82%;" name="invoiceTax" ngModel required>
+  
+      <label style="display: block; ">Consulting Fees</label>
+      <input type="number" style="margin: 2%; width: 82%;" name="consultingFees" ngModel required>
+
+      <label style="display: block; ">Diagnostic Test Fees</label>
+      <input type="number" style="margin: 2%; width: 82%;" name="diagnosticTestFees" ngModel required>
+
+      <label style="display: block; ">Diagnostic Scan Fees</label>
+      <input type="number" style="margin: 2%; width: 82%;" name="diagnosticScanFees" ngModel required>
+
+      <label style="display: block; ">Please enter Health Care Provider ID </label>
+      <input type="number" style="margin: 2%; width: 82%;" name="planId" ngModel required>
+
+      <div >
+      <button class="btn btn-success" style="margin-right: 4%; margin-top: 2%; width: 40%;" (click)="submitInvoiceRequest()"
+      [disabled]="requestInvoiceForm.invalid || requestInvoiceForm.value.invoiceDueDate<requestInvoiceForm.value.invoiceDate" >Request Invoice</button>
+      <button class="btn btn-danger" style="margin-top: 2%; width: 40%;" (click)="closeInvoiceRequest()">Cancel</button>
+    </div>
+    <button type="button" style=" border-radius: 25px; position: absolute; top: 1%; right: 1%;" class="btn btn-danger" (click)="closeInvoiceRequest()">
+      <i class="bi bi-x-circle"></i>
+    </button>
+    </form>
+    </div>

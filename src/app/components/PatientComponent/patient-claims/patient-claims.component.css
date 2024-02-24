@@ -1,0 +1,19 @@
+.plan-details{
+    display: none;
+}
+
+
+.plan-details.active{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:30%;
+    left: 30%;
+    width: 40%;
+    border-radius: 25px;
+    padding: 2%;
+    background-color: rgb(247, 242, 242);
+    border: outset 4px rgb(204, 204, 207);
+    
+    
+}

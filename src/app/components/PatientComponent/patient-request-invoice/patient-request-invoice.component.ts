@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class PatientRequestInvoiceComponent {
 
+  openInvoiceRequest(){
+    let content=document.getElementById('requestInvoiceDisplay');
+    content?.classList.add('active');
+  }
+
+  submitInvoiceRequest(){
+    alert('Congratulations Invoice request generated');
+    let content=document.getElementById('requestInvoiceDisplay');
+    content?.classList.remove('active');
+
+  }
+
+  closeInvoiceRequest(){
+    let content=document.getElementById('requestInvoiceDisplay');
+    content?.classList.remove('active');
+
+  }
+
 }

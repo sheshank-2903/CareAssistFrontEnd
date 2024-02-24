@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class PatientPlansComponent {
 
+
+
+  confirmPurchase(){
+    let content=document.getElementById('confirmPurchaseDisplay');
+    content?.classList.add('active');
+  }
+
+  closeConfirmPurchase(){
+    let content=document.getElementById('confirmPurchaseDisplay');
+    content?.classList.remove('active');
+  }
+
+  confirmPurchaseCompleted(){
+    alert('Congratulations Purchase completed');
+    let content=document.getElementById('confirmPurchaseDisplay');
+    content?.classList.remove('active');
+  }
+
 }

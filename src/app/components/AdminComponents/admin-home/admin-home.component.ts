@@ -13,7 +13,7 @@ export class AdminHomeComponent {
    addAdminForm !: FormGroup;
 
 toggleAddAdmin() {
-  let addModel=document.getElementById("addAdminFormModel");4
+  let addModel=document.getElementById("addAdminFormModel");
   if(this.isAddAdminModelVisible){
     addModel?.classList.remove("active");
     this.isAddAdminModelVisible=false;

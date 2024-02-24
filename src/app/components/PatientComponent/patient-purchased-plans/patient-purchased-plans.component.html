@@ -30,7 +30,7 @@
             <th>Status</th>
             <th>1</th>
             <td>Mark</td>
-            <td><button type="button" class="btn btn-info">
+            <td><button type="button" class="btn btn-info" (click)="generateClaim()">
               +
                Generate Claim Request
             </button></td>
@@ -58,3 +58,36 @@
         </tbody>
       </table>
 </div >
+
+
+
+<div class="generate-claim-request" id="generateClaimRequestDisplay">
+  <form #generateClaimForm="ngForm" style="width: 100%;" >
+
+    <label style="display: block; ">Please enter Claim Amount </label>
+    <input type="number" style="margin: 2%; width: 82%;" name="claimAmount" ngModel  #claimAmount="ngModel" required min="10001">
+    <div *ngIf="claimAmount.errors?.['min'] && !claimAmount.errors?.['required']" style="color: red;">
+      Amount must be greater than 1000.
+    </div>
+
+    <label style="display: block; ">Please enter Invoice ID </label>
+    <input type="number" style="margin: 2%; width: 82%;" name="invoiceId" ngModel required>
+
+    <label style="display: block; ">Please enter Patient ID </label>
+    <input type="number" style="margin: 2%; width: 82%;" name="patientId" ngModel required>
+
+    <label style="display: block; ">Please enter Plan ID </label>
+    <input type="number" style="margin: 2%; width: 82%;" name="planId" ngModel required>
+
+    <div >
+    <button class="btn btn-success" style="margin-right: 4%; margin-top: 2%; width: 40%;" (click)="submitgenerateClaim()"
+    [disabled]="generateClaimForm.invalid || generateClaimForm.value.claimAmount < 10001" >Request Claim</button>
+    <button class="btn btn-danger" style="margin-top: 2%; width: 40%;" (click)="closegenerateClaim()">Cancel</button>
+  </div>
+
+  <button type="button" style=" border-radius: 25px; position: absolute; top: 1%; right: 1%;" class="btn btn-danger" (click)="closegenerateClaim()">
+    <i class="bi bi-x-circle"></i>
+  </button>
+
+  </form>
+  </div>

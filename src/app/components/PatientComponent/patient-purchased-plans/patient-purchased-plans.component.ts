@@ -7,4 +7,20 @@ import { Component } from '@angular/core';
 })
 export class PatientPurchasedPlansComponent {
 
+  generateClaim(){
+    let content=document.getElementById('generateClaimRequestDisplay');
+    content?.classList.add('active');
+  }
+
+  closegenerateClaim(){
+    let content=document.getElementById('generateClaimRequestDisplay');
+    content?.classList.remove('active');
+  }
+
+  submitgenerateClaim(){
+    alert('Congratulations Claim request generated');
+    let content=document.getElementById('generateClaimRequestDisplay');
+    content?.classList.remove('active');
+  }
+
 }

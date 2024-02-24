@@ -31,7 +31,7 @@
             <th>1</th>
             <td>Mark</td>
             <td>
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-success" (click)="confirmPurchase()">
                   +
                   Purchase Plan
                 </button>
@@ -66,4 +66,19 @@
         </tbody>
       </table>
 </div >
+
+<div class="confirm-purchase-popup" id="confirmPurchaseDisplay">
+<form #purchaseForm="ngForm" >
+  <label style="display: block; ">Please confirm your purchase by typing confirm below: </label>
+  <input type="text" style="margin: 2%;  width: 82%;" name="confirmation" ngModel required>
+  <div >
+  <button class="btn btn-success" style="margin-right: 2%; margin-top:2% ; width: 40%;" (click)="confirmPurchaseCompleted()"
+   [disabled]="purchaseForm.value.confirmation!=='confirm'" >Confirm Purchase</button>
+  <button class="btn btn-danger" style=" width: 40%; margin-top:2% ;" (click)="closeConfirmPurchase()">Cancel</button>
+</div>
+<button type="button" style=" border-radius: 25px; position: absolute; top: 1%; right: 1%;" class="btn btn-danger" (click)="closeConfirmPurchase()">
+  <i class="bi bi-x-circle"></i>
+</button>
+</form>
+</div>
 
