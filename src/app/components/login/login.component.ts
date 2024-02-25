@@ -40,9 +40,13 @@ export class LoginComponent {
 
   public accessApi(token: any) {
     let responseBody = this.jwtService.authorizationTest(token,this.authRequest.email);
-    console.log(responseBody)
+    console.log(responseBody);
     responseBody.subscribe(responseData => {
       this.response = responseData;
+      if(this.response){
+        console.log("200 code");
+        
+      }
       console.log('responseData ' + responseData)
     }, error => { console.log('myerror ' + error) });
   }
