@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Patient } from 'src/app/model/Patient';
@@ -30,8 +30,13 @@ export class PatientService {
     return this._http.delete<boolean>(this.baseUrl+`delete/${patientId}`);
   }
 
-  getAllPatients():Observable<Patient[]>{
-    return this._http.get<Patient[]>(this.baseUrl+"getAll");
+  getAllPatients(token:string):Observable<Patient[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Patient[]>(this.baseUrl+"getAll", { headers, responseType: 'json' });
   }
 
   getPatientByName(patientName:string):Observable<Patient[]>{
