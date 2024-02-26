@@ -31,7 +31,6 @@ export class PlansService {
       'Access-Control-Allow-Origin': 'http://localhost:4200'
     }).set("Authorization", tokenString);
     return this._http.get<Plans[]>(this.baseUrl+"getAll", { headers, responseType: 'json' });
-    
   }
 
   getPlansByName(planName:string):Observable<Plans[]>{
@@ -64,8 +63,13 @@ export class PlansService {
     return this._http.get<Plans[]>(this.baseUrl+`getByPatientId/${patientId}`,{headers,responseType:'json'});
   }
 
-  deletePlanById(planId:number):Observable<boolean>{
-    return this._http.delete<boolean>(this.baseUrl+`delete/${planId}`)
+  deletePlanById(token:string,planId:number):Observable<boolean>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.delete<boolean>(this.baseUrl+`delete/${planId}`,{ headers, responseType: 'json' })
   }
 
 

@@ -27,7 +27,7 @@ export class HealthCareProviderProfileComponent {
       contact:['',[Validators.required,Validators.pattern('\\d{10}')]],
       address:['',[Validators.required]],
       email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
+      password:['',[Validators.required,Validators.pattern('^(?=.[A-Z])(?=.[a-z])(?=.\\d)(?=.[@$!%?&])[A-Za-z\\d@$!%?&./+]{8,}$')]],
       confirm_password: ['', Validators.required] 
     },{validator: this.passwordMatchValidator});
   }

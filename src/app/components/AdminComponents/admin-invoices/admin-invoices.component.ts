@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Invoices } from 'src/app/model/Invoices';
+import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.service';
 
 @Component({
   selector: 'app-admin-invoices',
@@ -6,7 +9,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-invoices.component.css']
 })
 export class AdminInvoicesComponent {
-  confirmDelete(){
+
+  invoiceList:Invoices[]=[];
+  deleteId!:number;
+
+  constructor(private invoiceService:InvoicesService,private cookieService: CookieService){
+    this.getAllInvoice();
+  }
+  getAllInvoice(){
+    this.invoiceService.getAllInvoices(JSON.parse(this.cookieService.get('userId')).userToken)
+             .subscribe(  
+                    (patients) =>
+                       { 
+                          this.invoiceList = patients 
+                          console.log(this.invoiceList);
+                      }
+            );
+    }
+
+  confirmDelete(deleteInvoiceId:number){
+    this.deleteId=deleteInvoiceId;
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.add('active');
   }
@@ -17,8 +39,21 @@ export class AdminInvoicesComponent {
   }
 
   submitConfirmDelete(){
-    alert('Congratulations Purchase completed');
+    this.deleteInvoiceId(this.deleteId);
+    alert('Delete completed');
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
+
+  deleteInvoiceId(deleteId:number){
+    this.invoiceService.deleteInvoiceById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
+             .subscribe(  
+                    (invoice) =>
+                       { 
+                          this.deleteId=0;
+                          console.log(invoice);
+                          this.getAllInvoice();
+                      }
+            );
+    }
 }

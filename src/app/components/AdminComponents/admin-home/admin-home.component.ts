@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 import { Admin } from 'src/app/model/Admin';
 import { AdminService } from 'src/app/services/AdminServices/admin.service';
 
@@ -10,7 +11,25 @@ import { AdminService } from 'src/app/services/AdminServices/admin.service';
 })
 export class AdminHomeComponent {
   isAddAdminModelVisible: boolean=false;
-   addAdminForm !: FormGroup;
+  addAdminForm !: FormGroup;
+  deleteId!:number;
+  adminList:Admin[]=[];
+
+  constructor(private adminService:AdminService,private cookieService: CookieService,private formBuilder:FormBuilder){
+    this.getAllAdmin();
+  }
+  
+  getAllAdmin(){
+    this.adminService.getAllAdmin(JSON.parse(this.cookieService.get('userId')).userToken)
+             .subscribe(  
+                    (admin) =>
+                       { 
+                          this.adminList = admin;
+                          console.log(this.adminList);
+                      }
+            );
+    }
+
 
 toggleAddAdmin(input?:boolean) {
   let addModel=document.getElementById("addAdminFormModel");
@@ -32,12 +51,6 @@ toggleAddAdmin(input?:boolean) {
     }
   }
 }
-
-  adminList:Admin[]=[];
-
-  constructor(private adminService:AdminService, private formBuilder:FormBuilder){
-  
-  }
 
   ngOnInit(){
     
@@ -79,7 +92,8 @@ toggleAddAdmin(input?:boolean) {
     }
   }
 
-  confirmDelete(){
+  confirmDelete(deleteId:number){
+    this.deleteId=deleteId;
     let content=document.getElementById('confirmDeleteDisplay');
     this.toggleAddAdmin(false);
     content?.classList.add('active');
@@ -91,10 +105,23 @@ toggleAddAdmin(input?:boolean) {
   }
 
   submitConfirmDelete(){
-    alert('Congratulations Purchase completed');
+    this.deleteAdminId(this.deleteId);
+    alert('Delete completed');
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
+
+  deleteAdminId(deleteId:number){
+    this.adminService.deleteAdminById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
+             .subscribe(  
+                    (admin) =>
+                       { 
+                          this.deleteId=0;
+                          console.log(admin);
+                          this.getAllAdmin();
+                      }
+            );
+    }
 
 
 }
