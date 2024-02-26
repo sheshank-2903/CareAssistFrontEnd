@@ -5,10 +5,10 @@
         <button class="tab" id="button-insurance" (click)="openTab('insurance')">Insurance</button>
     </div>
 
+    <!-- patient -->
     <div id="patient" class="tab-content active">
         <div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;">
-            
-            <form  [formGroup]="patientRegistrationForm" (ngSubmit)="onSubmit()"  style="width: 80%;">
+            <form  [formGroup]="patientRegistrationForm" (ngSubmit)="onSubmitPatinet()"  style="width: 80%;">
         
               <div class="form-group">
                 <label for="patientName">Patient Name:</label>
@@ -30,21 +30,15 @@
                   <div *ngIf="!getPatientForm['contact'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
                   <div *ngIf="getPatientForm['contact'].errors?.['required']" style="color: red;">Contact number cannot be empty</div>
               </div>
-        
-        
-              <div style="display: flex; flex-direction: column;">
+              <div style="display: flex; flex-direction: column; margin-bottom: 5%;">
                 <label for="healthCareProviderName">Gender:</label>
                 <div style="display: flex; flex-direction: row;">
-                    <label style="border-radius: 8%; " class="btn btn-outline-primary" for="male">
-                        <input type="radio" id="male" name="gender" [value]="'Male'" > 
-                        Male
-                    </label>
-                    <label style="margin-left: 5%; border-radius: 8%;" class="btn btn-outline-primary" for="female">
-                        <input type="radio" id="female" name="gender" [value]="'Female'" > 
-                        Female
-                    </label>
+                  <select id="patientGender" formControlName="patientGender">
+                    <option value="MALE" >Male</option>
+                    <option value="FEMALE">Female</option>
+                  </select>
                 </div>
-            </div>
+              </div>
               <div class="form-group">
                 <label for="dob">Date Of Birth: </label>
                 <input type="date"   class="form-control" id="dob"  [max]="getYesterdayDate()"
@@ -103,14 +97,16 @@
                   <div *ngIf="!getPatientForm['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
               </div>
           
-              <button type="submit"  [disabled]=" patientRegistrationForm.invalid" class="btn btn-primary" style="width: 100%;">Add Profile</button>
+              <button type="submit"  [disabled]="patientRegistrationForm.invalid" class="btn btn-primary" style="width: 100%;">Add Profile</button>
             </form>
           </div>
     </div>
 
+
+    <!-- healthcare -->
     <div id="healthCare" class="tab-content">
       <div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;">
-        <form  [formGroup]="HealthCareRegistrationForm" (ngSubmit)="onSubmit()"  style="width: 80%;">
+        <form  [formGroup]="HealthCareRegistrationForm" (ngSubmit)="onSubmitHealthCare()"  style="width: 80%;">
           <div class="form-group">
             <label for="healthCareProviderName">Health Care Provider Name:</label>
             <input type="text"   class="form-control" id="healthCareProviderName" formControlName="healthCareProviderName"
@@ -120,19 +116,15 @@
               <div *ngIf="!getHealthCareProvider['healthCareProviderName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
               <div *ngIf="getHealthCareProvider['healthCareProviderName'].errors?.['required']" style="color: red;">Health Care Provider name cannot be empty</div>
           </div>
-            <div style="display: flex; flex-direction: column;">
-                <label for="healthCareProviderName">Gender:</label>
-                <div style="display: flex; flex-direction: row;">
-                    <label style="border-radius: 8%; " class="btn btn-outline-primary" for="male">
-                        <input type="radio" id="male" name="gender" [value]="'Male'" [(ngModel)]="selectedGender"> 
-                        Male
-                    </label>
-                    <label style="margin-left: 5%; border-radius: 8%;" class="btn btn-outline-primary" for="female">
-                        <input type="radio" id="female" name="gender" [value]="'Female'" [(ngModel)]="selectedGender"> 
-                        Female
-                    </label>
-                </div>
+          <div style="display: flex; flex-direction: column; margin-bottom: 5%;">
+            <label for="providergender">Gender:</label>
+            <div style="display: flex; flex-direction: row;">
+              <select id="providergender" formControlName="providergender">
+                <option value="MALE" >Male</option>
+                <option value="FEMALE">Female</option>
+              </select>
             </div>
+          </div>
           <div class="form-group">
             <label for="address">Address</label>
             <textarea style="resize: none;" class="form-control"   id="address"
@@ -168,9 +160,10 @@
       </div>
     </div>
 
+    <!-- insurance -->
     <div id="insurance" class="tab-content">
       <div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;">
-        <form  [formGroup]=" insuranceRegistrationForm" (ngSubmit)="registerInsuranceCompany()"  style="width: 80%;">
+        <form  [formGroup]=" insuranceRegistrationForm" (ngSubmit)="onSubmitInsuranceCompany()"  style="width: 80%;">
           <div class="form-group">
             <label for="companyName">Company Name:</label>
             <input type="text"   class="form-control" id="companyName" formControlName="companyName"
@@ -180,8 +173,6 @@
               <div *ngIf="!getInsuranceForm['companyName'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">Looks good!</div>
               <div *ngIf="getInsuranceForm['companyName'].errors?.['required']" style="color: red;">Company name cannot be empty</div>
           </div>
-      
-          
           <div class="form-group">
             <label for="insuranceCompanyDescription">Insurance Company Description:</label>
             <textarea style="resize: none;" class="form-control"   id="insuranceCompanyDescription"

@@ -12,14 +12,6 @@ export class RegistrationComponent {
   insuranceRegistrationForm !:FormGroup;
   HealthCareRegistrationForm !:FormGroup;
 
-  selectedGender: string="";
-
-  genderOptions = ['Male', 'Female'];
-
-  selectGender(gender: string): void {
-    this.selectedGender = gender;
-  }
-
   constructor(private formBuilder: FormBuilder){
     
   }
@@ -34,11 +26,11 @@ export class RegistrationComponent {
       descriptionOfTreatment:['',[Validators.required]],
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
-      confirm_password: ['', Validators.required] 
+      confirm_password: ['', Validators.required] ,
+      patientGender: ['MALE', Validators.required], 
     },{validator: this.passwordMatchValidator});
 
     this.insuranceRegistrationForm=this.formBuilder.group({
-  
       insuranceCompanyDescription:['',[Validators.required,Validators.minLength(20)]],
       companyName:['',[Validators.required,Validators.pattern('^[a-zA-Z ]{5,20}$')]],
       companyContactNumber:['',[Validators.required,Validators.pattern('\\d{10}')]],
@@ -49,13 +41,11 @@ export class RegistrationComponent {
 
     this.HealthCareRegistrationForm=this.formBuilder.group({
       healthCareProviderName:['',[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
-      contact:['',[Validators.required,Validators.pattern('\\d{10}')]],
-      dob:['',[Validators.required]],
       address:['',[Validators.required]],
-      descriptionOfTreatment:['',[Validators.required]],
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
-      confirm_password: ['', Validators.required] 
+      confirm_password: ['', Validators.required],
+      providergender:['MALE', Validators.required],
     },{validator: this.passwordMatchValidator});
   }
 
@@ -75,25 +65,33 @@ export class RegistrationComponent {
     return this.patientRegistrationForm.controls;
   }
 
-  onSubmit(){
+  onSubmitPatinet(){
 
     if(this.patientRegistrationForm.invalid){
       return;
   }
   
   alert('Form submitted successfully');
-  console.log(this.getPatientForm['companyName'].value);
+  console.log(this.patientRegistrationForm);
   
   }
 
-  registerInsuranceCompany(){
+  onSubmitHealthCare(){
+    if(this.HealthCareRegistrationForm.invalid){
+      return;
+  }
+    alert('Form submitted successfully');
+    console.log(this.HealthCareRegistrationForm);
+  }
+
+  onSubmitInsuranceCompany(){
 
     if(this.insuranceRegistrationForm.invalid){
       return;
   }
   
   alert('Form submitted successfully');
-  console.log(this.getPatientForm['companyName'].value);
+  console.log(this.insuranceRegistrationForm);
   
   }
 
@@ -123,12 +121,10 @@ export class RegistrationComponent {
   openTab(tabId: string): void {
     // Hide all tab contents
     const tabContents: NodeListOf<Element> = document.querySelectorAll('.tab-content');
-    console.log(tabContents);
     tabContents.forEach((content: Element) => {
         content.classList.remove('active');
     });
     const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
-    console.log(tab);
     tab.forEach((content: Element) => {
         content.classList.remove('active');
     });
