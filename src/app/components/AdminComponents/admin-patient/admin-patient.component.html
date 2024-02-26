@@ -27,15 +27,15 @@
         </thead>
         <tbody>
           <tr *ngFor="let patient of patientList">
-            <th>{{patient.patientId}}</th>
+            <td>{{patient.patientId}}</td>
             <td>{{patient.patientName}}</td>
-            <th>{{patient.dob}}</th>
-            <th>{{patient.contact}}</th>
+            <td>{{patient.dob}}</td>
+            <td>{{patient.contact}}</td>
             <td>{{patient.address}}</td>
-            <th>{{patient.descriptionOfTreatment}}</th>
-            <th>{{patient.email}}</th>
+            <td>{{patient.descriptionOfTreatment}}</td>
+            <td>{{patient.email}}</td>
             <td>
-              <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+              <button type="button" class="btn btn-danger" (click)="confirmDelete(patient.patientId)">
                 <i class="bi bi-trash3"></i>
                  Delete
               </button>

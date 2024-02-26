@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Invoices } from 'src/app/model/Invoices';
@@ -16,8 +16,13 @@ export class InvoicesService {
     return this._http.post<Invoices>(this.baseUrl+`add/${patientId}`,body);
   }
 
-  getAllInvoices():Observable<Invoices[]>{
-    return this._http.get<Invoices[]>(this.baseUrl+"getAll");
+  getAllInvoices(token:string):Observable<Invoices[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Invoices[]>(this.baseUrl+"getAll", { headers, responseType: 'json' });
   }
 
   getInvoiceById(invoiceId:number):Observable<Invoices>{
@@ -28,18 +33,27 @@ export class InvoicesService {
     return this._http.get<Invoices[]>(this.baseUrl+`getByPatientId/${patientId}`);
   }
 
-  getInvoiceByHealthCareProviderId(healthCareProviderId:number):Observable<Invoices[]>{
-    return this._http.get<Invoices[]>(this.baseUrl+`getByHealthCareProviderId/${healthCareProviderId}`);
+  getInvoiceByHealthCareProviderId(token:string,healthCareProviderId:number):Observable<Invoices[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Invoices[]>(this.baseUrl+`getByHealthCareProviderId/${healthCareProviderId}`, { headers, responseType: 'json' });
   }
 
   updateInvoiceStatus(invoiceId:number, invoiceStatus:string){
     return this._http.put<Invoices>(this.baseUrl+`updateInvoiceStatus/${invoiceId}/${invoiceStatus}`,{});
   }
 
-  deleteInvoiceById(invoiceId:number):Observable<boolean>{
-    return this._http.delete<boolean>(this.baseUrl+`delete/${invoiceId}`);
+  deleteInvoiceById(token:string,invoiceId:number):Observable<boolean>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.delete<boolean>(this.baseUrl+`delete/${invoiceId}`,{ headers, responseType: 'json' });
   }
-
-  }
+}
 
   

@@ -31,20 +31,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <td><button type="button" class="btn btn-danger" (click)="confirmDelete()">
+          <tr *ngFor="let invoice of invoiceList">
+            <td>{{invoice.invoiceId}}</td>
+            <td>{{invoice.invoiceDate}}</td>
+            <td>{{invoice.invoiceDueDate}}</td>
+            <td>{{invoice.patientName}}</td>
+            <td>{{invoice.patientAddress}}</td>
+            <td>{{invoice.invoiceTax}}</td>
+            <td>{{invoice.consultingFees}}</td>
+            <td>{{invoice.diagnosticTestFees}}</td>
+            <td>{{invoice.diagnosticScanFees}}</td>
+            <td>{{invoice.calculatedAmount}}</td>
+            <td>{{invoice.invoiceStatus}}</td>
+            <td>{{invoice.healthCareProviderId}}</td>
+            <td><button type="button" class="btn btn-danger" (click)="confirmDelete(invoice.invoiceId)">
               <i class="bi bi-trash3"></i>
                Delete
             </button></td>

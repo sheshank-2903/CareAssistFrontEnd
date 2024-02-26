@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Claims } from 'src/app/model/Claims';
@@ -24,12 +24,22 @@ export class ClaimsService {
     return this._http.get<Claims>(this.baseUrl+`get/${ClaimsId}`)
   }
 
-  getAllClaims():Observable<Claims[]>{
-    return this._http.get<Claims[]>(this.baseUrl+`getAll`)
+  getAllClaims(token:string):Observable<Claims[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Claims[]>(this.baseUrl+`getAll`, { headers, responseType: 'json' })
   }
 
-  deleteClaimsById(ClaimsId:number):Observable<boolean>{
-    return this._http.delete<boolean>(this.baseUrl+`delete/${ClaimsId}`)
+  deleteClaimsById(token:string,ClaimsId:number):Observable<boolean>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.delete<boolean>(this.baseUrl+`delete/${ClaimsId}`,{ headers, responseType: 'json' })
   }
 
   getClaimsByPatientId(patientId:number):Observable<Claims[]>{

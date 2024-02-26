@@ -31,47 +31,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-            </tr>
-            <tr>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-            </tr>
-            <tr>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
-              <th>1</th>
-              <td>Mark</td>
+            <tr *ngFor="let invoice of invoiceList">
+              <th>{{invoice.invoiceId}}</th>
+              <td>{{invoice.invoiceDate}}</td>
+              <th>{{invoice.invoiceDueDate}}</th>
+              <th>{{invoice.patientName}}</th>
+              <td>{{invoice.patientAddress}}</td>
+              <th>{{invoice.invoiceTax}}</th>
+              <th>{{invoice.consultingFees}}</th>
+              <th>{{invoice.diagnosticTestFees}}</th>
+              <td>{{invoice.diagnosticScanFees}}</td>
+              <th>{{invoice.calculatedAmount}}</th>
+              <th>{{invoice.invoiceStatus}}</th>
+              <td>{{invoice.healthCareProviderId}}</td>
             </tr>
           </tbody>
         </table>

@@ -10,14 +10,12 @@ import { PatientService } from 'src/app/services/PatientServices/patient.service
 })
 export class AdminPatientComponent {
   patientList:Patient[]=[];
+  deleteId!:number;
 
   constructor(private patientService:PatientService,private cookieService: CookieService){
-    this.getAllPlans();
+    this.getAllPatients();
   }
-
-  
-
-  getAllPlans(){
+  getAllPatients(){
     this.patientService.getAllPatients(JSON.parse(this.cookieService.get('userId')).userToken)
              .subscribe(  
                     (patients) =>
@@ -28,8 +26,9 @@ export class AdminPatientComponent {
                       }
             );
     }
-
-    confirmDelete(){
+    
+    confirmDelete(deletePatientId:number){
+      this.deleteId=deletePatientId;
       let content=document.getElementById('confirmDeleteDisplay');
       content?.classList.add('active');
     }
@@ -40,8 +39,21 @@ export class AdminPatientComponent {
     }
   
     submitConfirmDelete(){
-      alert('Congratulations Purchase completed');
+      this.deletePatinetId(this.deleteId);
+      alert('Delete completed');
       let content=document.getElementById('confirmDeleteDisplay');
       content?.classList.remove('active');
     }
+
+    deletePatinetId(deleteId:number){
+      this.patientService.deletePatientById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
+               .subscribe(  
+                      (admin) =>
+                         { 
+                            this.deleteId!=undefined;
+                            console.log(admin);
+                            this.getAllPatients();
+                        }
+              );
+      }
 }

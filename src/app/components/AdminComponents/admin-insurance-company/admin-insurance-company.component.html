@@ -24,14 +24,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
+          <tr *ngFor="let insuranceCompany of insuranceCompanyList">
+            <td>{{insuranceCompany.insuranceCompanyId}}</td>
+            <td>{{insuranceCompany.companyName}}</td>
+            <td>{{insuranceCompany.insuranceCompanyDescription}}</td>
+            <td>{{insuranceCompany.companyContactNumber}}</td>
+            <td>{{insuranceCompany.email}}</td>
             <td>
-              <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+              <button type="button" class="btn btn-danger" (click)="confirmDelete(insuranceCompany.insuranceCompanyId)">
                 <i class="bi bi-trash3"></i>
                  Delete
               </button>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Plans } from 'src/app/model/Plans';
@@ -24,8 +24,13 @@ export class PlansService {
     return this._http.get<Plans>(this.baseUrl+`getById/${planId}`)
   }
 
-  getAllPlans():Observable<Plans[]>{
-    return this._http.get<Plans[]>(this.baseUrl+"getAll");
+  getAllPlans(token:string):Observable<Plans[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Plans[]>(this.baseUrl+"getAll", { headers, responseType: 'json' });
   }
 
   getPlansByName(planName:string):Observable<Plans[]>{
@@ -44,8 +49,13 @@ export class PlansService {
     return this._http.get<Plans[]>(this.baseUrl+`getByPatientId/${patientId}`)
   }
 
-  deletePlanById(planId:number):Observable<boolean>{
-    return this._http.delete<boolean>(this.baseUrl+`delete/${planId}`)
+  deletePlanById(token:string,planId:number):Observable<boolean>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.delete<boolean>(this.baseUrl+`delete/${planId}`,{ headers, responseType: 'json' })
   }
 
 
