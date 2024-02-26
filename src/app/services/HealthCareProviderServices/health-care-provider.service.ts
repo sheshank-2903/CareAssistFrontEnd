@@ -12,7 +12,7 @@ export class HealthCareProviderService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/healthcareprovider/'
 
-  addAdmin(body:HealthCareProvider):Observable<HealthCareProvider>{
+  addHealthCareProvider(body:HealthCareProvider):Observable<HealthCareProvider>{
     return this._http.post<HealthCareProvider>(this.baseUrl+"register",body)
   }
 
