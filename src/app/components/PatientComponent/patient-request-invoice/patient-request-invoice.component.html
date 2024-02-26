@@ -21,40 +21,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td>Otto</td>
+            <tr *ngFor="let healthcareProvider of healthCareProviderList">
+              <th>{{healthcareProvider.healthCareProviderId}}</th>
+              <td>{{healthcareProvider.healthcareProviderName}}</td>
+              <td>{{healthcareProvider.providerGender}}</td>
+              <td>{{healthcareProvider.address}}</td>
+              <td>{{healthcareProvider.email}}</td>
               <td>
                   <button type="button" class="btn btn-info" (click)="openInvoiceRequest()">
                     +
                      Request Invoice
                   </button>
               </td>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td><button type="button" class="btn btn-info">
-                +
-                 Request Invoice
-              </button></td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>Otto</td>
-              <td>Otto</td>
-              <td><button type="button" class="btn btn-info">
-                +
-                 Request Invoice
-              </button></td>
             </tr>
           </tbody>
         </table>

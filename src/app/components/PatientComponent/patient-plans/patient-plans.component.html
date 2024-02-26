@@ -24,43 +24,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
+          <tr *ngFor="let plan of plansList">
+            <th>{{plan.planId}}</th>
+            <td>{{plan.planName}}</td>
+            <th>{{plan.description}}</th>
+            <th>{{plan.dateOfIssue}}</th>
+            <td>{{plan.coverageAmount}}</td>
             <td>
                 <button type="button" class="btn btn-success" (click)="confirmPurchase()">
                   +
                   Purchase Plan
                 </button>
-            </td>
-          </tr>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <td>
-              <button type="button" class="btn btn-success">
-                +
-                Purchase Plan
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <td>
-              <button type="button" class="btn btn-success">
-                +
-                Purchase Plan
-              </button>
             </td>
           </tr>
         </tbody>

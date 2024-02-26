@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { Plans } from 'src/app/model/Plans';
+import { PlansService } from 'src/app/services/PlansServices/plans.service';
 
 @Component({
   selector: 'app-insurance-company-plans',
@@ -11,8 +14,11 @@ export class InsuranceCompanyPlansComponent {
   isEditPlanModelVisible:boolean=false;
   addPlanForm !: FormGroup;
 
-  constructor(private formBuilder: FormBuilder){
-    
+  comapnyPlansList:Plans[]=[];
+
+
+  constructor(private formBuilder: FormBuilder,private plansService:PlansService,private cookieService: CookieService){
+    this.getPlansByCompanyId();
   }
   
   ngOnInit(){
@@ -21,6 +27,11 @@ export class InsuranceCompanyPlansComponent {
       PlanAmount:['',[Validators.required,Validators.pattern('^[1-9]\\d{4,}$')]],
       descriptionOfPlan:['',[Validators.required]],
   })}
+
+  getPlansByCompanyId(){
+    this.plansService.getPlansByCompanyId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe(plans=>this.comapnyPlansList=plans);
+  }
 
 
   toggleAddPlan() {

@@ -24,37 +24,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
+          <tr *ngFor="let plan of purchasedPlansList">
+            <th>{{plan.planId}}</th>
+            <td>{{plan.planName}}</td>
+            <th>{{plan.description}}</th>
+            <th>{{plan.dateOfIssue}}</th>
+            <td>{{plan.coverageAmount}}</td>
             <td><button type="button" class="btn btn-info" (click)="generateClaim()">
               +
                Generate Claim Request
             </button></td>
           </tr>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <th>Status</th>
-            <th>1</th>
-            <td>Mark</td>
-            <td><button type="button" class="btn btn-info">
-              +
-              Generate Claim Request</button></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Status</td>
-            <td>1</td>
-            <td>Mark</td>
-            <td><button type="button" class="btn btn-info">
-              +
-              Generate Claim Request</button></td>
-          </tr>
+          
         </tbody>
       </table>
 </div >

@@ -19,10 +19,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Mark</td>
-              <th>Status</th>
+            <tr *ngFor="let claim of claimsList">
+              <th>{{claim.claimId}}</th>
+              <td>{{claim.claimAmount}}</td>
+              <th>{{claim.claimStatus}}</th>
               <td><button type="button" class="btn btn-info" (click)="showPlanDetails()">
                 <i class="bi bi-info-circle">
               </i></button></td>

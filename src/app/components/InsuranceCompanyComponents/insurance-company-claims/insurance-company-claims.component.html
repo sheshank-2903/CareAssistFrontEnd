@@ -15,8 +15,8 @@
         <thead class="thead-dark">
           <tr>
             <th>#claimId</th>
-            <th>Patient Name</th>
             <th>Claim Amount</th>
+            <th>Claim Status</th>
             <th>Patient</th>
             <th>Invoice</th>
             <th>Plan</th>
@@ -24,10 +24,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>10000</td>
+          <tr *ngFor="let claim of comapnyClaimsList">
+            <td>{{claim.claimId}}</td>
+            <td>{{claim.claimAmount}}</td>
+            <td>{{claim.claimStatus}}</td>
             <td>
               <button type="button" class="btn btn-info" (click)="showPatientModel()"><i class="bi bi-info-circle"></i></button>
             </td>

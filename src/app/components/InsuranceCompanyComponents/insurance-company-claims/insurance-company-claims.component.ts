@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Claims } from 'src/app/model/Claims';
+import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 
 @Component({
   selector: 'app-insurance-company-claims',
@@ -6,6 +9,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./insurance-company-claims.component.css']
 })
 export class InsuranceCompanyClaimsComponent {
+
+  comapnyClaimsList:Claims[]=[];
+  
+  constructor(private claimService:ClaimsService,private cookieService: CookieService){
+
+    this.getClaimsByCompanyId();
+  }
+
+  getClaimsByCompanyId(){
+    this.claimService.getClaimsByCompanyId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe(claims=>this.comapnyClaimsList=claims);
+  }
 
   showPatientModel(){
     let content=document.getElementById('showPatientModel');

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Invoices } from 'src/app/model/Invoices';
@@ -24,8 +24,13 @@ export class InvoicesService {
     return this._http.get<Invoices>(this.baseUrl+`get/${invoiceId}`);
   }
 
-  getInvoiceByPatientId(patientId:number):Observable<Invoices[]>{
-    return this._http.get<Invoices[]>(this.baseUrl+`getByPatientId/${patientId}`);
+  getInvoiceByPatientId(patientId:number,token:string):Observable<Invoices[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Invoices[]>(this.baseUrl+`getByPatientId/${patientId}`,{headers,responseType: 'json'});
   }
 
   getInvoiceByHealthCareProviderId(healthCareProviderId:number):Observable<Invoices[]>{
