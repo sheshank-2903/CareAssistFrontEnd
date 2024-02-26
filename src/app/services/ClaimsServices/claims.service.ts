@@ -14,12 +14,22 @@ export class ClaimsService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/claims/'
 
-  addClaims(body:Claims,patientId:number,planId:number,invoiceId:number):Observable<Claims>{
-    return this._http.post<Claims>(this.baseUrl+`add/${patientId}/${planId}/${invoiceId}`,body)
+  addClaims(body:Claims,patientId:number,planId:number,invoiceId:number,token:string):Observable<Claims>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.post<Claims>(this.baseUrl+`add/${patientId}/${planId}/${invoiceId}`,body,{ headers, responseType: 'json' })
   }
 
-  updateClaims(claimId:number,newStatus:string):Observable<Claims>{
-    return this._http.put<Claims>(this.baseUrl + `update/${claimId}/${newStatus}`,{})
+  updateClaims(claimId:number,newStatus:string,token:string):Observable<Claims>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.put<Claims>(this.baseUrl + `update/${claimId}/${newStatus}`, { headers, responseType: 'json' })
   }
 
   getClaimsById(ClaimsId:number):Observable<Claims>{
