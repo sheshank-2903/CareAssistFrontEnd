@@ -41,12 +41,26 @@ export class PlansService {
     return this._http.get<Plans[]>(this.baseUrl+`getByCompanyName/${companyName}`)
   }
 
+  getPlansByCompanyId(insuranceCompanyId:number,token:string):Observable<Plans[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Plans[]>(this.baseUrl+`getByCompanyId/${insuranceCompanyId}`,{headers,responseType: 'json'})
+  }
+
   getByCoverageAmountLessThan(coverageAmount:number):Observable<Plans[]>{
     return this._http.get<Plans[]>(this.baseUrl+`getByCoverageAmountLessThan/${coverageAmount}`)
   }
 
-  getByPatientId(patientId:number):Observable<Plans[]>{
-    return this._http.get<Plans[]>(this.baseUrl+`getByPatientId/${patientId}`)
+  getByPatientId(patientId:number,token:string):Observable<Plans[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Plans[]>(this.baseUrl+`getByPatientId/${patientId}`,{headers,responseType:'json'});
   }
 
   deletePlanById(token:string,planId:number):Observable<boolean>{

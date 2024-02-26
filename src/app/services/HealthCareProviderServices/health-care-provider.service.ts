@@ -49,6 +49,6 @@ export class HealthCareProviderService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': 'http://localhost:4200'
     }).set("Authorization", tokenString);
-    return this._http.get<HealthCareProvider[]>(this.baseUrl+`getAll`, { headers, responseType: 'json' })
+    return this._http.get<HealthCareProvider[]>(this.baseUrl+`getAll`,{headers,responseType: 'json'});
   }
 }

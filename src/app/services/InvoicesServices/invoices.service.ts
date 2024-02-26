@@ -29,8 +29,13 @@ export class InvoicesService {
     return this._http.get<Invoices>(this.baseUrl+`get/${invoiceId}`);
   }
 
-  getInvoiceByPatientId(patientId:number):Observable<Invoices[]>{
-    return this._http.get<Invoices[]>(this.baseUrl+`getByPatientId/${patientId}`);
+  getInvoiceByPatientId(patientId:number,token:string):Observable<Invoices[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Invoices[]>(this.baseUrl+`getByPatientId/${patientId}`,{headers,responseType: 'json'});
   }
 
   getInvoiceByHealthCareProviderId(token:string,healthCareProviderId:number):Observable<Invoices[]>{

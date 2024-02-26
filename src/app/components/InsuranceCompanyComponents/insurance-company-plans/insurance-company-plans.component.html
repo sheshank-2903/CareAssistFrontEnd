@@ -24,12 +24,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Status</td>
-          <td>1</td>
-          <td>Mark</td>
+        <tr *ngFor="let plan of comapnyPlansList">
+          <th>{{plan.planId}}</th>
+          <td>{{plan.planName}}</td>
+          <th>{{plan.description}}</th>
+          <th>{{plan.dateOfIssue}}</th>
+          <td>{{plan.coverageAmount}}</td>
           <td>
               <button type="button" class="btn btn-danger" (click)="confirmDelete()">
                 <i class="bi bi-trash3"></i>
@@ -41,26 +41,11 @@
               </button>
           </td>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Status</td>
-          <td>1</td>
-          <td>Mark</td>
-          <td>
-            <button type="button" class="btn btn-danger" (click)="confirmDelete()">
-              <i class="bi bi-trash3"></i>
-              Delete
-            </button> /
-            <button type="button" class="btn btn-success">
-              <i class="bi bi-pencil-square"></i>
-              Edit
-            </button>
-        </td>
-        </tr>
-
       </tbody>
   </table>
+
+
+  
   <!--Add Plan Modal -->
   <div id="addPlanFormModel" class="addPlanDisplay">
     <form  [formGroup]="addPlanForm" (ngSubmit)="SubmitPlan()"  style="width: 60%; margin-left: auto; margin-right: auto;">
