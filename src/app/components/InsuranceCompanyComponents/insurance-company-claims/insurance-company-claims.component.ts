@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Claims } from 'src/app/model/Claims';
+import { Patient } from 'src/app/model/Patient';
+import { Plans } from 'src/app/model/Plans';
 import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
+import { PlansService } from 'src/app/services/PlansServices/plans.service';
 
 @Component({
   selector: 'app-insurance-company-claims',
@@ -10,9 +13,31 @@ import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 })
 export class InsuranceCompanyClaimsComponent {
 
+  plan:Plans={
+    "planId":0,
+    "planName":'',
+    "dateOfIssue":new Date(),
+    "coverageAmount":0,
+    "description":''
+  }
+
+  patient:Patient={
+    "patientId": 0,
+    'dob': new Date(),
+    "contact": "",
+    "address": "",
+    "patientName": "",
+    "descriptionOfTreatment": "",
+    "email": "",
+    "password": "",
+    "patientGender":"",
+  }
+
+
   comapnyClaimsList:Claims[]=[];
   
-  constructor(private claimService:ClaimsService,private cookieService: CookieService){
+  
+  constructor(private claimService:ClaimsService,private cookieService: CookieService,private planService:PlansService){
 
     this.getClaimsByCompanyId();
   }
@@ -22,7 +47,10 @@ export class InsuranceCompanyClaimsComponent {
     .subscribe(claims=>this.comapnyClaimsList=claims);
   }
 
-  showPatientModel(){
+  showPatientModel(claimId:number){
+    this.claimService.getPatientByClaimId(claimId,JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe(data=>this.patient=data);
+
     let content=document.getElementById('showPatientModel');
     content?.classList.add('active');
   }
@@ -32,7 +60,11 @@ export class InsuranceCompanyClaimsComponent {
     content?.classList.remove('active');
   }
 
-  showPlanModel(){
+  showPlanModel(claimId:number){
+    this.claimService.getPlanByClaimId(claimId,JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe(data=>
+      this.plan=data);
+  
     let content=document.getElementById('showPlanModel');
     content?.classList.add('active');
   }

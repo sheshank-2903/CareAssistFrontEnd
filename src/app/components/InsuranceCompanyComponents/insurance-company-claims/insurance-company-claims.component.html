@@ -29,13 +29,13 @@
             <td>{{claim.claimAmount}}</td>
             <td>{{claim.claimStatus}}</td>
             <td>
-              <button type="button" class="btn btn-info" (click)="showPatientModel()"><i class="bi bi-info-circle"></i></button>
+              <button type="button" class="btn btn-info" (click)="showPatientModel(claim.claimId)"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
               <button type="button" class="btn btn-info" (click)="showInvoiceModel()"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
-              <button type="button" class="btn btn-info" (click)="showPlanModel()"><i class="bi bi-info-circle"></i></button>
+              <button type="button" class="btn btn-info" (click)="showPlanModel(claim.claimId)"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
               <button type="button" class="btn btn-danger">
@@ -57,23 +57,23 @@
     <div style="width: 60%; margin-left: auto; margin-right: auto;">
       <div class="form-group">
         <label for="PlanId">Plan Id:</label><br>
-        <input type="number" class="form-control" id="PlanId" readonly>
+        <input type="number" class="form-control" id="PlanId" readonly [value]="plan.planId">
       </div>
     <div class="form-group">
       <label for="PlanName">Plan Name:</label><br>
-      <input type="number" class="form-control" id="PlanName" readonly>
+      <input type="text" class="form-control" id="PlanName" readonly [value]="plan.planName">
     </div>
     <div class="form-group">
       <label for="descriptionOfPlan">Description Of Plan: </label>
-      <textarea style="resize: none;" class="form-control"  id="descriptionOfPlan" readonly></textarea>
+      <textarea style="resize: none;" class="form-control"  id="descriptionOfPlan" readonly [value]="plan.description"></textarea>
     </div>
     <div class="form-group">
       <label for="dateOfIssue">Date Of Issue:</label>
-      <input type="number" class="form-control" id="dateOfIssue" readonly>
+      <input type="text" class="form-control" id="dateOfIssue" readonly [value]="plan.dateOfIssue">
     </div>
     <div class="form-group">
       <label for="PlanAmount">Plan Amount:</label>
-      <input type="number" class="form-control" id="PlanAmount" readonly>
+      <input type="number" class="form-control" id="PlanAmount" readonly [value]="plan.coverageAmount">
     </div>
   </div>
   <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closePlanModel()">
@@ -81,36 +81,42 @@
   </button>
   </div>
 
-  <!--Plan Form Modal -->
+  <!--Patient Form Modal -->
   <div id="showPatientModel" class="patientDisplay">
     <div style="width: 60%; margin-left: auto; margin-right: auto;">
       <div class="form-group">
         <label for="patientId">Patient Id :</label><br>
-        <input type="number" class="form-control" id="patientId" readonly>
+        <input type="number" class="form-control" id="patientId" readonly [value]="patient.patientId">
       </div>
+      <div class="form-group">
+        <label for="patientName">Patient Name :</label>
+        <input type="text" class="form-control" id="patientName" readonly [value]="patient.patientName">
+      </div>
+      <div class="form-group">
+        <label for="patientName">Patient Gender :</label>
+        <input type="text" class="form-control" id="patientName" readonly [value]="patient.patientGender">
+      </div>
+
     <div class="form-group">
       <label for="dob">Date Of Birth :</label><br>
-      <input type="number" class="form-control" id="dob" readonly>
+      <input type="date" class="form-control" id="dob" readonly [value]="patient.dob">
     </div>
     <div class="form-group">
       <label for="contact">Contact : </label>
-      <textarea style="resize: none;" class="form-control"  id="contact" readonly></textarea>
+      <input type="tel" class="form-control" id="address" readonly [value]="patient.contact">
     </div>
     <div class="form-group">
       <label for="address">Address :</label>
-      <input type="number" class="form-control" id="address" readonly>
+      <input type="text" class="form-control" id="address" readonly [value]="patient.address">
     </div>
-    <div class="form-group">
-      <label for="patientName">Patient Name :</label>
-      <input type="number" class="form-control" id="patientName" readonly>
-    </div>
+    
     <div class="form-group">
       <label for="descriptionOfTreatment">Description Of Treatment :</label>
-      <input type="number" class="form-control" id="descriptionOfTreatment" readonly>
+      <input type="text" class="form-control" id="descriptionOfTreatment" readonly [value]="patient.descriptionOfTreatment">
     </div>
     <div class="form-group">
       <label for="email">Email :</label>
-      <input type="number" class="form-control" id="email" readonly>
+      <input type="text" class="form-control" id="email" readonly [value]="patient.email">
     </div>
   </div>
   <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closePatientModel()">
@@ -118,7 +124,7 @@
   </button>
   </div>
 
-  <!--Plan Form Modal -->
+  <!--Invoice Form Modal -->
   <div id="showInvoiceModel" class="invoiceDisplay">
     <div style="width: 60%; margin-left: auto; margin-right: auto;">
       <div class="form-group">

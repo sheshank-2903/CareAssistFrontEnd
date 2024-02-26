@@ -15,7 +15,7 @@ export class InsuranceCompanyPlansComponent {
   addPlanForm !: FormGroup;
 
   comapnyPlansList:Plans[]=[];
-
+  deleteId!:number;
 
   constructor(private formBuilder: FormBuilder,private plansService:PlansService,private cookieService: CookieService){
     this.getPlansByCompanyId();
@@ -82,7 +82,8 @@ export class InsuranceCompanyPlansComponent {
   
   }
 
-  confirmDelete(){
+  confirmDelete(planId:number){
+    this.deleteId=planId
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.add('active');
   }
@@ -93,9 +94,21 @@ export class InsuranceCompanyPlansComponent {
   }
 
   submitConfirmDelete(){
-    alert('Congratulations Purchase completed');
+    this.deletePlanById();
+
+    alert('Delete Successful');
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
+  }
+
+  deletePlanById(){
+    this.plansService.deletePlanById(JSON.parse(this.cookieService.get('userId')).userToken,this.deleteId)
+    .subscribe(message=>{
+      this.deleteId=0;
+      console.log("message");
+      this.getPlansByCompanyId();
+    }
+    )
   }
 }
 
