@@ -17,24 +17,7 @@ export class AdminHomeComponent {
   adminList:Admin[]=[];
 
   constructor(private adminService:AdminService,private cookieService: CookieService,private formBuilder:FormBuilder,private router: Router){
-    this.router.events.subscribe((event) => {
-      console.log(event);
-      if (event instanceof NavigationEnd) {
-        if(event.urlAfterRedirects==="/homePage"){
-          router.navigate(['/admin/home'])
-        }
-        const userIdCookie = this.cookieService.get('userId');
-        const userId = userIdCookie ? JSON.parse(userIdCookie) : null;
-        if (userId === null || userId === undefined) {
-          router.navigate(['/homePage'])
-        }
-        else{
-          this.getAllAdmin();
-        }
-      }
-    });
-
-    
+    this.getAllAdmin();
   }
   
   getAllAdmin(){

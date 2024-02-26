@@ -13,21 +13,8 @@ export class AdminHealthCareProviderComponent {
   healthCareProviderList: HealthCareProvider[] = [];
   deleteId!: number;
 
-  constructor(private healthCareProviderService: HealthCareProviderService, private cookieService: CookieService,private router: Router) {
-    
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        const userIdCookie = this.cookieService.get('userId');
-        const userId = userIdCookie ? JSON.parse(userIdCookie) : null;
-        if (userId === null || userId === undefined) {
-          router.navigate(['/homePage'])
-        }
-        else{
-          this.getAllHealthCareProvider();
-        }
-      }
-    });
-
+  constructor(private healthCareProviderService: HealthCareProviderService, private cookieService: CookieService) {
+    this.getAllHealthCareProvider();
   }
 
   getAllHealthCareProvider() {
