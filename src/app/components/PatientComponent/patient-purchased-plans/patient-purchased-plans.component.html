@@ -30,7 +30,7 @@
             <th>{{plan.description}}</th>
             <th>{{plan.dateOfIssue}}</th>
             <td>{{plan.coverageAmount}}</td>
-            <td><button type="button" class="btn btn-info" (click)="generateClaim()">
+            <td><button type="button" class="btn btn-info" (click)="generateClaim(plan.planId)">
               +
                Generate Claim Request
             </button></td>
@@ -46,19 +46,19 @@
   <form #generateClaimForm="ngForm" style="width: 100%;" >
 
     <label style="display: block; ">Please enter Claim Amount </label>
-    <input type="number" style="margin: 2%; width: 82%;" name="claimAmount" ngModel  #claimAmount="ngModel" required min="10001">
+    <input type="number" style="margin: 2%; width: 82%;" name="claimAmount" [(ngModel)]="coverageAmount"  #claimAmount="ngModel" required min="10001">
     <div *ngIf="claimAmount.errors?.['min'] && !claimAmount.errors?.['required']" style="color: red;">
       Amount must be greater than 1000.
     </div>
 
     <label style="display: block; ">Please enter Invoice ID </label>
-    <input type="number" style="margin: 2%; width: 82%;" name="invoiceId" ngModel required>
+    <input type="number" style="margin: 2%; width: 82%;" name="invoiceId" [(ngModel)]="selectedInvoiceId" required>
 
     <label style="display: block; ">Please enter Patient ID </label>
-    <input type="number" style="margin: 2%; width: 82%;" name="patientId" ngModel required>
+    <input type="number" style="margin: 2%; width: 82%;" name="patientId"   disabled [ngModel]="patientId">
 
     <label style="display: block; ">Please enter Plan ID </label>
-    <input type="number" style="margin: 2%; width: 82%;" name="planId" ngModel required>
+    <input type="number" style="margin: 2%; width: 82%;" name="planId" disabled [(ngModel)]="selectedPlanId" required>
 
     <div >
     <button class="btn btn-success" style="margin-right: 4%; margin-top: 2%; width: 40%;" (click)="submitgenerateClaim()"
