@@ -23,7 +23,7 @@
               <th>{{claim.claimId}}</th>
               <td>{{claim.claimAmount}}</td>
               <th>{{claim.claimStatus}}</th>
-              <td><button type="button" class="btn btn-info" (click)="showPlanDetails()">
+              <td><button type="button" class="btn btn-info" (click)="showPlanDetails(claim.claimId)">
                 <i class="bi bi-info-circle">
               </i></button></td>
             </tr>
@@ -32,15 +32,33 @@
   </div >
 
 
-  <div class="plan-details" id="planDetailsDisplay">
-    <p>Plan ID: 123</p> 
-    <p>Plan Name: JeevanBima</p>
-    <p>Plan Description: asaasasasa</p>
-    <p>Plan Coverage Amount: 13000</p>
-    <p>Date Of Issue: 22/01/2023</p>
-    <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closePlanDetails()">
-      <i class="bi bi-x-circle"></i>
-    </button>
+  <!--Plan Form Modal -->
+  <div id="planDetailsDisplay" class="plan-details">
+    <div style="width: 60%; margin-left: auto; margin-right: auto;">
+      <div class="form-group">
+        <label for="PlanId">Plan Id:</label><br>
+        <input type="number" class="form-control" id="PlanId" readonly [value]="plan.planId">
+      </div>
+    <div class="form-group">
+      <label for="PlanName">Plan Name:</label><br>
+      <input type="text" class="form-control" id="PlanName" readonly [value]="plan.planName">
     </div>
+    <div class="form-group">
+      <label for="descriptionOfPlan">Description Of Plan: </label>
+      <textarea style="resize: none;" class="form-control"  id="descriptionOfPlan" readonly [value]="plan.description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dateOfIssue">Date Of Issue:</label>
+      <input type="text" class="form-control" id="dateOfIssue" readonly [value]="plan.dateOfIssue">
+    </div>
+    <div class="form-group">
+      <label for="PlanAmount">Plan Amount:</label>
+      <input type="number" class="form-control" id="PlanAmount" readonly [value]="plan.coverageAmount">
+    </div>
+  </div>
+  <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closePlanModel()">
+    <i class="bi bi-x-circle"></i>
+  </button>
+  </div>
   
   

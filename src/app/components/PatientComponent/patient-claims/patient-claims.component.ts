@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Claims } from 'src/app/model/Claims';
+import { Plans } from 'src/app/model/Plans';
 import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 
 @Component({
@@ -12,6 +13,15 @@ export class PatientClaimsComponent {
 
   claimsList:Claims[]=[];
 
+  plan:Plans={
+    "planId":0,
+    "planName":'',
+    "dateOfIssue":new Date(),
+    "coverageAmount":0,
+    "description":''
+  }
+
+
   constructor(private claimService:ClaimsService,private cookieService: CookieService){
     this.getClaimsByPatientId();
 
@@ -22,12 +32,15 @@ export class PatientClaimsComponent {
     .subscribe(claims=>this.claimsList=claims);
   }
 
-  showPlanDetails(){
+  showPlanDetails(claimId:number){
+    this.claimService.getPlanByClaimId(claimId,JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe(data=>this.plan=data)
+
     let content=document.getElementById('planDetailsDisplay');
     content?.classList.add('active');
   }
 
-  closePlanDetails(){
+  closePlanModel(){
     let content=document.getElementById('planDetailsDisplay');
     content?.classList.remove('active');
   }

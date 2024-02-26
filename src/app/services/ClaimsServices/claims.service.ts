@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Claims } from 'src/app/model/Claims';
+import { Patient } from 'src/app/model/Patient';
+import { Plans } from 'src/app/model/Plans';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +69,26 @@ export class ClaimsService {
     }).set("Authorization", tokenString);
 
     return this._http.get<Claims[]>(this.baseUrl+`getByCompanyId/${insuranceCompanyId}`,{headers,responseType: 'json'})
+  }
+
+
+  getPlanByClaimId(claimId:number,token:string):Observable<Plans>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Plans>(this.baseUrl+`getPlanByClaimId/${claimId}`,{headers,responseType: 'json'})
+
+  }
+
+  getPatientByClaimId(claimId:number,token:string):Observable<Patient>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Patient>(this.baseUrl+`getPatientByClaimId/${claimId}`,{headers,responseType: 'json'})
+
   }
 }

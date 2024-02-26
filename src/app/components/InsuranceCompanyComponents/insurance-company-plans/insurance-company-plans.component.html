@@ -31,7 +31,7 @@
           <th>{{plan.dateOfIssue}}</th>
           <td>{{plan.coverageAmount}}</td>
           <td>
-              <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+              <button type="button" class="btn btn-danger" (click)="confirmDelete(plan.planId)">
                 <i class="bi bi-trash3"></i>
                 Delete
               </button> /

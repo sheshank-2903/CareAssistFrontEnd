@@ -20,8 +20,13 @@ export class PlansService {
     return this._http.put<Plans>(this.baseUrl+`update/${planName}/${description}/${coverageAmount}/${planId}`,{})
   }
 
-  getPlansById(planId:number):Observable<Plans>{
-    return this._http.get<Plans>(this.baseUrl+`getById/${planId}`)
+  getPlansById(planId:number,token:string):Observable<Plans>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Plans>(this.baseUrl+`getById/${planId}`,{ headers, responseType: 'json' })
   }
 
   getAllPlans(token:string):Observable<Plans[]>{
