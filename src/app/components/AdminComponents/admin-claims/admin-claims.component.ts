@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Claims } from 'src/app/model/Claims';
+import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 
 @Component({
   selector: 'app-admin-claims',
@@ -6,7 +9,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-claims.component.css']
 })
 export class AdminClaimsComponent {
-  confirmDelete(){
+
+  claimList:Claims[]=[];
+  deleteId!:number;
+
+  constructor(private claimService:ClaimsService,private cookieService: CookieService){
+    this.getAllClaims();
+  }
+  getAllClaims(){
+    this.claimService.getAllClaims(JSON.parse(this.cookieService.get('userId')).userToken)
+             .subscribe(  
+                    (claims) =>
+                       { 
+                          this.claimList = claims; 
+                          console.log(this.claimList);
+                      }
+            );
+    }
+
+  confirmDelete(deleteClaimId:number){
+    this.deleteId=deleteClaimId;
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.add('active');
   }
@@ -17,8 +39,21 @@ export class AdminClaimsComponent {
   }
 
   submitConfirmDelete(){
-    alert('Congratulations Purchase completed');
+    this.deleteClaimId(this.deleteId);
+    alert('delete completed');
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
+
+  deleteClaimId(deleteId:number){
+    this.claimService.deleteClaimsById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
+             .subscribe(  
+                    (claim) =>
+                       { 
+                          this.deleteId=0;
+                          console.log(claim);
+                          this.getAllClaims();
+                      }
+            );
+    }
 }

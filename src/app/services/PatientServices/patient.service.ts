@@ -26,8 +26,13 @@ export class PatientService {
   }
 
 
-  deletePatientById(patientId:number):Observable<boolean>{
-    return this._http.delete<boolean>(this.baseUrl+`delete/${patientId}`);
+  deletePatientById(token:string,patientId:number):Observable<boolean>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.delete<boolean>(this.baseUrl+`delete/${patientId}`,{ headers, responseType: 'json' });
   }
 
   getAllPatients(token:string):Observable<Patient[]>{

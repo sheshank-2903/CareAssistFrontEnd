@@ -1,6 +1,6 @@
 export interface HealthCareProvider{
 	healthCareProviderId:number;
-	healthcareProviderName:string;
+	healthCareProviderName:string;
     providerGender:string;
     address:string;
 	email:string;

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Plans } from 'src/app/model/Plans';
+import { PlansService } from 'src/app/services/PlansServices/plans.service';
 
 @Component({
   selector: 'app-admin-plans',
@@ -6,7 +9,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-plans.component.css']
 })
 export class AdminPlansComponent {
-  confirmDelete(){
+
+  planList:Plans[]=[];
+  deleteId!:number;
+  constructor(private planService:PlansService,private cookieService: CookieService){
+    this.getAllPlans();
+  }
+  getAllPlans(){
+    this.planService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken)
+             .subscribe(  
+                    (plans) =>
+                       { 
+                          this.planList = plans 
+                      }
+            );
+    }
+
+  confirmDelete(deletePlanId:number){
+    this.deleteId=deletePlanId;
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.add('active');
   }
@@ -17,8 +37,21 @@ export class AdminPlansComponent {
   }
 
   submitConfirmDelete(){
-    alert('Congratulations Purchase completed');
+    this.deletePlanId(this.deleteId);
+    alert('delete completed');
     let content=document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
+
+  deletePlanId(deleteId:number){
+    this.planService.deletePlanById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
+             .subscribe(  
+                    (plan) =>
+                       { 
+                          this.deleteId=0;
+                          console.log(plan);
+                          this.getAllPlans();
+                      }
+            );
+    }
 }

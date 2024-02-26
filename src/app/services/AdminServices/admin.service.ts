@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Admin } from 'src/app/model/Admin';
@@ -24,4 +24,24 @@ export class AdminService {
   getAdminById(adminId:number):Observable<Admin>{
     return this._http.get<Admin>(this.baseUrl+`get/${adminId}`)
   }
+
+  deleteAdminById(token:string,adminId:number){
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.delete<boolean>(this.baseUrl+`delete/`+adminId, { headers, responseType: 'json' })
+  }
+
+
+  getAllAdmin(token:string){
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Admin[]>(this.baseUrl+`getAll`, { headers, responseType: 'json' })
+  }
 }
+
