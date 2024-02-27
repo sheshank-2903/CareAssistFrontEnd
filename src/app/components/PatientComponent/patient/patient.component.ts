@@ -10,8 +10,11 @@ import { CookieService } from 'ngx-cookie-service';
 export class PatientComponent {
   constructor(private cookieService: CookieService,private router:Router) { }
 
-  logout(){
-    this.cookieService.delete('userId');
+  logout(): void {
+    const cookieNames: string[] = Object.keys(this.cookieService.getAll());
+    for (const cookieName of cookieNames) {
+      this.cookieService.delete(cookieName, '/', 'localhost');
+    }
     this.router.navigate(['/homePage']);
   }
 

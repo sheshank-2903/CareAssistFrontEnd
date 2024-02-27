@@ -67,10 +67,11 @@ export class PatientService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Authorization': tokenString 
+      'Authorization': tokenString,
     });
-    
-    return this._http.put<string>(`${this.baseUrl}purchasePlan/${patientId}/${planId}`, {headers: headers, responseType: 'text'});
+    console.log(`${this.baseUrl}purchasePlan/${patientId}/${planId}`);
+    console.log(tokenString);
+    return this._http.put<string>(`${this.baseUrl}purchasePlan/${patientId}/${planId}`,{},{headers: headers});
   }
   
   
