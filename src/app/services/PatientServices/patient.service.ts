@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of} from 'rxjs';
 import { Patient } from 'src/app/model/Patient';
 import { Plans } from 'src/app/model/Plans';
 
@@ -64,7 +64,9 @@ export class PatientService {
     return this._http.get<Plans[]>(this.baseUrl+`getAllPurchasedPlans/${patientId}`);
   }
 
-  purchasePlan(patientId: number, planId: number, token: string): Observable<string> {
+
+  purchasePlan(patientId: number, planId: number, token: string): Observable<any> {
+
     let tokenString = "Bearer " + token;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -72,7 +74,9 @@ export class PatientService {
       'Authorization': tokenString 
     });
     
-    return this._http.put<string>(`${this.baseUrl}purchasePlan/${patientId}/${planId}`,{},{headers: headers});
+    return this._http.put<any>(`${this.baseUrl}purchasePlan/${patientId}/${planId}`, {}, { headers: headers,responseType:'json' })
+    
+
   }
   
   
