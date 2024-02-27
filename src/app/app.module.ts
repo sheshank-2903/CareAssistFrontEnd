@@ -44,7 +44,6 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { AboutUsComponent } from './components/HomeComponents/about-us/about-us.component';
 import { FeedbackComponent } from './components/HomeComponents/feedback/feedback.component';
 import { HomeComponent } from './components/HomeComponents/home/home.component';
-import { StoreModule } from '@ngrx/store';
 
 
 

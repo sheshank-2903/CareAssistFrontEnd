@@ -31,7 +31,7 @@
             <th>{{plan.dateOfIssue}}</th>
             <td>{{plan.coverageAmount}}</td>
             <td>
-                <button type="button" class="btn btn-success" (click)="confirmPurchase()">
+                <button type="button" class="btn btn-success" (click)="confirmPurchase(plan.planId)">
                   +
                   Purchase Plan
                 </button>
@@ -44,7 +44,7 @@
 <div class="confirm-purchase-popup" id="confirmPurchaseDisplay">
 <form #purchaseForm="ngForm" >
   <label style="display: block; ">Please confirm your purchase by typing "CONFIRM" below: </label>
-  <input type="text" style="margin: 2%;  width: 82%;" name="confirmation" ngModel required>
+  <input type="text" style="margin: 2%;  width: 82%;" name="confirmation" [(ngModel)]="confirmInput" required>
   <div >
   <button class="btn btn-success" style="margin-right: 2%; margin-top:2% ; width: 40%;" (click)="confirmPurchaseCompleted()"
    [disabled]="purchaseForm.value.confirmation!=='CONFIRM'" >Confirm Purchase</button>

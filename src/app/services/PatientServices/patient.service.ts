@@ -53,9 +53,26 @@ export class PatientService {
   }
 
   
-  purchasePlan(patientId:number,planId:number):Observable<string>{
-    return this._http.put<string>(this.baseUrl+`purchasePlan/${patientId}/${planId}`,{});
+  // purchasePlan(patientId:number,planId:number,token:string):Observable<string>{
+  //   let tokenString = "Bearer " + token;
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Access-Control-Allow-Origin': 'http://localhost:4200'
+  //   }).set("Authorization", tokenString);
+  //   return this._http.put<string>(this.baseUrl+`purchasePlan/${patientId}/${planId}`,{headers, responseType: 'text'});
+  // }
+
+  purchasePlan(patientId: number, planId: number, token: string): Observable<string> {
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Authorization': tokenString 
+    });
+    
+    return this._http.put<string>(`${this.baseUrl}purchasePlan/${patientId}/${planId}`, {headers: headers, responseType: 'text'});
   }
+  
   
 
 }
