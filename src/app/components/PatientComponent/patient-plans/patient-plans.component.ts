@@ -12,46 +12,43 @@ import { PlansService } from 'src/app/services/PlansServices/plans.service';
 export class PatientPlansComponent {
 
 
-  plansList:Plans[]=[];
-  confirmInput!:string;
-  selectedPlanId!:number;
+  plansList: Plans[] = [];
+  confirmInput!: string;
+  selectedPlanId!: number;
 
 
-  constructor(private plansService:PlansService,private patientService:PatientService ,private cookieService: CookieService){
+  constructor(private plansService: PlansService, private patientService: PatientService, private cookieService: CookieService) {
     this.getAllPlans();
   }
 
-  getAllPlans(){
-    this.plansService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken).subscribe((plans)=>{this.plansList=plans});
+  getAllPlans() {
+    this.plansService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken).subscribe((plans) => { this.plansList = plans });
   }
 
 
-  confirmPurchase(planId:number){
+  confirmPurchase(planId: number) {
     this.selectedPlanId = planId;
-    let content=document.getElementById('confirmPurchaseDisplay');
+    let content = document.getElementById('confirmPurchaseDisplay');
     content?.classList.add('active');
   }
 
-  closeConfirmPurchase(){
-    let content=document.getElementById('confirmPurchaseDisplay');
+  closeConfirmPurchase() {
+    let content = document.getElementById('confirmPurchaseDisplay');
     content?.classList.remove('active');
   }
 
-  confirmPurchaseCompleted(){
-    console.log('patientId',JSON.parse(this.cookieService.get('userId')).userId);
-    console.log('planId',this.selectedPlanId);
-    
-    this.patientService.purchasePlan(JSON.parse(this.cookieService.get('userId')).userId,this.selectedPlanId,JSON.parse(this.cookieService.get('userId')).userToken)
-    .subscribe((data)=>{
-      console.log(data);
-      if(data){
-        alert('Congratulations Purchase completed');
-      }
-      this.confirmInput="";
-    },
-    error=>{alert('Unable to purchase plan')});
-    
-    let content=document.getElementById('confirmPurchaseDisplay');
+  confirmPurchaseCompleted() {
+    this.patientService.purchasePlan(JSON.parse(this.cookieService.get('userId')).userId, this.selectedPlanId, JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe(
+        (data) => {
+          console.log(data.message)
+          if(data.message=="Purchase Successfull")
+          alert('Congratulations Purchase completed');
+        else{alert('Purchase failed');}
+        }
+      );
+    this.confirmInput = "";
+    let content = document.getElementById('confirmPurchaseDisplay');
     content?.classList.remove('active');
   }
 

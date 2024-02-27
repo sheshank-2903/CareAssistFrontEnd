@@ -48,7 +48,7 @@ export class InsuranceCompanyPlansComponent {
 
   
   toggleEditPlan() {
-    let addModel = document.getElementById("editPlanFormModel"); 4
+    let addModel = document.getElementById("editPlanFormModel"); 
     if (this.isEditPlanModelVisible) {
       addModel?.classList.remove("active");
       this.isEditPlanModelVisible = false;

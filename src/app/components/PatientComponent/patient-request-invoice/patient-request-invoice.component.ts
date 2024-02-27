@@ -66,7 +66,6 @@ export class PatientRequestInvoiceComponent {
     
     this.invoiceService.addInvoice(invoice, JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe((invoice) => {
-        alert('Congratulations invoice request generated');
         this.invoiceDueDate = new Date();
         this.invoiceTax = 0;
         this.consultingFees = 0;
