@@ -61,7 +61,6 @@ export class PatientPurchasedPlansComponent {
       }, (error) => {
         console.error('Error occurred:', error);
         alert('Error occured while generating Claim request');
-
       });
 
 

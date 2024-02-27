@@ -28,7 +28,7 @@
               <td>{{healthcareProvider.address}}</td>
               <td>{{healthcareProvider.email}}</td>
               <td>
-                  <button type="button" class="btn btn-info" (click)="openInvoiceRequest()">
+                  <button type="button" class="btn btn-info" (click)="openInvoiceRequest(healthcareProvider.healthCareProviderId)">
                     +
                      Request Invoice
                   </button>
@@ -44,23 +44,23 @@
     <form #requestInvoiceForm="ngForm" style="width: 100%;" >
 
       <label style="display: block; ">Please enter Invoice Due Date </label>
-      <input type="date" style="margin: 2%; width: 82%;" name="invoiceDueDate" ngModel required>
+      <input type="date" style="margin: 2%; width: 82%;" name="invoiceDueDate" [(ngModel)]="invoiceDueDate" required>
       <div *ngIf="isDueDateInvalid(requestInvoiceForm.value) " style="color: red; margin-bottom: 2%;">Invalid Due Date</div>
   
       <label style="display: block; ">Invoice Tax </label>
-      <input type="number" style="margin: 2%; width: 82%;" name="invoiceTax" ngModel required>
+      <input type="number" style="margin: 2%; width: 82%;" name="invoiceTax" [(ngModel)]="invoiceTax" required>
   
       <label style="display: block; ">Consulting Fees</label>
-      <input type="number" style="margin: 2%; width: 82%;" name="consultingFees" ngModel required>
+      <input type="number" style="margin: 2%; width: 82%;" name="consultingFees" [(ngModel)]="consultingFees" required>
 
       <label style="display: block; ">Diagnostic Test Fees</label>
-      <input type="number" style="margin: 2%; width: 82%;" name="diagnosticTestFees" ngModel required>
+      <input type="number" style="margin: 2%; width: 82%;" name="diagnosticTestFees" [(ngModel)]="diagnosticTestFees" required>
 
       <label style="display: block; ">Diagnostic Scan Fees</label>
-      <input type="number" style="margin: 2%; width: 82%;" name="diagnosticScanFees" ngModel required>
+      <input type="number" style="margin: 2%; width: 82%;" name="diagnosticScanFees" [(ngModel)]="diagnosticScanFees" required>
 
       <label style="display: block; ">Please enter Health Care Provider ID </label>
-      <input type="number" style="margin: 2%; width: 82%;" name="planId" ngModel required>
+      <input type="number" style="margin: 2%; width: 82%;" name="healthCareProviderId" disabled [(ngModel)]="currentHealthCareProviderId" required>
 
       <div >
       <button class="btn btn-success" style="margin-right: 4%; margin-top: 2%; width: 40%;" (click)="submitInvoiceRequest()"

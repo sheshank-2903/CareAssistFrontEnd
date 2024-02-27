@@ -12,8 +12,13 @@ export class InvoicesService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/invoice/'
 
-  addInvoice(body:Invoices,patientId:number):Observable<Invoices>{
-    return this._http.post<Invoices>(this.baseUrl+`add/${patientId}`,body);
+  addInvoice(body:Invoices,patientId:number,token:string):Observable<Invoices>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.post<Invoices>(this.baseUrl+`add/${patientId}`,body,{headers,responseType: 'json'});
   }
 
   getAllInvoices(token:string):Observable<Invoices[]>{
