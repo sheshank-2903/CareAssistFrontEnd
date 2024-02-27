@@ -3,9 +3,9 @@
         <h2>Login Form</h2>
         <form #formData=ngForm  (ngSubmit)="readFormData(formData)">
             <input type="email" placeholder="Email Address" name="email"  required #email="ngModel"  ngModel>
-            <span style="color:red"  *ngIf="email.touched && email.invalid" >Email is required</span>
+            <span style="color:red; margin-left:8%;"  *ngIf="email.touched && email.invalid" >Email is required</span>
             <input type="password" placeholder="Password" required name="password" #password="ngModel"   ngModel>
-            <span style="color:red"   *ngIf="password.touched && password.invalid" >Password is mandartory</span>
+            <span style="color:red; margin-left:8%; margin-bottom: 2%;"   *ngIf="password.touched && password.invalid" >Password is mandartory</span>
             <div style="display: flex; justify-content: space-between; padding-left: 8%;">
                 <label for="role_admin" style="flex: 0.8;">
                     <input type="radio" id="role_admin" name="role" value="ADMIN" required [(ngModel)]="role"> 

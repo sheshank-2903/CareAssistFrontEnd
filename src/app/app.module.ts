@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HealthCareProviderComponent } from './components/HealthCareProviderComponents/health-care-provider/health-care-provider.component';
 import { ClaimComponent } from './components/ClaimComponents/claim/claim.component';
 import { InsuranceCompanyComponent } from './components/InsuranceCompanyComponents/insurance-company/insurance-company.component';
-import { AdminComponent } from './components/AdminComponents/admin/admin.component';
 import { InvoicesComponent } from './components/InvoicesComponents/invoices/invoices.component';
 import { PatientComponent } from './components/PatientComponent/patient/patient.component';
 import { PlansComponent } from './components/PlansComponents/plans/plans.component';
@@ -44,6 +43,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { AboutUsComponent } from './components/HomeComponents/about-us/about-us.component';
 import { FeedbackComponent } from './components/HomeComponents/feedback/feedback.component';
 import { HomeComponent } from './components/HomeComponents/home/home.component';
+import { AdminComponent } from './components/AdminComponents/admin/admin.component';
 
 
 
@@ -87,7 +87,6 @@ import { HomeComponent } from './components/HomeComponents/home/home.component';
     AboutUsComponent,
     FeedbackComponent,
     HomeComponent
-
   ],
   imports: [
     BrowserModule,

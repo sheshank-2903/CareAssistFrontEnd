@@ -20,7 +20,7 @@ export class AdminHomeComponent {
   constructor(private adminService:AdminService,private cookieService: CookieService,private formBuilder:FormBuilder,private router: Router){
     this.getAllAdmin();
   }
-  
+
   getAllAdmin(){
     this.adminService.getAllAdmin(JSON.parse(this.cookieService.get('userId')).userToken)
              .subscribe(  

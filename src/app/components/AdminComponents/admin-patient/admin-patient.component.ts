@@ -15,6 +15,7 @@ export class AdminPatientComponent {
   search: any;
 
   constructor(private patientService: PatientService, private cookieService: CookieService) {
+    console.log("patient load ho rh h")
     this.getAllPatients();
   }
   getAllPatients() {
