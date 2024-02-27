@@ -12,7 +12,7 @@ import { HealthCareProviderService } from 'src/app/services/HealthCareProviderSe
 export class AdminHealthCareProviderComponent {
   healthCareProviderList: HealthCareProvider[] = [];
   deleteId!: number;
-
+  search:any;
   constructor(private healthCareProviderService: HealthCareProviderService, private cookieService: CookieService) {
     this.getAllHealthCareProvider();
   }
@@ -56,4 +56,30 @@ export class AdminHealthCareProviderComponent {
         }
       );
   }
+
+  searchHealthCareProviderByName(){
+    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else{
+      this.healthCareProviderService.getHealthCareProviderByName(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((healthCareProviderList)=>{
+        console.log(healthCareProviderList);
+        this.healthCareProviderList=healthCareProviderList;
+      })
+    }
+
+  }
+  searchHealthCareProviderById(){
+    const parsedNumber: number = parseInt(this.search, 10);
+    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else{
+      this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
+      .subscribe((healthcareprovider)=>{
+        console.log(healthcareprovider);
+        this.healthCareProviderList=[];
+        this.healthCareProviderList = this.healthCareProviderList.concat(healthcareprovider);
+      })
+    }
+
+  }
+
 }

@@ -10,34 +10,47 @@ import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.serv
   styleUrls: ['./health-care-provider-home.component.css']
 })
 export class HealthCareProviderHomeComponent {
-  isAddAdminModelVisible: boolean=false;
-  invoiceList:Invoices[]=[];
-
-  constructor(private invoiceService:InvoicesService,private cookieService: CookieService){
+  isAddAdminModelVisible: boolean = false;
+  invoiceList: Invoices[] = [];
+  currentInvoiceId!:number;
+  constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
   }
-  getAllInvoice(){
-    this.invoiceService.getInvoiceByHealthCareProviderId(JSON.parse(this.cookieService.get('userId')).userToken,JSON.parse(this.cookieService.get('userId')).userId)
-             .subscribe(  
-                    (patients) =>
-                       { 
-                          this.invoiceList = patients 
-                          console.log(this.invoiceList);
-                      }
-            );
-    }
+  getAllInvoice() {
+    this.invoiceService.getInvoiceByHealthCareProviderId(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
+      .subscribe(
+        (patients) => {
+          this.invoiceList = patients
+          console.log(this.invoiceList);
+        }
+      );
+  }
 
-toggleChangeStatus() {
- let statusModel=document.getElementById("changeStatusModel");4
- if(this.isAddAdminModelVisible){
-    statusModel?.classList.remove("active");
-   console.log("Remove")
-   this.isAddAdminModelVisible=false;
- }
- else{
-    statusModel?.classList.add("active");
-   console.log("show")
-   this.isAddAdminModelVisible=true;
- }
-}
+  approveInvoiceAction(){
+    this.invoiceService.updateInvoiceStatus(JSON.parse(this.cookieService.get('userId')).userToken,this.currentInvoiceId,"APPROVED")
+    .subscribe((invoice)=>{
+      alert("Status Approved");
+      this.toggleChangeStatus(0);
+    })
+  }
+  rejectInvoiceAction(){
+    this.invoiceService.updateInvoiceStatus(JSON.parse(this.cookieService.get('userId')).userToken,this.currentInvoiceId,"REJECTED")
+    .subscribe(()=>{
+      alert("Status Rejected");
+      this.toggleChangeStatus(0);
+    })
+  }
+
+  toggleChangeStatus(currentInvoiceId:number) {
+    this.currentInvoiceId=currentInvoiceId;
+    let statusModel = document.getElementById("changeStatusModel"); 4
+    if (this.isAddAdminModelVisible) {
+      statusModel?.classList.remove("active");
+      this.isAddAdminModelVisible = false;
+    }
+    else {
+      statusModel?.classList.add("active");
+      this.isAddAdminModelVisible = true;
+    }
+  }
 }

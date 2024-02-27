@@ -34,6 +34,17 @@ export class HealthCareProviderService {
     return this._http.get<HealthCareProvider>(this.baseUrl+`get/${HealthCareProviderId}`, { headers, responseType: 'json' })
   }
 
+  getHealthCareProviderByName(HealthCareProviderName:string,token:string):Observable<HealthCareProvider[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<HealthCareProvider[]>(this.baseUrl+`getHealthCareProviderByName/${HealthCareProviderName}`, { headers, responseType: 'json' })
+  }
+
+
+
   deleteHealthCareProviderById(token:string,HealthCareProviderId:number):Observable<boolean>{
     let tokenString = "Bearer " + token;
     const headers = new HttpHeaders({

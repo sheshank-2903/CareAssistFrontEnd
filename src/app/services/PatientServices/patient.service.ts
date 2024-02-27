@@ -21,8 +21,14 @@ export class PatientService {
     return this._http.put<Patient>(this.baseUrl+"update",body);
   }
 
-  getPatientById(patientId:number):Observable<Patient>{
-    return this._http.get<Patient>(this.baseUrl+`getById/${patientId}`);
+  getPatientById(patientId:number,token:string):Observable<Patient>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Authorization': tokenString 
+    });
+    return this._http.get<Patient>(this.baseUrl+`getById/${patientId}`, { headers, responseType: 'json' });
   }
 
 
@@ -44,8 +50,14 @@ export class PatientService {
     return this._http.get<Patient[]>(this.baseUrl+"getAll", { headers, responseType: 'json' });
   }
 
-  getPatientByName(patientName:string):Observable<Patient[]>{
-    return this._http.get<Patient[]>(this.baseUrl+`getByName/${patientName}`);
+  getPatientByName(patientName:string,token:string):Observable<Patient[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Authorization': tokenString 
+    });
+    return this._http.get<Patient[]>(this.baseUrl+`getByName/${patientName}`, { headers, responseType: 'json' });
   }
 
   getAllPurchasedPlans(patientId:number):Observable<Plans[]>{
@@ -53,8 +65,8 @@ export class PatientService {
   }
 
 
-
   purchasePlan(patientId: number, planId: number, token: string): Observable<any> {
+
     let tokenString = "Bearer " + token;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -64,6 +76,7 @@ export class PatientService {
     
     return this._http.put<any>(`${this.baseUrl}purchasePlan/${patientId}/${planId}`, {}, { headers: headers,responseType:'json' })
     
+
   }
   
   

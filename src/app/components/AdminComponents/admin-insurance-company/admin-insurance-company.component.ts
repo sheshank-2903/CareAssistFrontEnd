@@ -11,7 +11,7 @@ import { InsuranceCompanyService } from 'src/app/services/InsuranceCompanyServic
 export class AdminInsuranceCompanyComponent {
   insuranceCompanyList:InsuranceCompany[]=[];
   deleteId!:number;
-
+  search:any;
   constructor(private insuranceCompanyService:InsuranceCompanyService,private cookieService: CookieService){
     this.getAllInsuranceCompany();
   }
@@ -55,4 +55,28 @@ export class AdminInsuranceCompanyComponent {
                       }
             );
     }
+    searchInsuranceCompanyByName(){
+      if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
+      else{
+        this.insuranceCompanyService.getInsuranceCompanyByName(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
+        .subscribe((insuranceCompanyList)=>{
+          console.log(insuranceCompanyList);
+          this.insuranceCompanyList=insuranceCompanyList;
+        })
+      }
+  
+    }
+    searchInsuranceCompanyById(){
+      const parsedNumber: number = parseInt(this.search, 10);
+      if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+      else{
+        this.insuranceCompanyService.getInsuranceCompanyById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+        .subscribe((insuranceCompany)=>{
+          console.log(insuranceCompany);
+          this.insuranceCompanyList=[];
+          this.insuranceCompanyList = this.insuranceCompanyList.concat(insuranceCompany);
+        })
+      }
+    }
+    
 }
