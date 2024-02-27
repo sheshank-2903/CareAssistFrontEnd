@@ -10,11 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class InsuranceCompanyComponent {
   constructor(private cookieService: CookieService,private router:Router) { }
 
-  logout(): void {
-    const cookieNames: string[] = Object.keys(this.cookieService.getAll());
-    for (const cookieName of cookieNames) {
-      this.cookieService.delete(cookieName, '/', 'localhost');
-    }
+  logout(){
+    this.cookieService.delete('userId');
     this.router.navigate(['/homePage']);
   }
 

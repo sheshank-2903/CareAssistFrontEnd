@@ -69,26 +69,16 @@ toggleAddAdmin(input?:boolean) {
     return this. addAdminForm.controls;
   }
 
-  addAdminSubmit(){
+  onSubmit(){
 
     if(this. addAdminForm.invalid){
       return;
   }
-  const admin:Admin={
-    adminId:0,
-    adminName:this.addAdminForm.value.adminName,
-    email:this.addAdminForm.value.email,
-    password:this.addAdminForm.value.password
-  }
-  this.adminService.addAdmin(admin)
-  .subscribe((admin)=>{
-    alert('Form submitted successfully');
-    console.log(admin);
-    this.addAdminForm.reset();
-  },
-  (error)=>{
-    alert('Please try again');
-  });
+  
+  alert('Form submitted successfully');
+  console.log(this. addAdminForm);
+  this.addAdminForm.reset();
+  
   }
 
   passwordMatchValidator(control: AbstractControl) {
