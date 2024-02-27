@@ -35,6 +35,10 @@ export class InsuranceCompanyClaimsComponent {
 
 
   comapnyClaimsList:Claims[]=[];
+
+  claimId!:number;
+  confirmApproveInput!:string;
+  confirmRejectInput!:string;
   
   
   constructor(private claimService:ClaimsService,private cookieService: CookieService,private planService:PlansService){
@@ -83,5 +87,53 @@ export class InsuranceCompanyClaimsComponent {
     let content=document.getElementById('showInvoiceModel');
     content?.classList.remove('active');
   }
+
+
+  confirmApprove(claimId:number) {
+    this.claimId = claimId;
+    let content = document.getElementById('confirmApproveDisplay');
+    content?.classList.add('active');
+  }
+
+  closeApproveModel() {
+    this.confirmApproveInput="";
+    let content = document.getElementById('confirmApproveDisplay');
+    content?.classList.remove('active');
+  }
+
+  submitApprove(){
+    this.claimService.updateClaims(this.claimId,"APPROVED",JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe((claim)=>{
+      alert("Claim has been approved");
+      this.confirmApproveInput="";
+      this.getClaimsByCompanyId();
+      this.closeApproveModel();
+    },error=>alert("Failed to approve claim"))
+  }
+
+  confirmReject(claimId:number) {
+    this.claimId = claimId;
+    let content = document.getElementById('confirmRejectDisplay');
+    content?.classList.add('active');
+  }
+
+  closeRejectModel() {
+    this.confirmRejectInput="";
+    let content = document.getElementById('confirmRejectDisplay');
+    content?.classList.remove('active');
+  }
+
+  
+  submitReject(){
+    this.claimService.updateClaims(this.claimId,"REJECTED",JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe((claim)=>{
+      alert("Claim has been rejected");
+      this.getClaimsByCompanyId();
+      this.confirmRejectInput="";
+      this.getClaimsByCompanyId();
+      this.closeRejectModel();
+    },error=>alert("Failed to reject claim"))
+  }
+
 
 }

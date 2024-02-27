@@ -29,8 +29,9 @@ export class ClaimsService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': 'http://localhost:4200'
     }).set("Authorization", tokenString);
-    return this._http.put<Claims>(this.baseUrl + `update/${claimId}/${newStatus}`, { headers, responseType: 'json' })
+    return this._http.put<Claims>(this.baseUrl + `update/${claimId}/${newStatus}`,{}, { headers, responseType: 'json' })
   }
+
 
   getClaimsById(ClaimsId:number):Observable<Claims>{
     return this._http.get<Claims>(this.baseUrl+`get/${ClaimsId}`)

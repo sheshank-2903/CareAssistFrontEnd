@@ -12,12 +12,22 @@ export class PlansService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/plans/'
 
-  addPlans(body:Plans,insuranceCompanyId:number):Observable<Plans>{
-    return this._http.post<Plans>(this.baseUrl+`add/${insuranceCompanyId}`,body)
+  addPlans(body:Plans,insuranceCompanyId:number,token:string):Observable<Plans>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.post<Plans>(this.baseUrl+`add/${insuranceCompanyId}`,body,{ headers, responseType: 'json' })
   }
 
-  updatePlans(planName:string,description:string,coverageAmount:number,planId:number):Observable<Plans>{
-    return this._http.put<Plans>(this.baseUrl+`update/${planName}/${description}/${coverageAmount}/${planId}`,{})
+  updatePlans(planName:string,description:string,coverageAmount:number,planId:number,token:string):Observable<Plans>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.put<Plans>(this.baseUrl+`update/${planName}/${description}/${coverageAmount}/${planId}`,{},{headers,responseType:'json'})
   }
 
   getPlansById(planId:number,token:string):Observable<Plans>{
