@@ -52,8 +52,13 @@ export class InvoicesService {
     return this._http.get<Invoices[]>(this.baseUrl+`getByHealthCareProviderId/${healthCareProviderId}`, { headers, responseType: 'json' });
   }
 
-  updateInvoiceStatus(invoiceId:number, invoiceStatus:string){
-    return this._http.put<Invoices>(this.baseUrl+`updateInvoiceStatus/${invoiceId}/${invoiceStatus}`,{});
+  updateInvoiceStatus(token:string,invoiceId:number, invoiceStatus:string){
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.put<Invoices>(this.baseUrl+`updateInvoiceStatus/${invoiceId}/${invoiceStatus}`,{},{ headers, responseType: 'json' });
   }
 
   deleteInvoiceById(token:string,invoiceId:number):Observable<boolean>{

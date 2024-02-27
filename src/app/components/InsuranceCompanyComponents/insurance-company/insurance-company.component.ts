@@ -11,7 +11,7 @@ export class InsuranceCompanyComponent {
   constructor(private cookieService: CookieService,private router:Router) { }
 
   logout(){
-    this.cookieService.delete('userId');
+    this.cookieService.delete('userId', '/', 'localhost');
     this.router.navigate(['/homePage']);
   }
 

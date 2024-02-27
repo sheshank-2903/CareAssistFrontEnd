@@ -20,8 +20,13 @@ export class InsuranceCompanyService {
     return this._http.put<InsuranceCompany>(this.baseUrl+"update",body)
   }
 
-  getInsuranceCompanyById(InsuranceCompanyId:number):Observable<InsuranceCompany>{
-    return this._http.get<InsuranceCompany>(this.baseUrl+`get/${InsuranceCompanyId}`)
+  getInsuranceCompanyById(InsuranceCompanyId:number,token:string):Observable<InsuranceCompany>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<InsuranceCompany>(this.baseUrl+`get/${InsuranceCompanyId}`,{ headers, responseType: 'json' })
   }
 
   getAllInsuranceCompany(token:string):Observable<InsuranceCompany[]>{
@@ -42,7 +47,12 @@ export class InsuranceCompanyService {
     return this._http.delete<boolean>(this.baseUrl+`delete/${insuranceCompanyId}`,{ headers, responseType: 'json' })
   }
 
-  getInsuranceCompanyByName(insuranceCompanyName:string):Observable<InsuranceCompany[]>{
-    return this._http.get<InsuranceCompany[]>(this.baseUrl+`getByName/${insuranceCompanyName}`)
+  getInsuranceCompanyByName(token:string,insuranceCompanyName:string):Observable<InsuranceCompany[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<InsuranceCompany[]>(this.baseUrl+`getByName/${insuranceCompanyName}`,{ headers, responseType: 'json' })
   }
 }

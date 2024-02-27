@@ -15,6 +15,7 @@ export class AdminHomeComponent {
   addAdminForm !: FormGroup;
   deleteId!:number;
   adminList:Admin[]=[];
+  search:any;
 
   constructor(private adminService:AdminService,private cookieService: CookieService,private formBuilder:FormBuilder,private router: Router){
     this.getAllAdmin();
@@ -124,5 +125,28 @@ toggleAddAdmin(input?:boolean) {
             );
     }
 
+    searchAdminByName(){
+      if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
+      else{
+        this.adminService.getAdminByName(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+        .subscribe((adminList)=>{
+          this.adminList=adminList;
+        })
+      }
+  
+    }
+    searchAdminById(){
+      const parsedNumber: number = parseInt(this.search, 10);
+      if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+      else{
+        this.adminService.getAdminById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+        .subscribe((admin)=>{
+          console.log(admin);
+          this.adminList=[];
+          this.adminList = this.adminList.concat(admin);
+        })
+      }
+  
+    }
 
 }
