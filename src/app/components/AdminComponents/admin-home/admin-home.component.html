@@ -80,7 +80,7 @@
         <div *ngIf="!getAdminForm['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">
           Looks good!</div>
       </div>
-      <button type="submit" [disabled]="addAdminForm.invalid" (click)="onSubmit()" class="btn btn-primary"
+      <button type="submit" [disabled]="addAdminForm.invalid" (click)="addAdminSubmit()" class="btn btn-primary"
         style="width: 100%;">Create New Admin</button>
       <button type="button" style="  position: absolute; top: 0%; right: 0%;" class="btn btn-danger"
         (click)="toggleAddAdmin()">
