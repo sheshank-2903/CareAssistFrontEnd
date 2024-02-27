@@ -13,7 +13,7 @@ export class InsuranceCompanyComponent {
   logout(): void {
     const cookieNames: string[] = Object.keys(this.cookieService.getAll());
     for (const cookieName of cookieNames) {
-      this.cookieService.delete(cookieName);
+      this.cookieService.delete(cookieName, '/', 'localhost');
     }
     this.router.navigate(['/homePage']);
   }
