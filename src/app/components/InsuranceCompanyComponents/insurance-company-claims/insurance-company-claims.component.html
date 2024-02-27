@@ -38,13 +38,13 @@
               <button type="button" class="btn btn-info" (click)="showPlanModel(claim.claimId)"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
-              <button type="button" class="btn btn-danger">
-                <i class="bi bi-bag-x"></i>
-                 Reject
-              </button> /
-              <button type="button" class="btn btn-success">
+              <button type="button" class="btn btn-success" (click)="confirmApprove(claim.claimId)">
                 <i class="bi bi-bag-check"></i>
-                 Approve
+                Approve 
+              </button> /
+              <button type="button" class="btn btn-danger" (click)="confirmReject(claim.claimId)">
+                <i class="bi bi-bag-x"></i>
+                Reject
               </button>
             </td>
           </tr>
@@ -167,4 +167,35 @@
   <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closeInvoiceModel()">
     <i class="bi bi-x-circle"></i>
   </button>
+  </div>
+
+
+  <!-- Approve Model -->
+<div class="confirm-approve-popup" id="confirmApproveDisplay">
+  <form #purchaseForm="ngForm" (ngSubmit)="submitApprove()">
+    <label style="display: block;">Please confirm your purchase by typing "APPROVE" below: </label>
+    <input type="text" style="margin: 2%; width: 82%;" name="confirmation" [(ngModel)]="confirmApproveInput" required>
+    <div>
+      <button type="submit" class="btn btn-success" style="margin-right: 2%; margin-top: 2%; width: 40%;" [disabled]="confirmApproveInput !== 'APPROVE'">Confirm Approval</button>
+      <button type="button" class="btn btn-danger" style="width: 40%; margin-top: 2%;" (click)="closeApproveModel()">Cancel</button>
+    </div>
+    <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closeApproveModel()">
+      <i class="bi bi-x-circle"></i>
+    </button>
+  </form>
+</div>
+
+  <!-- Reject Model -->
+  <div class="confirm-reject-popup" id="confirmRejectDisplay">
+    <form #purchaseForm="ngForm" (ngSubmit)="submitReject()">
+      <label style="display: block;">Please confirm your purchase by typing "REJECT" below: </label>
+      <input type="text" style="margin: 2%; width: 82%;" name="confirmation" [(ngModel)]="confirmRejectInput" required>
+      <div>
+        <button type="submit" class="btn btn-success" style="margin-right: 2%; margin-top: 2%; width: 40%;" [disabled]="confirmRejectInput !== 'REJECT'">Confirm REJECT</button>
+        <button type="button" class="btn btn-danger" style="width: 40%; margin-top: 2%;" (click)="closeRejectModel()">Cancel</button>
+      </div>
+      <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger" (click)="closeRejectModel()">
+        <i class="bi bi-x-circle"></i>
+      </button>
+    </form>
   </div>

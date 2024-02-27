@@ -11,31 +11,42 @@ import { PlansService } from 'src/app/services/PlansServices/plans.service';
 })
 export class InsuranceCompanyPlansComponent {
   isAddPlanModelVisible: boolean = false;
-  isEditPlanModelVisible:boolean=false;
+  isEditPlanModelVisible: boolean = false;
   addPlanForm !: FormGroup;
+  editPlanForm !: FormGroup;
+  confirmDeleteInput!:string;
 
-  comapnyPlansList:Plans[]=[];
-  deleteId!:number;
+  comapnyPlansList: Plans[] = [];
+  deleteId!: number;
+  editId!:number;
 
-  constructor(private formBuilder: FormBuilder,private plansService:PlansService,private cookieService: CookieService){
+
+  constructor(private formBuilder: FormBuilder, private plansService: PlansService, private cookieService: CookieService) {
     this.getPlansByCompanyId();
   }
-  
-  ngOnInit(){
-    this.addPlanForm=this.formBuilder.group({
-      PlanName:['',[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
-      PlanAmount:['',[Validators.required,Validators.pattern('^[1-9]\\d{4,}$')]],
-      descriptionOfPlan:['',[Validators.required]],
-  })}
 
-  getPlansByCompanyId(){
-    this.plansService.getPlansByCompanyId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
-    .subscribe(plans=>this.comapnyPlansList=plans);
+  ngOnInit() {
+    this.addPlanForm = this.formBuilder.group({
+      PlanName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
+      PlanAmount: ['', [Validators.required, Validators.pattern('^[1-9]\\d{4,}$')]],
+      descriptionOfPlan: ['', [Validators.required]]
+    })
+
+    this.editPlanForm = this.formBuilder.group({
+      PlanName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
+      PlanAmount: ['', [Validators.required, Validators.pattern('^[1-9]\\d{4,}$')]],
+      descriptionOfPlan: ['', [Validators.required]]
+    })
+  }
+
+  getPlansByCompanyId() {
+    this.plansService.getPlansByCompanyId(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe(plans => this.comapnyPlansList = plans);
   }
 
 
   toggleAddPlan() {
-    let addModel = document.getElementById("addPlanFormModel"); 4
+    let addModel = document.getElementById("addPlanFormModel");
     if (this.isAddPlanModelVisible) {
       addModel?.classList.remove("active");
       this.isAddPlanModelVisible = false;
@@ -46,9 +57,10 @@ export class InsuranceCompanyPlansComponent {
     }
   }
 
-  
-  toggleEditPlan() {
-    let addModel = document.getElementById("editPlanFormModel"); 
+
+  toggleEditPlan(planId:number) {
+    this.editId=planId;
+    let addModel = document.getElementById("editPlanFormModel");
     if (this.isEditPlanModelVisible) {
       addModel?.classList.remove("active");
       this.isEditPlanModelVisible = false;
@@ -59,56 +71,81 @@ export class InsuranceCompanyPlansComponent {
     }
   }
 
-  get getPlanForm(){
+  get getPlanForm() {
     return this.addPlanForm.controls;
   }
 
+  get getEditPlanForm() {
+    return this.editPlanForm.controls;
+  }
 
 
-  SubmitPlan(){
-    if(this.addPlanForm.invalid){
+
+
+  SubmitPlan() {
+    if (this.addPlanForm.invalid) {
       return;
-  }
-  alert('Form submitted successfully');
-  this.addPlanForm.reset();
+    }
+    const plan: Plans = {
+      "planId": 0,
+      "planName": this.addPlanForm.get("PlanName")?.value,
+      "description": this.addPlanForm.get("descriptionOfPlan")?.value,
+      "dateOfIssue": new Date(),
+      "coverageAmount": this.addPlanForm.get("PlanAmount")?.value
+    }
+
+    this.plansService.addPlans(plan, JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe(plan => {
+        alert('Plan generated successfully');
+        this.addPlanForm.reset();
+        this.toggleAddPlan();
+        this.getPlansByCompanyId();
+      },(error)=>{alert("Failed to generate plan")})
+
   }
 
-  SubmitEditedPlan(){
-    if(this.addPlanForm.invalid){
+  SubmitEditedPlan() {
+    if (this.editPlanForm.invalid) {
       return;
-  }
-  alert('Form Edited successfully');
-  this.addPlanForm.reset();
-  
+    }
+    this.plansService.updatePlans(this.editPlanForm.get("PlanName")?.value, this.editPlanForm.get("descriptionOfPlan")?.value,this.editPlanForm.get("PlanAmount")?.value,this.editId,JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe(plan => {
+        alert('Plan updated successfully');
+        this.editPlanForm.reset();
+        this.toggleEditPlan(1);
+        this.getPlansByCompanyId();
+      },(error)=>{alert("Failed to update plan")})
+
+
   }
 
-  confirmDelete(planId:number){
-    this.deleteId=planId
-    let content=document.getElementById('confirmDeleteDisplay');
+  confirmDelete(planId: number) {
+    this.deleteId = planId
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.add('active');
   }
 
-  closeDeleteModel(){
-    let content=document.getElementById('confirmDeleteDisplay');
+  closeDeleteModel() {
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
-  submitConfirmDelete(){
+  submitConfirmDelete() {
     this.deletePlanById();
 
     alert('Delete Successful');
-    let content=document.getElementById('confirmDeleteDisplay');
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
-  deletePlanById(){
-    this.plansService.deletePlanById(JSON.parse(this.cookieService.get('userId')).userToken,this.deleteId)
-    .subscribe(message=>{
-      this.deleteId=0;
-      console.log("message");
-      this.getPlansByCompanyId();
-    }
-    )
+  deletePlanById() {
+    this.plansService.deletePlanById(JSON.parse(this.cookieService.get('userId')).userToken, this.deleteId)
+      .subscribe(message => {
+        this.deleteId = 0;
+        this.getPlansByCompanyId();
+        this.confirmDeleteInput="";
+      }
+      )
   }
 }
 
