@@ -15,6 +15,7 @@ export class PatientPlansComponent {
   plansList: Plans[] = [];
   confirmInput!: string;
   selectedPlanId!: number;
+  search!:any;
 
 
   constructor(private plansService: PlansService, private patientService: PatientService, private cookieService: CookieService) {
@@ -50,6 +51,31 @@ export class PatientPlansComponent {
     this.confirmInput = "";
     let content = document.getElementById('confirmPurchaseDisplay');
     content?.classList.remove('active');
+  }
+
+  searchPlanByName(){
+    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else{
+      this.plansService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
+      .subscribe((planList)=>{
+        console.log(planList);
+        this.plansList=planList;
+      })
+    }
+
+  }
+  searchPlanById(){
+    const parsedNumber: number = parseInt(this.search, 10);
+    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else{
+      this.plansList=[];
+      this.plansService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((plan)=>{
+        console.log(plan);
+        
+        this.plansList = this.plansList.concat(plan);
+      })
+    }
   }
 
 }

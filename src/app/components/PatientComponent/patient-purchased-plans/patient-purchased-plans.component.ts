@@ -16,6 +16,7 @@ export class PatientPurchasedPlansComponent {
   selectedPlanId!: number;
   coverageAmount!: number;
   selectedInvoiceId!: number;
+  search!:any;
 
   patientId = JSON.parse(this.cookieService.get('userId')).userId;
 
@@ -64,6 +65,31 @@ export class PatientPurchasedPlansComponent {
       });
 
 
+  }
+
+  searchPlanByName(){
+    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else{
+      this.plansService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
+      .subscribe((planList)=>{
+        console.log(planList);
+        this.purchasedPlansList=planList;
+      })
+    }
+
+  }
+  searchPlanById(){
+    const parsedNumber: number = parseInt(this.search, 10);
+    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else{
+      this.purchasedPlansList=[];
+      this.plansService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((plan)=>{
+        console.log(plan);
+        
+        this.purchasedPlansList = this.purchasedPlansList.concat(plan);
+      })
+    }
   }
 
 }

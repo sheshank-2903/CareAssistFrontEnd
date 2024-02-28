@@ -15,6 +15,7 @@ export class PatientRequestInvoiceComponent {
 
   currentDate: Date = new Date();
   healthCareProviderList: HealthCareProvider[] = [];
+  search!:any;
 
   currentHealthCareProviderId!: number;
 
@@ -88,6 +89,30 @@ export class PatientRequestInvoiceComponent {
 
   }
 
+  searchHealthCareProviderByName(){
+    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else{
+      this.healthCareProviderService.getHealthCareProviderByName(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((healthCareProviderList)=>{
+        
+        this.healthCareProviderList=healthCareProviderList;
+      })
+    }
 
+  }
+  searchHealthCareProviderById(){
+
+    const parsedNumber: number = parseInt(this.search, 10);
+    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else{
+      this.healthCareProviderList=[];
+      this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
+      .subscribe((healthcareprovider)=>{
+        
+        this.healthCareProviderList = this.healthCareProviderList.concat(healthcareprovider);
+      })
+    }
+
+  }
 
 }

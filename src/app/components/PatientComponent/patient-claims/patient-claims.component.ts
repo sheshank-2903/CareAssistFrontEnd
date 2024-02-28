@@ -12,6 +12,7 @@ import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 export class PatientClaimsComponent {
 
   claimsList:Claims[]=[];
+  search!:any;
 
   plan:Plans={
     "planId":0,
@@ -44,5 +45,15 @@ export class PatientClaimsComponent {
     let content=document.getElementById('planDetailsDisplay');
     content?.classList.remove('active');
   }
+
+  searchClaimById() {
+    this.claimsList = [];
+      this.claimService.getClaimsById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+        subscribe(data => {
+          this.claimsList = this.claimsList.concat(data);
+          console.log(this.claimsList);
+        })
+
+    }
 
 }

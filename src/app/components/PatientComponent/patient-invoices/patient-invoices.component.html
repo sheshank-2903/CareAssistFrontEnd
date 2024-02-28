@@ -1,7 +1,7 @@
 <div style="margin-top: 2%; margin-left: 2%; margin-right: 2%;">
     <div class="d-flex container" style="margin-bottom: 2%;">
-      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-      <button type="button" class="btn btn-outline-info ml-3">
+      <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="search">
+      <button type="button" class="btn btn-outline-info ml-3" (click)="searchInvoiceById()">
         <i class="bi bi-search"></i>
         Search By Id
       </button>
