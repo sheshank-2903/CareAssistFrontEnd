@@ -1,9 +1,9 @@
-<div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;">
+<div style="display: flex; justify-content: center; align-items: center; padding-top: 4%; padding-bottom: 4%;"  *ngIf="updateForm">
     <i class="bi bi-pencil-square btn btn-primary" (click)="toggleEditable()" style=" position: fixed;bottom: 8%;right: 10%;"></i>
- <form style="width: 60%;"  [formGroup]="updateForm">
+ <form style="width: 60%;"  [formGroup]="updateForm" (ngSubmit)="onSubmit()">
      <div class="form-group">
        <label for="adminId">Admin ID:</label>
-       <input type="number" readonly="true" class="form-control" id="adminId" required>
+       <input type="number" readonly="true" class="form-control" id="adminId" formControlName="adminId" required>
      </div>
      <div class="form-group">
        <label for="adminName">Name:</label>
@@ -21,7 +21,7 @@
       <div *ngIf="getAdminForm['email'].errors?.['required']" style="color: red;">Email cannot be empty</div>
       <div *ngIf="getAdminForm['email'].errors?.['email']" style="color: red;">Email must be valid</div>
      </div>
-     <div class="form-group">
+     <div class="form-group" *ngIf="!editable">
       <label for="password">Password:</label>
       <input type="password" [readOnly]="editable" class="form-control" id="password" formControlName="password"
         required [ngClass]="{'is-invalid':getAdminForm['password'].errors,'is-valid':!getAdminForm['password'].errors}">

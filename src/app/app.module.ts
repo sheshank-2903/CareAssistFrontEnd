@@ -93,7 +93,8 @@ import { AdminComponent } from './components/AdminComponents/admin/admin.compone
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

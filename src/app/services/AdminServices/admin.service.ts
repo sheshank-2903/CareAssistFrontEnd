@@ -17,8 +17,13 @@ export class AdminService {
     return this._http.post<Admin>(this.baseUrl+"register",body)
   }
 
-  updateAdmin(body:Admin):Observable<Admin>{
-    return this._http.put<Admin>(this.baseUrl+"update",body)
+  updateAdmin(body:Admin,token:string):Observable<Admin>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.put<Admin>(this.baseUrl+"update",body, { headers, responseType: 'json' })
   }
 
   getAdminByName(adminName:string,token:string):Observable<Admin[]>{
