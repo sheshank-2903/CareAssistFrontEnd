@@ -16,8 +16,13 @@ export class InsuranceCompanyService {
     return this._http.post<InsuranceCompany>(this.baseUrl+"register",body)
   }
 
-  updateInsuranceCompany(body:InsuranceCompany):Observable<InsuranceCompany>{
-    return this._http.put<InsuranceCompany>(this.baseUrl+"update",body)
+  updateInsuranceCompany(body:InsuranceCompany,token:string):Observable<InsuranceCompany>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.put<InsuranceCompany>(this.baseUrl+"update",body,{ headers, responseType: 'json' })
   }
 
   getInsuranceCompanyById(InsuranceCompanyId:number,token:string):Observable<InsuranceCompany>{

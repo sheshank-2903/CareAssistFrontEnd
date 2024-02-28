@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { Admin } from 'src/app/model/Admin';
+import { AdminService } from 'src/app/services/AdminServices/admin.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -8,45 +11,74 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./admin-profile.component.css']
 })
 export class AdminProfileComponent {
-  editable:boolean=true;
+  editable: boolean = true;
 
   updateForm !: FormGroup;
 
-  constructor(private formBuilder: FormBuilder){
+  admin: Admin = {
+    "adminId": 0,
+    "adminName": "",
+    "email": "",
+    "password": "",
   }
 
-  ngOnInit(){
-    
-    this.updateForm=this.formBuilder.group({
-      adminName:['',[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
-      confirm_password: ['', Validators.required] 
-    },{validator: this.passwordMatchValidator});
+  constructor(private formBuilder: FormBuilder, private cookieService: CookieService, private adminservice: AdminService) {
+
+    this.adminservice.getAdminById(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe(
+        (admin) => {
+          this.admin = admin;
+
+
+          this.updateForm = this.formBuilder.group({
+            adminId: [this.admin.adminId, []],
+            adminName: [this.admin.adminName, [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
+            email: [this.admin.email, [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
+            confirm_password: ['', Validators.required]
+          }, { validator: this.passwordMatchValidator });
+        }
+      )
+  }
+
+  ngOnInit() {
 
   }
 
 
-  get getAdminForm(){
-  
+  get getAdminForm() {
+
     return this.updateForm.controls;
   }
 
 
-  toggleEditable(){
-    this.editable=!this.editable;
-    // console.log("new value ", this.editable);
+  toggleEditable() {
+    this.editable = !this.editable;
+    if (this.editable) {
+      location.reload();
+    }
+
   }
 
-  onSubmit(){
+  onSubmit() {
 
-    if(this.updateForm.invalid){
+    if (this.updateForm.invalid) {
       return;
-  }
-  
-  alert('Form submitted successfully');
-  console.log(this.getAdminForm['companyName'].value);
-  
+    }
+
+    this.admin.adminName = this.updateForm.value.adminName;
+    this.admin.email = this.updateForm.value.email;
+    this.admin.password = this.updateForm.value.password;
+
+    this.adminservice.updateAdmin(this.admin, JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe(data=>{
+      alert('Form submitted successfully');
+      location.reload();
+    
+    })
+
+    
+
   }
 
 
