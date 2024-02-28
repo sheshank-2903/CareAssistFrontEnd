@@ -139,10 +139,11 @@ toggleAddAdmin(input?:boolean) {
       const parsedNumber: number = parseInt(this.search, 10);
       if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
       else{
+        this.adminList=[];
         this.adminService.getAdminById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((admin)=>{
           console.log(admin);
-          this.adminList=[];
+          
           this.adminList = this.adminList.concat(admin);
         })
       }

@@ -10,50 +10,60 @@ import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 })
 export class AdminClaimsComponent {
 
-  claimList:Claims[]=[];
-  deleteId!:number;
+  claimList: Claims[] = [];
+  deleteId!: number;
+  search!: number;
 
-  constructor(private claimService:ClaimsService,private cookieService: CookieService){
+  constructor(private claimService: ClaimsService, private cookieService: CookieService) {
     this.getAllClaims();
   }
-  getAllClaims(){
+  getAllClaims() {
     this.claimService.getAllClaims(JSON.parse(this.cookieService.get('userId')).userToken)
-             .subscribe(  
-                    (claims) =>
-                       { 
-                          this.claimList = claims; 
-                          console.log(this.claimList);
-                      }
-            );
-    }
+      .subscribe(
+        (claims) => {
+          this.claimList = claims;
+          console.log(this.claimList);
+        }
+      );
+  }
 
-  confirmDelete(deleteClaimId:number){
-    this.deleteId=deleteClaimId;
-    let content=document.getElementById('confirmDeleteDisplay');
+  confirmDelete(deleteClaimId: number) {
+    this.deleteId = deleteClaimId;
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.add('active');
   }
 
-  closeDeleteModel(){
-    let content=document.getElementById('confirmDeleteDisplay');
+  closeDeleteModel() {
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
-  submitConfirmDelete(){
+  submitConfirmDelete() {
     this.deleteClaimId(this.deleteId);
     alert('delete completed');
-    let content=document.getElementById('confirmDeleteDisplay');
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
-  deleteClaimId(deleteId:number){
-    this.claimService.deleteClaimsById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
-             .subscribe(  
-                    (claim) =>
-                       { 
-                          this.deleteId=0;
-                          console.log(claim);
-                          this.getAllClaims();
-                      }
-            );
+  deleteClaimId(deleteId: number) {
+    this.claimService.deleteClaimsById(JSON.parse(this.cookieService.get('userId')).userToken, deleteId)
+      .subscribe(
+        (claim) => {
+          this.deleteId = 0;
+          console.log(claim);
+          this.getAllClaims();
+        }
+      );
+  }
+
+
+  searchClaimById() {
+    this.claimList = [];
+      this.claimService.getClaimsById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+        subscribe(data => {
+          this.claimList = this.claimList.concat(data);
+          console.log(this.claimList);
+        })
+
     }
-}
+  }

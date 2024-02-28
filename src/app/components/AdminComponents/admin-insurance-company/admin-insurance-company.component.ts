@@ -70,10 +70,11 @@ export class AdminInsuranceCompanyComponent {
       const parsedNumber: number = parseInt(this.search, 10);
       if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
       else{
+        this.insuranceCompanyList=[];
         this.insuranceCompanyService.getInsuranceCompanyById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((insuranceCompany)=>{
           console.log(insuranceCompany);
-          this.insuranceCompanyList=[];
+          
           this.insuranceCompanyList = this.insuranceCompanyList.concat(insuranceCompany);
         })
       }

@@ -71,10 +71,11 @@ export class AdminPlansComponent {
       const parsedNumber: number = parseInt(this.search, 10);
       if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
       else{
+        this.planList=[];
         this.planService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((plan)=>{
           console.log(plan);
-          this.planList=[];
+          
           this.planList = this.planList.concat(plan);
         })
       }

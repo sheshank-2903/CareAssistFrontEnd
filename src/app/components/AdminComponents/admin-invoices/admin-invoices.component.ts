@@ -12,6 +12,7 @@ export class AdminInvoicesComponent {
 
   invoiceList:Invoices[]=[];
   deleteId!:number;
+  search!:number;
 
   constructor(private invoiceService:InvoicesService,private cookieService: CookieService){
     this.getAllInvoice();
@@ -56,4 +57,16 @@ export class AdminInvoicesComponent {
                       }
             );
     }
+
+    searchInvoiceById() {
+      this.invoiceList = [];
+      this.invoiceService.getInvoiceById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+        subscribe(data => {
+          
+          this.invoiceList = this.invoiceList.concat(data);
+          console.log(this.invoiceList);
+        })
+
+    }
+
 }

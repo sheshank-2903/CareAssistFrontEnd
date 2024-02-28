@@ -72,10 +72,11 @@ export class AdminPatientComponent {
     const parsedNumber: number = parseInt(this.search, 10);
     if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
     else{
+      this.patientList=[];
       this.patientService.getPatientById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe((patient)=>{
         console.log(patient);
-        this.patientList=[];
+        
         this.patientList = this.patientList.concat(patient);
       })
     }

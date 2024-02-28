@@ -69,13 +69,14 @@ export class AdminHealthCareProviderComponent {
 
   }
   searchHealthCareProviderById(){
+
     const parsedNumber: number = parseInt(this.search, 10);
     if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
     else{
+      this.healthCareProviderList=[];
       this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
       .subscribe((healthcareprovider)=>{
         console.log(healthcareprovider);
-        this.healthCareProviderList=[];
         this.healthCareProviderList = this.healthCareProviderList.concat(healthcareprovider);
       })
     }

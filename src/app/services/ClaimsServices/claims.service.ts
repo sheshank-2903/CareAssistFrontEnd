@@ -33,8 +33,13 @@ export class ClaimsService {
   }
 
 
-  getClaimsById(ClaimsId:number):Observable<Claims>{
-    return this._http.get<Claims>(this.baseUrl+`get/${ClaimsId}`)
+  getClaimsById(ClaimsId:number,token:string):Observable<Claims>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Claims>(this.baseUrl+`get/${ClaimsId}`,{ headers, responseType: 'json' })
   }
 
   getAllClaims(token:string):Observable<Claims[]>{
