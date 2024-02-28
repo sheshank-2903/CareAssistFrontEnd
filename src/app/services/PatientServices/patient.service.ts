@@ -17,8 +17,14 @@ export class PatientService {
     return this._http.post<Patient>(this.baseUrl+"register",body);
   }
 
-  updatePatient(body:Patient):Observable<Patient>{
-    return this._http.put<Patient>(this.baseUrl+"update",body);
+  updatePatient(body:Patient,token:string):Observable<Patient>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Authorization': tokenString 
+    });
+    return this._http.put<Patient>(this.baseUrl+"update",body,{headers, responseType: 'json'});
   }
 
   getPatientById(patientId:number,token:string):Observable<Patient>{

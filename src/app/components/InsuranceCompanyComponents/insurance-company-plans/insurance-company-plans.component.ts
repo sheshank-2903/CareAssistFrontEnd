@@ -133,7 +133,7 @@ export class InsuranceCompanyPlansComponent {
   submitConfirmDelete() {
     this.deletePlanById();
 
-    alert('Delete Successful');
+    
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
@@ -142,10 +142,10 @@ export class InsuranceCompanyPlansComponent {
     this.plansService.deletePlanById(JSON.parse(this.cookieService.get('userId')).userToken, this.deleteId)
       .subscribe(message => {
         this.deleteId = 0;
+        alert('Plan Deleted Successfully');
         this.getPlansByCompanyId();
         this.confirmDeleteInput="";
-      }
-      )
+      },error=>alert("Cannot Delete Plan As It Is Purchased By Patients!!!"))
   }
 
   searchPlanByName(){

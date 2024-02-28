@@ -41,18 +41,17 @@ export class AdminPatientComponent {
   }
 
   submitConfirmDelete() {
-    this.deletePatinetId(this.deleteId);
+    this.deletePatientId(this.deleteId);
     alert('Delete completed');
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
-  deletePatinetId(deleteId: number) {
+  deletePatientId(deleteId: number) {
     this.patientService.deletePatientById(JSON.parse(this.cookieService.get('userId')).userToken, deleteId)
       .subscribe(
         (admin) => {
-          this.deleteId != undefined;
-          console.log(admin);
+          this.deleteId = 0;
           this.getAllPatients();
         }
       );

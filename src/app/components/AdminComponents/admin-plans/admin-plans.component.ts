@@ -11,7 +11,6 @@ import { PlansService } from 'src/app/services/PlansServices/plans.service';
 export class AdminPlansComponent {
 
   planList:Plans[]=[];
-  deleteId!:number;
   search:any;
   constructor(private planService:PlansService,private cookieService: CookieService){
     this.getAllPlans();
@@ -26,35 +25,6 @@ export class AdminPlansComponent {
             );
     }
 
-  confirmDelete(deletePlanId:number){
-    this.deleteId=deletePlanId;
-    let content=document.getElementById('confirmDeleteDisplay');
-    content?.classList.add('active');
-  }
-
-  closeDeleteModel(){
-    let content=document.getElementById('confirmDeleteDisplay');
-    content?.classList.remove('active');
-  }
-
-  submitConfirmDelete(){
-    this.deletePlanId(this.deleteId);
-    alert('delete completed');
-    let content=document.getElementById('confirmDeleteDisplay');
-    content?.classList.remove('active');
-  }
-
-  deletePlanId(deleteId:number){
-    this.planService.deletePlanById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
-             .subscribe(  
-                    (plan) =>
-                       { 
-                          this.deleteId=0;
-                          console.log(plan);
-                          this.getAllPlans();
-                      }
-            );
-    }
 
     searchPlanByName(){
       if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");

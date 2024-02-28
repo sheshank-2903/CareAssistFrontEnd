@@ -71,13 +71,13 @@ export class AdminProfileComponent {
     this.admin.password = this.updateForm.value.password;
 
     this.adminservice.updateAdmin(this.admin, JSON.parse(this.cookieService.get('userId')).userToken)
-    .subscribe(data=>{
-      alert('Form submitted successfully');
-      location.reload();
-    
-    })
+      .subscribe(data => {
+        alert('Profile updated successfully');
+        location.reload();
+      }, error => alert("Failed to update Profile"))
 
-    
+
+
 
   }
 

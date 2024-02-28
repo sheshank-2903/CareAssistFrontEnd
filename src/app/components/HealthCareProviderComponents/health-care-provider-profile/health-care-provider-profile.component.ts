@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { HealthCareProvider } from 'src/app/model/HealthCareProvider';
+import { HealthCareProviderService } from 'src/app/services/HealthCareProviderServices/health-care-provider.service';
 
 @Component({
   selector: 'app-health-care-provider-profile',
@@ -10,26 +13,38 @@ export class HealthCareProviderProfileComponent {
   editable:boolean=true;
 
   updateForm !: FormGroup;
-  selectedGender: string="";
 
-  genderOptions = ['Male', 'Female'];
-
-  selectGender(gender: string): void {
-    this.selectedGender = gender;
+  healthCareProvider:HealthCareProvider={
+    healthCareProviderId: 0,
+    healthCareProviderName: '',
+    providerGender: '',
+    address: '',
+    email: '',
+    password: ''
   }
-  constructor(private formBuilder: FormBuilder){
+  
+
+  constructor(private formBuilder: FormBuilder,private healthCareProviderService:HealthCareProviderService,private cookieService: CookieService){
+    this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
+    .subscribe(data=>{
+      this.healthCareProvider = data;
+
+      this.updateForm=this.formBuilder.group({
+        healthCareProviderId:[this.healthCareProvider.healthCareProviderId],
+        healthCareProviderName:[this.healthCareProvider.healthCareProviderName,[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
+        address:[this.healthCareProvider.address,[Validators.required]],
+        email:[this.healthCareProvider.email,[Validators.required,Validators.email]],
+        providerGender:[this.healthCareProvider.providerGender],
+        password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
+        confirm_password: ['', Validators.required] 
+      },{validator: this.passwordMatchValidator});
+
+
+    })
   }
 
   ngOnInit(){
     
-    this.updateForm=this.formBuilder.group({
-      healthCareProviderName:['',[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
-      contact:['',[Validators.required,Validators.pattern('\\d{10}')]],
-      address:['',[Validators.required]],
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.pattern('^(?=.[A-Z])(?=.[a-z])(?=.\\d)(?=.[@$!%?&])[A-Za-z\\d@$!%?&./+]{8,}$')]],
-      confirm_password: ['', Validators.required] 
-    },{validator: this.passwordMatchValidator});
   }
 
 
@@ -41,7 +56,10 @@ export class HealthCareProviderProfileComponent {
 
   toggleEditable(){
     this.editable=!this.editable;
-    // console.log("new value ", this.editable);
+    if(this.editable){
+      location.reload();
+    }
+
   }
 
   onSubmit(){
@@ -49,10 +67,18 @@ export class HealthCareProviderProfileComponent {
     if(this.updateForm.invalid){
       return;
   }
-  
-  alert('Form submitted successfully');
-  console.log(this.getHealthCareProvider['companyName'].value);
-  
+
+    this.healthCareProvider.healthCareProviderName=this.updateForm.value.healthCareProviderName;
+    this.healthCareProvider.address=this.updateForm.value.address;
+    this.healthCareProvider.email=this.updateForm.value.email;
+    this.healthCareProvider.providerGender=this.updateForm.value.providerGender;
+    this.healthCareProvider.password=this.updateForm.value.password;
+
+    this.healthCareProviderService.updateHealthCareProvider(JSON.parse(this.cookieService.get('userId')).userToken,this.healthCareProvider)
+    .subscribe(data=>{
+        alert('Profile updated successfully');
+        location.reload();
+      },error=>alert("Failed to update profile"))  
   }
 
 
