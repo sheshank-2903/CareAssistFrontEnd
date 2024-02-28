@@ -56,6 +56,15 @@ export class PlansService {
     }).set("Authorization", tokenString);
     return this._http.get<Plans[]>(this.baseUrl+`getByName/${planName}`,{ headers, responseType: 'json' })
   }
+  
+  getPlansByNameAndCompanyId(token:string,planName:string,insuranceCompanyId:number):Observable<Plans[]>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<Plans[]>(this.baseUrl+`getByNameAndCompanyId/${planName}/${insuranceCompanyId}`,{ headers, responseType: 'json' })
+  }
 
   getPlansByCompanyName(companyName:string):Observable<Plans[]>{
     return this._http.get<Plans[]>(this.baseUrl+`getByCompanyName/${companyName}`)

@@ -12,6 +12,7 @@ import { PlansService } from 'src/app/services/PlansServices/plans.service';
   styleUrls: ['./insurance-company-claims.component.css']
 })
 export class InsuranceCompanyClaimsComponent {
+  search:any;
 
   plan:Plans={
     "planId":0,
@@ -34,7 +35,7 @@ export class InsuranceCompanyClaimsComponent {
   }
 
 
-  comapnyClaimsList:Claims[]=[];
+  claimList:Claims[]=[];
 
   claimId!:number;
   confirmApproveInput!:string;
@@ -48,7 +49,7 @@ export class InsuranceCompanyClaimsComponent {
 
   getClaimsByCompanyId(){
     this.claimService.getClaimsByCompanyId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
-    .subscribe(claims=>this.comapnyClaimsList=claims);
+    .subscribe(claims=>this.claimList=claims);
   }
 
   showPatientModel(claimId:number){
@@ -135,5 +136,19 @@ export class InsuranceCompanyClaimsComponent {
     },error=>alert("Failed to reject claim"))
   }
 
+  searchClaimsById(){
+    const parsedNumber: number = parseInt(this.search, 10);
+    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else{
+      this.claimList=[];
+      this.claimService.getClaimsById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((claim)=>{
+        console.log(claim);
+        
+        this.claimList = this.claimList.concat(claim);
+      })
+    }
+
+  }
 
 }

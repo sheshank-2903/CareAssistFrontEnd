@@ -1,7 +1,7 @@
 <div style="margin-top: 2%; margin-left: 2%; margin-right: 2%;">
     <div class="d-flex container" style="margin-bottom: 2%;">
-      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-      <button type="button" class="btn btn-outline-info ml-3" >
+      <input class="form-control" type="number" placeholder="Search" aria-label="Search" [(ngModel)]="search">
+      <button type="button" class="btn btn-outline-info ml-3" (click)="searchInvoiceById()">
         <i class="bi bi-search"></i>
         Search By Id
       </button>
@@ -26,17 +26,17 @@
           </thead>
           <tbody>
             <tr *ngFor="let invoice of invoiceList">
-              <th>{{invoice.invoiceId}}</th>
+              <td>{{invoice.invoiceId}}</td>
               <td>{{invoice.invoiceDate}}</td>
-              <th>{{invoice.invoiceDueDate}}</th>
-              <th>{{invoice.patientName}}</th>
+              <td>{{invoice.invoiceDueDate}}</td>
+              <td>{{invoice.patientName}}</td>
               <td>{{invoice.patientAddress}}</td>
-              <th>{{invoice.invoiceTax}}</th>
-              <th>{{invoice.consultingFees}}</th>
-              <th>{{invoice.diagnosticTestFees}}</th>
+              <td>{{invoice.invoiceTax}}</td>
+              <td>{{invoice.consultingFees}}</td>
+              <td>{{invoice.diagnosticTestFees}}</td>
               <td>{{invoice.diagnosticScanFees}}</td>
-              <th>{{invoice.calculatedAmount}}</th>
-              <th>{{invoice.invoiceStatus}}</th>
+              <td>{{invoice.calculatedAmount}}</td>
+              <td>{{invoice.invoiceStatus}}</td>
               <td>{{invoice.healthCareProviderId}}</td>
             </tr>
           </tbody>

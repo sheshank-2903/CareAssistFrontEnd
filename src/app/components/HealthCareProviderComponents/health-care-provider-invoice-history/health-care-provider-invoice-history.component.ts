@@ -11,7 +11,7 @@ import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.serv
 export class HealthCareProviderInvoiceHistoryComponent {
     
   invoiceList:Invoices[]=[];
-
+  search!:number;
   constructor(private invoiceService:InvoicesService,private cookieService: CookieService){
     this.getAllInvoice();
   }
@@ -24,5 +24,14 @@ export class HealthCareProviderInvoiceHistoryComponent {
                           console.log(this.invoiceList);
                       }
             );
+    }
+    searchInvoiceById() {
+      this.invoiceList = [];
+      this.invoiceService.getInvoiceById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+        subscribe(data => {
+          this.invoiceList = this.invoiceList.concat(data);
+          console.log(this.invoiceList);
+        })
+
     }
 }

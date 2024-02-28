@@ -15,7 +15,7 @@ export class InsuranceCompanyPlansComponent {
   addPlanForm !: FormGroup;
   editPlanForm !: FormGroup;
   confirmDeleteInput!:string;
-
+  search:any
   comapnyPlansList: Plans[] = [];
   deleteId!: number;
   editId!:number;
@@ -147,6 +147,29 @@ export class InsuranceCompanyPlansComponent {
       }
       )
   }
+
+  searchPlanByName(){
+    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else{
+      this.plansService.getPlansByNameAndCompanyId(JSON.parse(this.cookieService.get('userId')).userToken,this.search, JSON.parse(this.cookieService.get('userId')).userId)
+      .subscribe((planList)=>{
+        console.log(planList);
+        this.comapnyPlansList=planList;
+      })
+    }
+
+  }
+  searchPlanById(){
+    const parsedNumber: number = parseInt(this.search, 10);
+    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else{
+      this.comapnyPlansList=[];
+      this.plansService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((plan)=>{
+        console.log(plan);
+        
+        this.comapnyPlansList = this.comapnyPlansList.concat(plan);
+      })
+    }
+  }
 }
-
-

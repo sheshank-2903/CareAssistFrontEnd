@@ -13,6 +13,7 @@ export class HealthCareProviderHomeComponent {
   isAddAdminModelVisible: boolean = false;
   invoiceList: Invoices[] = [];
   currentInvoiceId!:number;
+  search!:number;
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
   }
@@ -52,5 +53,15 @@ export class HealthCareProviderHomeComponent {
       statusModel?.classList.add("active");
       this.isAddAdminModelVisible = true;
     }
+  }
+
+  searchInvoiceById() {
+    this.invoiceList = [];
+    this.invoiceService.getInvoiceById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+      subscribe(data => {
+        this.invoiceList = this.invoiceList.concat(data);
+        console.log(this.invoiceList);
+      })
+
   }
 }
