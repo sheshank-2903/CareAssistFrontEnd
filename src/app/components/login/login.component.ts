@@ -32,7 +32,7 @@ export class LoginComponent {
 
   constructor(private jwtService: JwtServiceService, private cookieService: CookieService, private router:Router) { }
   readFormData(formData: any) {
-    this.authRequest.email = formData.form.value.email;
+    this.authRequest.email = formData.form.value.email.toLowerCase();
     this.authRequest.password = formData.form.value.password;
     this.getAccessToken(this.authRequest);
   }

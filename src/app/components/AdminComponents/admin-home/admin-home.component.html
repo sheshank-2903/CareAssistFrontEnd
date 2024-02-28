@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let admin of adminList">
+      <tr *ngFor="let admin of adminList" [ngStyle]="{'display': getDisplay(admin.adminId)}">
         <td>{{admin.adminId}}</td>
         <td>{{admin.adminName}}</td>
         <td>{{admin.email}}</td>

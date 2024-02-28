@@ -14,22 +14,22 @@ export class HomeComponent {
     tabContents.forEach((content: Element) => {
         content.classList.remove('active');
     });
-    // const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
-    // console.log(tab);
-    // tab.forEach((content: Element) => {
-    //     content.classList.remove('active');
-    // });
 
-    // Show the selected tab content
+    const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
+    console.log(tab);
+    tab.forEach((content: Element) => {
+        content.classList.remove('active');
+    });
+
     const selectedTabContent: Element | null = document.getElementById(tabId);
     if (selectedTabContent) {
         selectedTabContent.classList.add('active');
     }
 
-    // const selectedTab: Element | null = document.getElementById("button-"+tabId);
-    // if (selectedTab) {
-    //   selectedTab.classList.add('active');
-    // }
+    const selectedTab: Element | null = document.getElementById("button-"+tabId);
+    if (selectedTab) {
+      selectedTab.classList.add('active');
+    }
   }
 
 }

@@ -6,3 +6,11 @@
 .home-content.active{
     display: block;
 }
+
+.tab{
+    font-weight: 300;
+}
+
+.tab.active{
+    font-weight: bold;
+}

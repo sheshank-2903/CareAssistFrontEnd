@@ -23,10 +23,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let plan of plansList">
-            <th>{{plan.planId}}</th>
+            <td>{{plan.planId}}</td>
             <td>{{plan.planName}}</td>
-            <th>{{plan.description}}</th>
-            <th>{{plan.dateOfIssue}}</th>
+            <td>{{plan.description}}</td>
+            <td>{{plan.dateOfIssue}}</td>
             <td>{{plan.coverageAmount}}</td>
             <td>
                 <button type="button" class="btn btn-success" (click)="confirmPurchase(plan.planId)">

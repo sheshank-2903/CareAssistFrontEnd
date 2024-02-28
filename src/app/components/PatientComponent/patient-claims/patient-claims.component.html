@@ -17,9 +17,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let claim of claimsList">
-              <th>{{claim.claimId}}</th>
+              <td>{{claim.claimId}}</td>
               <td>{{claim.claimAmount}}</td>
-              <th>{{claim.claimStatus}}</th>
+              <td [ngStyle]="{'color': getStatusColor(claim.claimStatus)}">{{claim.claimStatus}}</td>
               <td><button type="button" class="btn btn-info" (click)="showPlanDetails(claim.claimId)">
                 <i class="bi bi-info-circle">
               </i></button></td>

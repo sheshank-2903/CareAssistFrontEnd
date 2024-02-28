@@ -148,7 +148,31 @@ export class InsuranceCompanyClaimsComponent {
         this.claimList = this.claimList.concat(claim);
       })
     }
+  }
 
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'PENDING':
+        return 'blue';
+      case 'APPROVED':
+        return 'green';
+      case 'REJECTED':
+        return 'red';
+      default:
+        return 'black'; // or any default color
+    }
+  }
+
+  getDisplayActionText(status:string){
+    if(status!=="PENDING")
+      return ""
+    else return "none"
+  }
+
+  getDisplayActionButton(status:string){
+    if(status==="PENDING")
+      return ""
+    else return "none"
   }
 
 }

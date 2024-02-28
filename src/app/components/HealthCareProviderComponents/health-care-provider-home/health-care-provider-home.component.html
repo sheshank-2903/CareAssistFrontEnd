@@ -37,13 +37,18 @@
               <td>{{invoice.diagnosticTestFees}}</td>
               <td>{{invoice.diagnosticScanFees}}</td>
               <td>{{invoice.calculatedAmount}}</td>
-              <td>{{invoice.invoiceStatus}}</td>
+              <td [ngStyle]="{'color': getStatusColor(invoice.invoiceStatus)}">{{invoice.invoiceStatus}}</td>
               <td>{{invoice.healthCareProviderId}}</td>
               <td>
+                <div [ngStyle]="{'display': getDisplayActionButton(invoice.invoiceStatus)}">
                   <button type="button" class="btn btn-info" (click)="toggleChangeStatus(invoice.invoiceId)">
                     <i class="bi bi-pencil-square"></i>
                     Change Status
                   </button>
+                </div>
+                <div [ngStyle]="{'display': getDisplayActionText(invoice.invoiceStatus)}">
+                  No Action Required
+                </div>
               </td>
             </tr>
           </tbody>

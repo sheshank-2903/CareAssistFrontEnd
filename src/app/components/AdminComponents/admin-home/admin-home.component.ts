@@ -16,7 +16,12 @@ export class AdminHomeComponent {
   deleteId!:number;
   adminList:Admin[]=[];
   search:any;
-
+  admin:Admin={
+    adminId:0,
+    adminName:"",
+    email:"",
+    password:""
+  };
   constructor(private adminService:AdminService,private cookieService: CookieService,private formBuilder:FormBuilder,private router: Router){
     this.getAllAdmin();
   }
@@ -71,15 +76,26 @@ toggleAddAdmin(input?:boolean) {
   }
 
   onSubmit(){
-
     if(this. addAdminForm.invalid){
       return;
   }
+  this.admin.adminId=this.addAdminForm.value.adminId;
+  this.admin.adminName=this.addAdminForm.value.adminName;
+  this.admin.email=this.addAdminForm.value.email.toLowerCase();
+  this.admin.password=this.addAdminForm.value.password;
   
-  alert('Form submitted successfully');
-  console.log(this. addAdminForm);
-  this.addAdminForm.reset();
-  
+  this.adminService.addAdmin(this.admin)
+  .subscribe((admin)=>{
+    alert('Form submitted successfully');
+    console.log(admin);
+    this.addAdminForm.reset();
+    this.toggleAddAdmin();
+    this.getAllAdmin();
+  }
+  ,(error)=>{
+    alert('try again later');
+    console.log(error);
+  });
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -147,7 +163,12 @@ toggleAddAdmin(input?:boolean) {
           this.adminList = this.adminList.concat(admin);
         })
       }
-  
+    }
+    getDisplay(adminId: number): string {
+      if(adminId===JSON.parse(this.cookieService.get('userId')).userId)
+        return "none";
+      else
+        return ""
     }
 
 }

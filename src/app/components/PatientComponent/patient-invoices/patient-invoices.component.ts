@@ -35,4 +35,17 @@ export class PatientInvoicesComponent {
 
   }
 
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'PENDING':
+        return 'blue';
+      case 'APPROVED':
+        return 'green';
+      case 'REJECTED':
+        return 'red';
+      default:
+        return 'black'; // or any default color
+    }
+  }
+
 }

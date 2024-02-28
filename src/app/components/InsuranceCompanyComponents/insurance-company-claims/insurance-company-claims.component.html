@@ -22,7 +22,7 @@
           <tr *ngFor="let claim of claimList">
             <td>{{claim.claimId}}</td>
             <td>{{claim.claimAmount}}</td>
-            <td>{{claim.claimStatus}}</td>
+            <td [ngStyle]="{'color': getStatusColor(claim.claimStatus)}">{{claim.claimStatus}}</td>
             <td>
               <button type="button" class="btn btn-info" (click)="showPatientModel(claim.claimId)"><i class="bi bi-info-circle"></i></button>
             </td>
@@ -33,14 +33,19 @@
               <button type="button" class="btn btn-info" (click)="showPlanModel(claim.claimId)"><i class="bi bi-info-circle"></i></button>
             </td>
             <td>
-              <button type="button" class="btn btn-success" (click)="confirmApprove(claim.claimId)">
-                <i class="bi bi-bag-check"></i>
-                Approve 
-              </button> /
-              <button type="button" class="btn btn-danger" (click)="confirmReject(claim.claimId)">
-                <i class="bi bi-bag-x"></i>
-                Reject
-              </button>
+              <div [ngStyle]="{'display': getDisplayActionButton(claim.claimStatus)}">
+                <button type="button" class="btn btn-success" (click)="confirmApprove(claim.claimId)">
+                  <i class="bi bi-bag-check"></i>
+                  Approve 
+                </button> /
+                <button type="button" class="btn btn-danger" (click)="confirmReject(claim.claimId)">
+                  <i class="bi bi-bag-x"></i>
+                  Reject
+                </button>
+              </div>
+              <div [ngStyle]="{'display': getDisplayActionText(claim.claimStatus)}">
+                No Action Required
+              </div>
             </td>
           </tr>
         </tbody>
@@ -168,7 +173,7 @@
   <!-- Approve Model -->
 <div class="confirm-approve-popup" id="confirmApproveDisplay">
   <form #purchaseForm="ngForm" (ngSubmit)="submitApprove()">
-    <label style="display: block;">Please confirm your purchase by typing "APPROVE" below: </label>
+    <label style="display: block;">Please confirm your action by typing "APPROVE" below: </label>
     <input type="text" style="margin: 2%; width: 82%;" name="confirmation" [(ngModel)]="confirmApproveInput" required>
     <div>
       <button type="submit" class="btn btn-success" style="margin-right: 2%; margin-top: 2%; width: 40%;" [disabled]="confirmApproveInput !== 'APPROVE'">Confirm Approval</button>
@@ -183,7 +188,7 @@
   <!-- Reject Model -->
   <div class="confirm-reject-popup" id="confirmRejectDisplay">
     <form #purchaseForm="ngForm" (ngSubmit)="submitReject()">
-      <label style="display: block;">Please confirm your purchase by typing "REJECT" below: </label>
+      <label style="display: block;">Please confirm your action by typing "REJECT" below: </label>
       <input type="text" style="margin: 2%; width: 82%;" name="confirmation" [(ngModel)]="confirmRejectInput" required>
       <div>
         <button type="submit" class="btn btn-success" style="margin-right: 2%; margin-top: 2%; width: 40%;" [disabled]="confirmRejectInput !== 'REJECT'">Confirm REJECT</button>

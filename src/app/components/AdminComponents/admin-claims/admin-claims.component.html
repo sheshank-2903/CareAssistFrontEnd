@@ -19,7 +19,7 @@
           <tr *ngFor="let claim of claimList">
             <td>{{claim.claimId}}</td>
             <td>{{claim.claimAmount}}</td>
-            <td>{{claim.claimStatus}}</td>
+            <td [ngStyle]="{'color': getStatusColor(claim.claimStatus)}">{{claim.claimStatus}}</td>
             <td>
               <button type="button" class="btn btn-danger" (click)="confirmDelete(claim.claimId)">
                 <i class="bi bi-trash3"></i>

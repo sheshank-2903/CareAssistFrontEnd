@@ -32,6 +32,18 @@ export class HealthCareProviderInvoiceHistoryComponent {
           this.invoiceList = this.invoiceList.concat(data);
           console.log(this.invoiceList);
         })
+    }
 
+    getStatusColor(status: string): string {
+      switch (status) {
+        case 'PENDING':
+          return 'blue';
+        case 'APPROVED':
+          return 'green';
+        case 'REJECTED':
+          return 'red';
+        default:
+          return 'black'; // or any default color
+      }
     }
 }

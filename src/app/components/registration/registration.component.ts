@@ -84,7 +84,7 @@ export class RegistrationComponent {
       address:this.patientRegistrationForm.value.address,
       patientName:this.patientRegistrationForm.value.patientName,
       descriptionOfTreatment:this.patientRegistrationForm.value.descriptionOfTreatment,
-      email:this.patientRegistrationForm.value.email,
+      email:this.patientRegistrationForm.value.email.toLowerCase(),
       password:this.patientRegistrationForm.value.password,
       patientGender:this.patientRegistrationForm.value.patientGender
     }
@@ -107,7 +107,7 @@ export class RegistrationComponent {
       healthCareProviderId: 0,
       healthCareProviderName: this.HealthCareRegistrationForm.value.healthCareProviderName,
       address: this.HealthCareRegistrationForm.value.address,
-      email: this.HealthCareRegistrationForm.value.email,
+      email: this.HealthCareRegistrationForm.value.email.toLowerCase(),
       password: this.HealthCareRegistrationForm.value.password,
       providerGender: this.HealthCareRegistrationForm.value.providerGender
     };
@@ -132,7 +132,7 @@ export class RegistrationComponent {
       insuranceCompanyDescription:this.insuranceRegistrationForm.value.insuranceCompanyDescription,
       companyName:this.insuranceRegistrationForm.value.companyName,
       companyContactNumber:this.insuranceRegistrationForm.value.companyContactNumber,
-      email:this.insuranceRegistrationForm.value.email,
+      email:this.insuranceRegistrationForm.value.email.toLowerCase(),
       password:this.insuranceRegistrationForm.value.password
     };
     this.insuranceService.addInsuranceCompany(insuranceCompany)

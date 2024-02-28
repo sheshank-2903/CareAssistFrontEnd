@@ -64,6 +64,18 @@ export class AdminClaimsComponent {
           this.claimList = this.claimList.concat(data);
           console.log(this.claimList);
         })
+    }
 
+    getStatusColor(status: string): string {
+      switch (status) {
+        case 'PENDING':
+          return 'blue';
+        case 'APPROVED':
+          return 'green';
+        case 'REJECTED':
+          return 'red';
+        default:
+          return 'black'; // or any default color
+      }
     }
   }
