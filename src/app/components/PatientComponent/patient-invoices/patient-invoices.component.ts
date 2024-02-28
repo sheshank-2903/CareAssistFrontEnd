@@ -11,6 +11,7 @@ import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.serv
 export class PatientInvoicesComponent {
 
   invoiceList:Invoices[]=[];
+  search!:any;
 
   constructor(private invoiceService:InvoicesService,private cookieService: CookieService){
 
@@ -20,6 +21,17 @@ export class PatientInvoicesComponent {
   getInvoicesByPatientId(){
     this.invoiceService.getInvoiceByPatientId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
     .subscribe(invoices=>this.invoiceList=invoices)
+
+  }
+
+  searchInvoiceById() {
+    this.invoiceList = [];
+    this.invoiceService.getInvoiceById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+      subscribe(data => {
+        
+        this.invoiceList = this.invoiceList.concat(data);
+        console.log(this.invoiceList);
+      })
 
   }
 
