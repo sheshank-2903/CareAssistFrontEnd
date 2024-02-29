@@ -15,7 +15,7 @@ export class PatientPlansComponent {
   plansList: Plans[] = [];
   confirmInput!: string;
   selectedPlanId!: number;
-  search!:any;
+  search!: any;
 
 
   constructor(private plansService: PlansService, private patientService: PatientService, private cookieService: CookieService) {
@@ -23,7 +23,8 @@ export class PatientPlansComponent {
   }
 
   getAllPlans() {
-    this.plansService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken).subscribe((plans) => { this.plansList = plans });
+    this.plansService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken)
+    .subscribe((plans) => { this.plansList = plans },error=> alert("Failed to get Plans"));
   }
 
 
@@ -42,10 +43,9 @@ export class PatientPlansComponent {
     this.patientService.purchasePlan(JSON.parse(this.cookieService.get('userId')).userId, this.selectedPlanId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (data) => {
-          console.log(data.message)
-          if(data.message=="Purchase Successfull")
-          alert('Congratulations Purchase completed');
-        else{alert('Purchase failed');}
+          if (data.message == "Purchase Successfull")
+            alert('Congratulations Purchase completed');
+          else { alert('Purchase failed'); }
         }
       );
     this.confirmInput = "";
@@ -53,29 +53,25 @@ export class PatientPlansComponent {
     content?.classList.remove('active');
   }
 
-  searchPlanByName(){
-    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
-    else{
-      this.plansService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
-      .subscribe((planList)=>{
-        console.log(planList);
-        this.plansList=planList;
-      })
+  searchPlanByName() {
+    if (this.search == null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else {
+      this.plansService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken, this.search)
+        .subscribe((planList) => {
+          this.plansList = planList;
+        })
     }
 
   }
-  searchPlanById(){
+  searchPlanById() {
     const parsedNumber: number = parseInt(this.search, 10);
-    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
-    else{
-      this.plansList=[];
-      this.plansService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
-      .subscribe((plan)=>{
-        console.log(plan);
-        
-        this.plansList = this.plansList.concat(plan);
-      })
+    if (this.search == null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else {
+      this.plansList = [];
+      this.plansService.getPlansById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
+        .subscribe((plan) => {
+          this.plansList = this.plansList.concat(plan);
+        })
     }
   }
-
 }

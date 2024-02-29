@@ -2,7 +2,6 @@
     display: none;
 }
 
-
 .confirm-delete-popup.active{
     display: flex;
     position: absolute;
@@ -12,5 +11,4 @@
     border-radius: 5%;
     padding: 2%;
     background-color: rgb(247, 242, 242);
-    
 }

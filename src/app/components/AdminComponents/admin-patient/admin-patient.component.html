@@ -9,41 +9,41 @@
       <i class="bi bi-search"></i>
       Search By Name
     </button>
-</div>
-<div style="min-width: 100%; overflow-x: scroll; max-width: 100vh; width: 100vh;">
+  </div>
+  <div style="min-width: 100%; overflow-x: scroll; max-width: 100vh; width: 100vh;">
     <table class="table mt-10% table-hover table-bordered text-center">
-        <thead class="thead-dark">
-          <tr>
-            <th>#patientId</th>
-            <th>Name</th>
-            <th>DOB</th>
-            <th>Contact</th>
-            <th>Address</th>
-            <th>Description Of Treatment</th>
-            <th>Email</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let patient of patientList">
-            <td>{{patient.patientId}}</td>
-            <td>{{patient.patientName}}</td>
-            <td>{{patient.dob}}</td>
-            <td>{{patient.contact}}</td>
-            <td>{{patient.address}}</td>
-            <td>{{patient.descriptionOfTreatment}}</td>
-            <td>{{patient.email}}</td>
-            <td>
-              <button type="button" class="btn btn-danger" (click)="confirmDelete(patient.patientId)">
-                <i class="bi bi-trash3"></i>
-                 Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-</div >
+      <thead class="thead-dark">
+        <tr>
+          <th>#patientId</th>
+          <th>Name</th>
+          <th>DOB</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Description Of Treatment</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patientList">
+          <td>{{patient.patientId}}</td>
+          <td>{{patient.patientName}}</td>
+          <td>{{patient.dob}}</td>
+          <td>{{patient.contact}}</td>
+          <td>{{patient.address}}</td>
+          <td>{{patient.descriptionOfTreatment}}</td>
+          <td>{{patient.email}}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="confirmDelete(patient.patientId)">
+              <i class="bi bi-trash3"></i>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <!-- Delete Model -->
 <div class="confirm-delete-popup" id="confirmDeleteDisplay">
@@ -53,8 +53,7 @@
     <div>
       <button class="btn btn-success" style="margin-right: 2%; margin-top:2% ; width: 40%;"
         (click)="submitConfirmDelete()" [disabled]="purchaseForm.value.confirmation!=='DELETE'">Confirm Delete</button>
-      <button class="btn btn-danger" style=" width: 40%; margin-top:2% ;"
-        (click)="closeDeleteModel()">Cancel</button>
+      <button class="btn btn-danger" style=" width: 40%; margin-top:2% ;" (click)="closeDeleteModel()">Cancel</button>
     </div>
     <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger"
       (click)="closeDeleteModel()">

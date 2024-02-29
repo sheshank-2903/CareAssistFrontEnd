@@ -33,7 +33,6 @@ export class PatientHomeComponent {
     .subscribe(
       patient=>{
         this.patient=patient;
-
         this.updateForm=this.formBuilder.group({
           patientId:[this.patient.patientId],
           patientName:[this.patient.patientName,[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
@@ -46,13 +45,8 @@ export class PatientHomeComponent {
           password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
           confirm_password: ['', Validators.required] 
         },{validator: this.passwordMatchValidator});
-      }
+      },error=> alert("Failed to get Patient Information")
     )
-    
-  }
-
-  ngOnInit(){
-    
   }
 
 
@@ -113,9 +107,6 @@ export class PatientHomeComponent {
   
     return `${yyyy}-${mm}-${dd}`;
   }
-
-
-
 }
 
 

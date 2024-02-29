@@ -10,44 +10,40 @@ import { PlansService } from 'src/app/services/PlansServices/plans.service';
 })
 export class AdminPlansComponent {
 
-  planList:Plans[]=[];
-  search:any;
-  constructor(private planService:PlansService,private cookieService: CookieService){
+  planList: Plans[] = [];
+  search: any;
+  constructor(private planService: PlansService, private cookieService: CookieService) {
     this.getAllPlans();
   }
-  getAllPlans(){
+  getAllPlans() {
     this.planService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken)
-             .subscribe(  
-                    (plans) =>
-                       { 
-                          this.planList = plans 
-                      }
-            );
-    }
+      .subscribe(
+        (plans) => {
+          this.planList = plans
+        },error=>{alert("Please try Again! Error Occured");}
+      );
+  }
 
 
-    searchPlanByName(){
-      if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
-      else{
-        this.planService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
-        .subscribe((planList)=>{
-          console.log(planList);
-          this.planList=planList;
+  searchPlanByName() {
+    if (this.search == null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else {
+      this.planService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken, this.search)
+        .subscribe((planList) => {
+          this.planList = planList;
         })
-      }
-  
     }
-    searchPlanById(){
-      const parsedNumber: number = parseInt(this.search, 10);
-      if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
-      else{
-        this.planList=[];
-        this.planService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
-        .subscribe((plan)=>{
-          console.log(plan);
-          
+
+  }
+  searchPlanById() {
+    const parsedNumber: number = parseInt(this.search, 10);
+    if (this.search == null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else {
+      this.planList = [];
+      this.planService.getPlansById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
+        .subscribe((plan) => {
           this.planList = this.planList.concat(plan);
         })
-      }
     }
+  }
 }

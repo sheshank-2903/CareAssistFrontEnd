@@ -10,77 +10,71 @@ import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.serv
 })
 export class AdminInvoicesComponent {
 
-  invoiceList:Invoices[]=[];
-  deleteId!:number;
-  search!:number;
+  invoiceList: Invoices[] = [];
+  deleteId!: number;
+  search!: number;
 
-  constructor(private invoiceService:InvoicesService,private cookieService: CookieService){
+  constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
   }
-  getAllInvoice(){
+  getAllInvoice() {
     this.invoiceService.getAllInvoices(JSON.parse(this.cookieService.get('userId')).userToken)
-             .subscribe(  
-                    (patients) =>
-                       { 
-                          this.invoiceList = patients 
-                          console.log(this.invoiceList);
-                      }
-            );
-    }
+      .subscribe(
+        (patients) => {
+          this.invoiceList = patients
+        },error=>{alert("Please try Again! Error Occured");}
+      );
+  }
 
-  confirmDelete(deleteInvoiceId:number){
-    this.deleteId=deleteInvoiceId;
-    let content=document.getElementById('confirmDeleteDisplay');
+  confirmDelete(deleteInvoiceId: number) {
+    this.deleteId = deleteInvoiceId;
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.add('active');
   }
 
-  closeDeleteModel(){
-    let content=document.getElementById('confirmDeleteDisplay');
+  closeDeleteModel() {
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
-  submitConfirmDelete(){
+  submitConfirmDelete() {
     this.deleteInvoiceId(this.deleteId);
     alert('Delete completed');
-    let content=document.getElementById('confirmDeleteDisplay');
+    let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
-  deleteInvoiceId(deleteId:number){
-    this.invoiceService.deleteInvoiceById(JSON.parse(this.cookieService.get('userId')).userToken,deleteId)
-             .subscribe(  
-                    (invoice) =>
-                       { 
-                          this.deleteId=0;
-                          console.log(invoice);
-                          this.getAllInvoice();
-                      }
-            );
-    }
-    
-    getStatusColor(status: string): string {
-      switch (status) {
-        case 'PENDING':
-          return 'blue';
-        case 'APPROVED':
-          return 'green';
-        case 'REJECTED':
-          return 'red';
-        default:
-          return 'black'; // or any default color
-      }
-    }
-    
+  deleteInvoiceId(deleteId: number) {
+    this.invoiceService.deleteInvoiceById(JSON.parse(this.cookieService.get('userId')).userToken, deleteId)
+      .subscribe(
+        (invoice) => {
+          this.deleteId = 0;
+          this.getAllInvoice();
+        },error=>{alert("Failed to delete Invoice");}
+      );
+  }
 
-    searchInvoiceById() {
-      this.invoiceList = [];
-      this.invoiceService.getInvoiceById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
-        subscribe(data => {
-          
-          this.invoiceList = this.invoiceList.concat(data);
-          console.log(this.invoiceList);
-        })
-
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'PENDING':
+        return 'blue';
+      case 'APPROVED':
+        return 'green';
+      case 'REJECTED':
+        return 'red';
+      default:
+        return 'black';
     }
+  }
+
+
+  searchInvoiceById() {
+    this.invoiceList = [];
+    this.invoiceService.getInvoiceById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+      subscribe(data => {
+        this.invoiceList = this.invoiceList.concat(data);
+      })
+
+  }
 
 }

@@ -14,11 +14,11 @@ export class InsuranceCompanyPlansComponent {
   isEditPlanModelVisible: boolean = false;
   addPlanForm !: FormGroup;
   editPlanForm !: FormGroup;
-  confirmDeleteInput!:string;
-  search:any
+  confirmDeleteInput!: string;
+  search: any
   comapnyPlansList: Plans[] = [];
   deleteId!: number;
-  editId!:number;
+  editId!: number;
 
 
   constructor(private formBuilder: FormBuilder, private plansService: PlansService, private cookieService: CookieService) {
@@ -41,7 +41,7 @@ export class InsuranceCompanyPlansComponent {
 
   getPlansByCompanyId() {
     this.plansService.getPlansByCompanyId(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
-      .subscribe(plans => this.comapnyPlansList = plans);
+      .subscribe(plans => this.comapnyPlansList = plans,error=>{alert("Unable to fetch Plan");});
   }
 
 
@@ -58,8 +58,8 @@ export class InsuranceCompanyPlansComponent {
   }
 
 
-  toggleEditPlan(planId:number) {
-    this.editId=planId;
+  toggleEditPlan(planId: number) {
+    this.editId = planId;
     let addModel = document.getElementById("editPlanFormModel");
     if (this.isEditPlanModelVisible) {
       addModel?.classList.remove("active");
@@ -100,7 +100,7 @@ export class InsuranceCompanyPlansComponent {
         this.addPlanForm.reset();
         this.toggleAddPlan();
         this.getPlansByCompanyId();
-      },(error)=>{alert("Failed to generate plan")})
+      }, (error) => { alert("Failed to generate plan") })
 
   }
 
@@ -108,13 +108,13 @@ export class InsuranceCompanyPlansComponent {
     if (this.editPlanForm.invalid) {
       return;
     }
-    this.plansService.updatePlans(this.editPlanForm.get("PlanName")?.value, this.editPlanForm.get("descriptionOfPlan")?.value,this.editPlanForm.get("PlanAmount")?.value,this.editId,JSON.parse(this.cookieService.get('userId')).userToken)
+    this.plansService.updatePlans(this.editPlanForm.get("PlanName")?.value, this.editPlanForm.get("descriptionOfPlan")?.value, this.editPlanForm.get("PlanAmount")?.value, this.editId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(plan => {
         alert('Plan updated successfully');
         this.editPlanForm.reset();
         this.toggleEditPlan(1);
         this.getPlansByCompanyId();
-      },(error)=>{alert("Failed to update plan")})
+      }, (error) => { alert("Failed to update plan") })
 
 
   }
@@ -133,7 +133,7 @@ export class InsuranceCompanyPlansComponent {
   submitConfirmDelete() {
     this.deletePlanById();
 
-    
+
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
@@ -144,32 +144,29 @@ export class InsuranceCompanyPlansComponent {
         this.deleteId = 0;
         alert('Plan Deleted Successfully');
         this.getPlansByCompanyId();
-        this.confirmDeleteInput="";
-      },error=>alert("Cannot Delete Plan As It Is Purchased By Patients!!!"))
+        this.confirmDeleteInput = "";
+      }, error => alert("Cannot Delete Plan As It Is Purchased By Patients!!!"))
   }
 
-  searchPlanByName(){
-    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
-    else{
-      this.plansService.getPlansByNameAndCompanyId(JSON.parse(this.cookieService.get('userId')).userToken,this.search, JSON.parse(this.cookieService.get('userId')).userId)
-      .subscribe((planList)=>{
-        console.log(planList);
-        this.comapnyPlansList=planList;
-      })
+  searchPlanByName() {
+    if (this.search == null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else {
+      this.plansService.getPlansByNameAndCompanyId(JSON.parse(this.cookieService.get('userId')).userToken, this.search, JSON.parse(this.cookieService.get('userId')).userId)
+        .subscribe((planList) => {
+          this.comapnyPlansList = planList;
+        })
     }
 
   }
-  searchPlanById(){
+  searchPlanById() {
     const parsedNumber: number = parseInt(this.search, 10);
-    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
-    else{
-      this.comapnyPlansList=[];
-      this.plansService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
-      .subscribe((plan)=>{
-        console.log(plan);
-        
-        this.comapnyPlansList = this.comapnyPlansList.concat(plan);
-      })
+    if (this.search == null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else {
+      this.comapnyPlansList = [];
+      this.plansService.getPlansById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
+        .subscribe((plan) => {
+          this.comapnyPlansList = this.comapnyPlansList.concat(plan);
+        })
     }
   }
 }

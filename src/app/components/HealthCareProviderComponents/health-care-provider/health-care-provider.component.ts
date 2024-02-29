@@ -9,9 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./health-care-provider.component.css']
 })
 export class HealthCareProviderComponent {
-  constructor(private cookieService: CookieService,private router:Router) { }
+  constructor(private cookieService: CookieService, private router: Router) { }
 
-  logout(){
+  logout() {
     this.cookieService.delete('userId', '/', 'localhost');
     this.router.navigate(['/homePage']);
   }

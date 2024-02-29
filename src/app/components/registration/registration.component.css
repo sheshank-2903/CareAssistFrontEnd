@@ -1,4 +1,4 @@
-.main-container{
+.main-container {
     padding-top: 4%;
     padding-left: 2%;
     padding-right: 2%;
@@ -18,22 +18,22 @@
 }
 
 
-.tab-container{
-    display:flex;
+.tab-container {
+    display: flex;
     flex-direction: row;
     width: 100%;
-    
+
 }
 
-.tab-container button{
+.tab-container button {
     outline: none;
     box-shadow: #ffffff;
 }
 
-.tab{
+.tab {
     width: 100%;
-    color:rgb(23,162,184);
-    border-color:rgb(23,162,184);
+    color: rgb(23, 162, 184);
+    border-color: rgb(23, 162, 184);
     background-color: rgb(255, 255, 255);
     padding: 1.5%;
     border-radius: 10px;
@@ -42,16 +42,16 @@
 
 
 
-#button-healthCare{
-   margin-right: 2%; 
-   margin-left: 2%;
+#button-healthCare {
+    margin-right: 2%;
+    margin-left: 2%;
 }
 
 
-.tab:hover{
-    color:rgb(255, 255, 255);
-    border-color:rgb(23,162,184);
-    background-color: rgb(23,162,184);
+.tab:hover {
+    color: rgb(255, 255, 255);
+    border-color: rgb(23, 162, 184);
+    background-color: rgb(23, 162, 184);
 
 }
 
@@ -71,14 +71,14 @@
 
 .tab-content.active {
     display: block;
-    border:none;
-    
+    border: none;
+
 }
 
 
-.tab.active{
-    color:rgb(255, 255, 255);
-    border-color:rgb(23,162,184);
-    background-color: rgb(23,162,184);
+.tab.active {
+    color: rgb(255, 255, 255);
+    border-color: rgb(23, 162, 184);
+    background-color: rgb(23, 162, 184);
     border: none;
 }

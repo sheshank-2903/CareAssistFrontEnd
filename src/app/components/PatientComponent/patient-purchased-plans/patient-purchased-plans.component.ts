@@ -16,7 +16,7 @@ export class PatientPurchasedPlansComponent {
   selectedPlanId!: number;
   coverageAmount!: number;
   selectedInvoiceId!: number;
-  search!:any;
+  search!: any;
 
   patientId = JSON.parse(this.cookieService.get('userId')).userId;
 
@@ -27,7 +27,7 @@ export class PatientPurchasedPlansComponent {
 
   getPlansByPatientid() {
     this.plansService.getByPatientId(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
-      .subscribe(plans => this.purchasedPlansList = plans);
+      .subscribe(plans => this.purchasedPlansList = plans,error=> alert("Failed to get Plans"));
   }
 
 
@@ -49,46 +49,39 @@ export class PatientPurchasedPlansComponent {
       claimStatus: "PENDING"
 
     }
-    console.log(claim);
-    
+
     this.claimService.addClaims(claim, JSON.parse(this.cookieService.get('userId')).userId, this.selectedPlanId, this.selectedInvoiceId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe((claimResponse) => {
 
         alert('Congratulations Claim request generated');
-        this.coverageAmount=0;
-        this.selectedInvoiceId=0;
+        this.coverageAmount = 0;
+        this.selectedInvoiceId = 0;
         let content = document.getElementById('generateClaimRequestDisplay');
         content?.classList.remove('active');
       }, (error) => {
         console.error('Error occurred:', error);
         alert('Error occured while generating Claim request');
       });
-
-
   }
 
-  searchPlanByName(){
-    if(this.search==null || typeof this.search !== 'string') alert("invalid Input for search by name");
-    else{
-      this.plansService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
-      .subscribe((planList)=>{
-        console.log(planList);
-        this.purchasedPlansList=planList;
-      })
+  searchPlanByName() {
+    if (this.search == null || typeof this.search !== 'string') alert("invalid Input for search by name");
+    else {
+      this.plansService.getPlansByName(JSON.parse(this.cookieService.get('userId')).userToken, this.search)
+        .subscribe((planList) => {
+          this.purchasedPlansList = planList;
+        })
     }
-
   }
-  searchPlanById(){
+  searchPlanById() {
     const parsedNumber: number = parseInt(this.search, 10);
-    if(this.search==null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
-    else{
-      this.purchasedPlansList=[];
-      this.plansService.getPlansById(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
-      .subscribe((plan)=>{
-        console.log(plan);
-        
-        this.purchasedPlansList = this.purchasedPlansList.concat(plan);
-      })
+    if (this.search == null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
+    else {
+      this.purchasedPlansList = [];
+      this.plansService.getPlansById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
+        .subscribe((plan) => {
+         this.purchasedPlansList = this.purchasedPlansList.concat(plan);
+        })
     }
   }
 

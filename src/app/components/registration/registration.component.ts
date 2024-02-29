@@ -77,16 +77,16 @@ export class RegistrationComponent {
     if (this.patientRegistrationForm.invalid) {
       return;
     }
-    const patient:Patient={
-      patientId:0,
-      dob:this.patientRegistrationForm.value.dob,
-      contact:this.patientRegistrationForm.value.contact,
-      address:this.patientRegistrationForm.value.address,
-      patientName:this.patientRegistrationForm.value.patientName,
-      descriptionOfTreatment:this.patientRegistrationForm.value.descriptionOfTreatment,
-      email:this.patientRegistrationForm.value.email.toLowerCase(),
-      password:this.patientRegistrationForm.value.password,
-      patientGender:this.patientRegistrationForm.value.patientGender
+    const patient: Patient = {
+      patientId: 0,
+      dob: this.patientRegistrationForm.value.dob,
+      contact: this.patientRegistrationForm.value.contact,
+      address: this.patientRegistrationForm.value.address,
+      patientName: this.patientRegistrationForm.value.patientName,
+      descriptionOfTreatment: this.patientRegistrationForm.value.descriptionOfTreatment,
+      email: this.patientRegistrationForm.value.email.toLowerCase(),
+      password: this.patientRegistrationForm.value.password,
+      patientGender: this.patientRegistrationForm.value.patientGender
     }
     this.patientService.addPatient(patient)
       .subscribe(
@@ -94,7 +94,7 @@ export class RegistrationComponent {
           alert('You have been registered successfully');
           this.patientRegistrationForm.reset();
           new HomeComponent().openTab("login");
-        }
+        },error=>{alert("Not able to Register patient")}
       );
   }
 
@@ -102,7 +102,6 @@ export class RegistrationComponent {
     if (this.HealthCareRegistrationForm.invalid) {
       return;
     }
-    console.log(this.HealthCareRegistrationForm);
     const healthCareProvider: HealthCareProvider = {
       healthCareProviderId: 0,
       healthCareProviderName: this.HealthCareRegistrationForm.value.healthCareProviderName,
@@ -111,37 +110,35 @@ export class RegistrationComponent {
       password: this.HealthCareRegistrationForm.value.password,
       providerGender: this.HealthCareRegistrationForm.value.providerGender
     };
-    console.log("before sending",healthCareProvider)
     this.healthCareService.addHealthCareProvider(healthCareProvider)
       .subscribe(
         (healthCareProviders) => {
           alert('You have been Registered Successfully');
           this.HealthCareRegistrationForm.reset();
           new HomeComponent().openTab("login");
-        }
+        },error=>{alert("Not able to Register Health Care Provider")}
       );
   }
 
   onSubmitInsuranceCompany() {
-
     if (this.insuranceRegistrationForm.invalid) {
       return;
     }
-    const insuranceCompany:InsuranceCompany={
-      insuranceCompanyId:0,
-      insuranceCompanyDescription:this.insuranceRegistrationForm.value.insuranceCompanyDescription,
-      companyName:this.insuranceRegistrationForm.value.companyName,
-      companyContactNumber:this.insuranceRegistrationForm.value.companyContactNumber,
-      email:this.insuranceRegistrationForm.value.email.toLowerCase(),
-      password:this.insuranceRegistrationForm.value.password
+    const insuranceCompany: InsuranceCompany = {
+      insuranceCompanyId: 0,
+      insuranceCompanyDescription: this.insuranceRegistrationForm.value.insuranceCompanyDescription,
+      companyName: this.insuranceRegistrationForm.value.companyName,
+      companyContactNumber: this.insuranceRegistrationForm.value.companyContactNumber,
+      email: this.insuranceRegistrationForm.value.email.toLowerCase(),
+      password: this.insuranceRegistrationForm.value.password
     };
     this.insuranceService.addInsuranceCompany(insuranceCompany)
       .subscribe(
-        (insuranceCompany)=>{
+        (insuranceCompany) => {
           alert('You have been registered successfully');
           this.insuranceRegistrationForm.reset();
           new HomeComponent().openTab("login");
-        }
+        },error=>{alert("Not able to Register Insurance Company")}
       )
   }
 
@@ -160,16 +157,16 @@ export class RegistrationComponent {
 
   getYesterdayDate(): string {
     const today = new Date();
-    today.setDate(today.getDate() - 1); // Subtract 1 day to get yesterday's date
+    today.setDate(today.getDate() - 1); 
     const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); 
     const yyyy = today.getFullYear();
 
     return `${yyyy}-${mm}-${dd}`;
   }
 
   openTab(tabId: string): void {
-    // Hide all tab contents
+
     const tabContents: NodeListOf<Element> = document.querySelectorAll('.tab-content');
     tabContents.forEach((content: Element) => {
       content.classList.remove('active');
@@ -179,8 +176,6 @@ export class RegistrationComponent {
       content.classList.remove('active');
     });
 
-
-    // Show the selected tab content
     const selectedTabContent: Element | null = document.getElementById(tabId);
     if (selectedTabContent) {
       selectedTabContent.classList.add('active');

@@ -1,16 +1,15 @@
-
-.home-content{
+.home-content {
     display: none;
 }
 
-.home-content.active{
+.home-content.active {
     display: block;
 }
 
-.tab{
+.tab {
     font-weight: 300;
 }
 
-.tab.active{
+.tab.active {
     font-weight: bold;
 }

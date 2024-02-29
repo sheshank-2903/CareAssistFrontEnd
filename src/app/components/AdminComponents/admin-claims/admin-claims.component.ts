@@ -22,8 +22,7 @@ export class AdminClaimsComponent {
       .subscribe(
         (claims) => {
           this.claimList = claims;
-          console.log(this.claimList);
-        }
+        }, error => { alert("Please try Again! Error Occured"); }
       );
   }
 
@@ -50,32 +49,29 @@ export class AdminClaimsComponent {
       .subscribe(
         (claim) => {
           this.deleteId = 0;
-          console.log(claim);
           this.getAllClaims();
-        }
+        }, error => { alert("Failed to delete claim"); }
       );
   }
 
-
   searchClaimById() {
     this.claimList = [];
-      this.claimService.getClaimsById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
-        subscribe(data => {
-          this.claimList = this.claimList.concat(data);
-          console.log(this.claimList);
-        })
-    }
+    this.claimService.getClaimsById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
+      subscribe(data => {
+        this.claimList = this.claimList.concat(data);
+      })
+  }
 
-    getStatusColor(status: string): string {
-      switch (status) {
-        case 'PENDING':
-          return 'blue';
-        case 'APPROVED':
-          return 'green';
-        case 'REJECTED':
-          return 'red';
-        default:
-          return 'black'; // or any default color
-      }
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'PENDING':
+        return 'blue';
+      case 'APPROVED':
+        return 'green';
+      case 'REJECTED':
+        return 'red';
+      default:
+        return 'black';
     }
   }
+}
