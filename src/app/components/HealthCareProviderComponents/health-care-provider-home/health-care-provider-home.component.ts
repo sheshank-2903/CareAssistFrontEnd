@@ -44,7 +44,7 @@ export class HealthCareProviderHomeComponent {
 
   toggleChangeStatus(currentInvoiceId:number) {
     this.currentInvoiceId=currentInvoiceId;
-    let statusModel = document.getElementById("changeStatusModel"); 4
+    let statusModel = document.getElementById("changeStatusModel"); 
     if (this.isAddAdminModelVisible) {
       statusModel?.classList.remove("active");
       this.isAddAdminModelVisible = false;
