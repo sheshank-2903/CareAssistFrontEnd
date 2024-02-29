@@ -26,6 +26,7 @@ export class PatientPurchasedPlansComponent {
   }
 
   getPlansByPatientid() {
+    this.search=undefined;
     this.plansService.getByPatientId(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(plans => this.purchasedPlansList = plans,error=> alert("Failed to get Plans"));
   }

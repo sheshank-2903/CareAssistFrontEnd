@@ -47,6 +47,7 @@ export class InsuranceCompanyClaimsComponent {
   }
 
   getClaimsByCompanyId() {
+    this.search=undefined;
     this.claimService.getClaimsByCompanyId(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(claims => this.claimList = claims, error => { alert("Please try Again! Error Occured"); });
   }
@@ -75,17 +76,6 @@ export class InsuranceCompanyClaimsComponent {
     let content = document.getElementById('showPlanModel');
     content?.classList.remove('active');
   }
-
-  showInvoiceModel() {
-    let content = document.getElementById('showInvoiceModel');
-    content?.classList.add('active');
-  }
-
-  closeInvoiceModel() {
-    let content = document.getElementById('showInvoiceModel');
-    content?.classList.remove('active');
-  }
-
 
   confirmApprove(claimId: number) {
     this.claimId = claimId;
@@ -134,15 +124,18 @@ export class InsuranceCompanyClaimsComponent {
   }
 
   searchClaimsById() {
-    const parsedNumber: number = parseInt(this.search, 10);
-    if (this.search == null || isNaN(parsedNumber)) alert("invalid Input for search by Id");
-    else {
-      this.claimList = [];
-      this.claimService.getClaimsById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
-        .subscribe((claim) => {
-          this.claimList = this.claimList.concat(claim);
-        })
-    }
+    this.claimList = [];
+    this.claimService.getClaimsById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((claim) => {
+        this.claimList = this.claimList.concat(claim);
+      })
+  }
+
+  searchClaimsByPatientId() {
+    this.claimService.getClaimsByPatientId(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe((claimList) => {
+        this.claimList = claimList;
+      })
   }
 
   getStatusColor(status: string): string {

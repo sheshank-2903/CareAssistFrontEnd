@@ -49,7 +49,7 @@ textarea {
     resize: none;
 }
 
-.login-form input[type="email"] {
+.login-form input[type="text"] {
 
     width: 84%;
     padding: 10px;

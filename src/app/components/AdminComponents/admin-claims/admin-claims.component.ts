@@ -13,7 +13,7 @@ export class AdminClaimsComponent {
 
   claimList: Claims[] = [];
   deleteId!: number;
-  search!: number;
+  search!: any;
 
   patient: Patient = {
     "patientId": 0,
@@ -31,6 +31,7 @@ export class AdminClaimsComponent {
     this.getAllClaims();
   }
   getAllClaims() {
+    this.search=undefined;
     this.claimService.getAllClaims(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (claims) => {

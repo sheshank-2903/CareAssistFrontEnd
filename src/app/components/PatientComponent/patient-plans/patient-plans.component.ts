@@ -23,6 +23,7 @@ export class PatientPlansComponent {
   }
 
   getAllPlans() {
+    this.search=undefined;
     this.plansService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken)
     .subscribe((plans) => { this.plansList = plans },error=> alert("Failed to get Plans"));
   }

@@ -16,6 +16,7 @@ export class AdminPlansComponent {
     this.getAllPlans();
   }
   getAllPlans() {
+    this.search=undefined;
     this.planService.getAllPlans(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (plans) => {

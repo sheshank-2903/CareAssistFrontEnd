@@ -18,6 +18,7 @@ export class AdminPatientComponent {
   }
 
   getAllPatients() {
+    this.search=undefined;
     this.patientService.getAllPatients(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (patients) => {

@@ -11,11 +11,12 @@ import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.serv
 export class HealthCareProviderInvoiceHistoryComponent {
 
   invoiceList: Invoices[] = [];
-  search!: number;
+  search!:any;
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
   }
   getAllInvoice() {
+    this.search=undefined;
     this.invoiceService.getInvoiceByHealthCareProviderId(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
       .subscribe(
         (patients) => {

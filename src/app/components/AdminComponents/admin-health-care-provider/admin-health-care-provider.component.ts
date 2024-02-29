@@ -18,6 +18,7 @@ export class AdminHealthCareProviderComponent {
   }
 
   getAllHealthCareProvider() {
+    this.search=undefined;
     this.healthCareProviderService.getAllHealthCareProvider(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (healthCareProviders) => {

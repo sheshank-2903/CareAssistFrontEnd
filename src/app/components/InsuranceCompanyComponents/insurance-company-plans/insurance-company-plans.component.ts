@@ -40,6 +40,7 @@ export class InsuranceCompanyPlansComponent {
   }
 
   getPlansByCompanyId() {
+    this.search=undefined;
     this.plansService.getPlansByCompanyId(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(plans => this.comapnyPlansList = plans,error=>{alert("Unable to fetch Plan");});
   }
@@ -132,8 +133,6 @@ export class InsuranceCompanyPlansComponent {
 
   submitConfirmDelete() {
     this.deletePlanById();
-
-
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }

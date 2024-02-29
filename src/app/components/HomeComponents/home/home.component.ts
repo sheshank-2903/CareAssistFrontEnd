@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,19 @@ export class HomeComponent {
     if (selectedTabContent) {
       selectedTabContent.classList.add('active');
     }
+
+    const selectedTab: Element | null = document.getElementById("button-" + tabId);
+    if (selectedTab) {
+      selectedTab.classList.add('active');
+    }
+  }
+
+  setSelectedTabActive(tabId: string) {
+
+    const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
+    tab.forEach((content: Element) => {
+      content.classList.remove('active');
+    });
 
     const selectedTab: Element | null = document.getElementById("button-" + tabId);
     if (selectedTab) {

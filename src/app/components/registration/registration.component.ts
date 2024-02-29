@@ -7,6 +7,7 @@ import { HealthCareProviderService } from 'src/app/services/HealthCareProviderSe
 import { InsuranceCompanyService } from 'src/app/services/InsuranceCompanyServices/insurance-company.service';
 import { PatientService } from 'src/app/services/PatientServices/patient.service';
 import { HomeComponent } from '../HomeComponents/home/home.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-registration',
@@ -20,12 +21,13 @@ export class RegistrationComponent {
   HealthCareRegistrationForm !: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private healthCareService: HealthCareProviderService
-    , private patientService: PatientService, private insuranceService: InsuranceCompanyService) {
+    , private patientService: PatientService, private insuranceService: InsuranceCompanyService,
+    private cookieService:CookieService) {
+      this.cookieService.delete('userId', '/', 'localhost');
 
   }
 
   ngOnInit() {
-
     this.patientRegistrationForm = this.formBuilder.group({
       patientName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
       contact: ['', [Validators.required, Validators.pattern('\\d{10}')]],
@@ -94,7 +96,7 @@ export class RegistrationComponent {
           alert('You have been registered successfully');
           this.patientRegistrationForm.reset();
           new HomeComponent().openTab("login");
-        },error=>{alert("Not able to Register patient")}
+        }, error => { alert("Not able to Register patient") }
       );
   }
 
@@ -116,7 +118,7 @@ export class RegistrationComponent {
           alert('You have been Registered Successfully');
           this.HealthCareRegistrationForm.reset();
           new HomeComponent().openTab("login");
-        },error=>{alert("Not able to Register Health Care Provider")}
+        }, error => { alert("Not able to Register Health Care Provider") }
       );
   }
 
@@ -138,7 +140,7 @@ export class RegistrationComponent {
           alert('You have been registered successfully');
           this.insuranceRegistrationForm.reset();
           new HomeComponent().openTab("login");
-        },error=>{alert("Not able to Register Insurance Company")}
+        }, error => { alert("Not able to Register Insurance Company") }
       )
   }
 
@@ -157,18 +159,18 @@ export class RegistrationComponent {
 
   getYesterdayDate(): string {
     const today = new Date();
-    today.setDate(today.getDate() - 1); 
+    today.setDate(today.getDate() - 1);
     const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();
 
     return `${yyyy}-${mm}-${dd}`;
   }
 
   openTab(tabId: string): void {
-
     const tabContents: NodeListOf<Element> = document.querySelectorAll('.tab-content');
     tabContents.forEach((content: Element) => {
+      
       content.classList.remove('active');
     });
     const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
@@ -184,5 +186,7 @@ export class RegistrationComponent {
     if (selectedTab) {
       selectedTab.classList.add('active');
     }
+
+    new HomeComponent().setSelectedTabActive("registration");
   }
 }
