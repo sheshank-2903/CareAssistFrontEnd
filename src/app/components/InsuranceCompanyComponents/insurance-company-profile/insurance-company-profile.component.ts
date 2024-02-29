@@ -25,16 +25,13 @@ export class InsuranceCompanyProfileComponent {
 
 
 
-  constructor(private router:Router, private formBuilder: FormBuilder, private insuranceCompanyService: InsuranceCompanyService, private cookieService: CookieService) {
-   
+  constructor(private router: Router, private formBuilder: FormBuilder, private insuranceCompanyService: InsuranceCompanyService, private cookieService: CookieService) {
+
     this.insuranceCompanyService.getInsuranceCompanyById(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
-      .subscribe(insuranceCompany=>{
-        this.insuranceCompany=insuranceCompany;
-        
-
+      .subscribe(insuranceCompany => {
+        this.insuranceCompany = insuranceCompany;
         this.updateForm = this.formBuilder.group({
-
-          insuranceCompanyId:[this.insuranceCompany.insuranceCompanyId, []],
+          insuranceCompanyId: [this.insuranceCompany.insuranceCompanyId, []],
           insuranceCompanyDescription: [this.insuranceCompany.insuranceCompanyDescription, [Validators.required, Validators.minLength(20)]],
           companyName: [this.insuranceCompany.companyName, [Validators.required, Validators.pattern('^[a-zA-Z ]{5,20}$')]],
           companyContactNumber: [this.insuranceCompany.companyContactNumber, [Validators.required, Validators.pattern('\\d{10}')]],
@@ -42,60 +39,41 @@ export class InsuranceCompanyProfileComponent {
           password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
           confirm_password: ['', Validators.required]
         }, { validator: this.passwordMatchValidator });
-        
-      })
-    
-  }
-
-
-
-  ngOnInit() {
+      },error=>{alert("Please try Again! Error Occured");})
 
   }
-
 
   get f() {
-
     return this.updateForm.controls;
   }
 
-
   toggleEditable() {
     this.editable = !this.editable;
-    if(this.editable){
+    if (this.editable) {
       location.reload();
     }
   }
 
   onSubmit() {
-
     if (this.updateForm.invalid) {
       return;
     }
-
-    this.insuranceCompany.companyName=this.updateForm.value.companyName;
-    this.insuranceCompany.insuranceCompanyDescription=this.updateForm.value.insuranceCompanyDescription;
-    this.insuranceCompany.companyContactNumber=this.updateForm.value.companyContactNumber;
-    this.insuranceCompany.email=this.updateForm.value.email;
-    this.insuranceCompany.password=this.updateForm.value.password;
-
-    this.insuranceCompanyService.updateInsuranceCompany(this.insuranceCompany,JSON.parse(this.cookieService.get('userId')).userToken).
-    subscribe(updatedData=>{
-      
-      alert('Form submitted successfully');
-      location.reload();
-    
-    })
-
-    
-
+    this.insuranceCompany.companyName = this.updateForm.value.companyName;
+    this.insuranceCompany.insuranceCompanyDescription = this.updateForm.value.insuranceCompanyDescription;
+    this.insuranceCompany.companyContactNumber = this.updateForm.value.companyContactNumber;
+    this.insuranceCompany.email = this.updateForm.value.email;
+    this.insuranceCompany.password = this.updateForm.value.password;
+    this.insuranceCompanyService.updateInsuranceCompany(this.insuranceCompany, JSON.parse(this.cookieService.get('userId')).userToken).
+      subscribe(updatedData => {
+        alert('Details updated successfully');
+        location.reload();
+      },error=>{alert("unable to update details");})
   }
 
 
   passwordMatchValidator(control: AbstractControl) {
     const password = control.get('password')?.value;
     const confirm_password = control.get('confirm_password')?.value;
-
     if (password !== confirm_password) {
       control.get('confirm_password')?.setErrors({ passwordMismatch: true });
       return { passwordMismatch: true };

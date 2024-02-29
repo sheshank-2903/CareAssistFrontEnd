@@ -12,8 +12,8 @@ import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.serv
 export class HealthCareProviderHomeComponent {
   isAddAdminModelVisible: boolean = false;
   invoiceList: Invoices[] = [];
-  currentInvoiceId!:number;
-  search!:number;
+  currentInvoiceId!: number;
+  search!: number;
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
   }
@@ -22,28 +22,29 @@ export class HealthCareProviderHomeComponent {
       .subscribe(
         (patients) => {
           this.invoiceList = patients
-          console.log(this.invoiceList);
-        }
+        },error=>{alert("Please try Again! Error Occured");}
       );
   }
 
-  approveInvoiceAction(){
-    this.invoiceService.updateInvoiceStatus(JSON.parse(this.cookieService.get('userId')).userToken,this.currentInvoiceId,"APPROVED")
-    .subscribe((invoice)=>{
-      alert("Status Approved");
-      this.toggleChangeStatus(0);
-    })
+  approveInvoiceAction() {
+    this.invoiceService.updateInvoiceStatus(JSON.parse(this.cookieService.get('userId')).userToken, this.currentInvoiceId, "APPROVED")
+      .subscribe((invoice) => {
+        alert("Status Approved");
+        this.toggleChangeStatus(0);
+        location.reload();
+      })
   }
-  rejectInvoiceAction(){
-    this.invoiceService.updateInvoiceStatus(JSON.parse(this.cookieService.get('userId')).userToken,this.currentInvoiceId,"REJECTED")
-    .subscribe(()=>{
-      alert("Status Rejected");
-      this.toggleChangeStatus(0);
-    })
+  rejectInvoiceAction() {
+    this.invoiceService.updateInvoiceStatus(JSON.parse(this.cookieService.get('userId')).userToken, this.currentInvoiceId, "REJECTED")
+      .subscribe(() => {
+        alert("Status Rejected");
+        this.toggleChangeStatus(0);
+        location.reload();
+      })
   }
 
-  toggleChangeStatus(currentInvoiceId:number) {
-    this.currentInvoiceId=currentInvoiceId;
+  toggleChangeStatus(currentInvoiceId: number) {
+    this.currentInvoiceId = currentInvoiceId;
     let statusModel = document.getElementById("changeStatusModel"); 4
     if (this.isAddAdminModelVisible) {
       statusModel?.classList.remove("active");
@@ -60,7 +61,6 @@ export class HealthCareProviderHomeComponent {
     this.invoiceService.getInvoiceById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
       subscribe(data => {
         this.invoiceList = this.invoiceList.concat(data);
-        console.log(this.invoiceList);
       })
 
   }
@@ -74,18 +74,18 @@ export class HealthCareProviderHomeComponent {
       case 'REJECTED':
         return 'red';
       default:
-        return 'black'; // or any default color
+        return 'black';
     }
   }
 
-  getDisplayActionText(status:string){
-    if(status!=="PENDING")
+  getDisplayActionText(status: string) {
+    if (status !== "PENDING")
       return ""
     else return "none"
   }
 
-  getDisplayActionButton(status:string){
-    if(status==="PENDING")
+  getDisplayActionButton(status: string) {
+    if (status === "PENDING")
       return ""
     else return "none"
   }

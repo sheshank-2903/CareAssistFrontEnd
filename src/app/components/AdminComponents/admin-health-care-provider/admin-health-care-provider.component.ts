@@ -22,9 +22,7 @@ export class AdminHealthCareProviderComponent {
       .subscribe(
         (healthCareProviders) => {
           this.healthCareProviderList = healthCareProviders
-          console.log(this.healthCareProviderList);
-
-        }
+        },error=>{alert("Please try Again! Error Occured");}
       );
   }
 
@@ -51,9 +49,8 @@ export class AdminHealthCareProviderComponent {
       .subscribe(
         (admin) => {
           this.deleteId = 0;
-          console.log(admin);
           this.getAllHealthCareProvider();
-        }
+        },error=>{alert("Failed to delete Health Care Provider");}
       );
   }
 
@@ -62,7 +59,6 @@ export class AdminHealthCareProviderComponent {
     else{
       this.healthCareProviderService.getHealthCareProviderByName(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe((healthCareProviderList)=>{
-        console.log(healthCareProviderList);
         this.healthCareProviderList=healthCareProviderList;
       })
     }
@@ -76,11 +72,8 @@ export class AdminHealthCareProviderComponent {
       this.healthCareProviderList=[];
       this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
       .subscribe((healthcareprovider)=>{
-        console.log(healthcareprovider);
         this.healthCareProviderList = this.healthCareProviderList.concat(healthcareprovider);
       })
     }
-
   }
-
 }

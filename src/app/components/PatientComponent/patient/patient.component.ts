@@ -7,12 +7,11 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css']
 })
+
 export class PatientComponent {
   constructor(private cookieService: CookieService,private router:Router) { }
-
   logout(){
     this.cookieService.delete('userId', '/', 'localhost');
     this.router.navigate(['/homePage']);
   }
-
 }

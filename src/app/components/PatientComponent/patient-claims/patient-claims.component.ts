@@ -30,12 +30,12 @@ export class PatientClaimsComponent {
 
   getClaimsByPatientId(){
     this.claimService.getClaimsByPatientId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
-    .subscribe(claims=>this.claimsList=claims);
+    .subscribe(claims=>this.claimsList=claims,error=> alert("Failed to get Claims"))
   }
 
   showPlanDetails(claimId:number){
     this.claimService.getPlanByClaimId(claimId,JSON.parse(this.cookieService.get('userId')).userToken)
-    .subscribe(data=>this.plan=data)
+    .subscribe(data=>this.plan=data,error=> alert("Failed to get Plans"))
 
     let content=document.getElementById('planDetailsDisplay');
     content?.classList.add('active');
@@ -51,7 +51,6 @@ export class PatientClaimsComponent {
       this.claimService.getClaimsById(this.search, JSON.parse(this.cookieService.get('userId')).userToken).
         subscribe(data => {
           this.claimsList = this.claimsList.concat(data);
-          console.log(this.claimsList);
         })
 
     }
@@ -65,7 +64,7 @@ export class PatientClaimsComponent {
         case 'REJECTED':
           return 'red';
         default:
-          return 'black'; // or any default color
+          return 'black';
       }
     }
 

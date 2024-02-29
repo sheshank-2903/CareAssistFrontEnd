@@ -8,9 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./insurance-company.component.css']
 })
 export class InsuranceCompanyComponent {
-  constructor(private cookieService: CookieService,private router:Router) { }
+  constructor(private cookieService: CookieService, private router: Router) { }
 
-  logout(){
+  logout() {
     this.cookieService.delete('userId', '/', 'localhost');
     this.router.navigate(['/homePage']);
   }

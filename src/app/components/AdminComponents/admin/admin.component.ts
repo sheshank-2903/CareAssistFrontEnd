@@ -8,9 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  constructor(private cookieService: CookieService,private router:Router) { }
+  constructor(private cookieService: CookieService, private router: Router) { }
 
-  logout(){
+  logout() {
     this.cookieService.delete('userId', '/', 'localhost');
     this.router.navigate(['/homePage']);
   }

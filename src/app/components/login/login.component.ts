@@ -29,7 +29,6 @@ export class LoginComponent {
     new HomeComponent().openTab("register");
   }
 
-
   constructor(private jwtService: JwtServiceService, private cookieService: CookieService, private router:Router) { }
   readFormData(formData: any) {
     this.authRequest.email = formData.form.value.email.toLowerCase();
@@ -40,11 +39,15 @@ export class LoginComponent {
   public getAccessToken(authRequest: any) {
     let response = this.jwtService.getGeneratedToken(authRequest, this.role);
 
-    response.subscribe((genToken: any) => {
-      this.token = genToken; console.log(genToken);
-      this.accessApi(this.token)
-    });
-
+    response
+    .subscribe((genToken: any) => {
+        this.token = genToken;
+        this.accessApi(this.token);
+      },
+      (error:any) => {
+        alert("Please check email and password");
+      }
+    );
   }
 
   public accessApi(token: any) {
@@ -73,7 +76,7 @@ export class LoginComponent {
           this.router.navigate(['/insuranceCompany/home']);
         }
       }
-    }, error => { console.log('myerror ' + error) });
+    }, error => { alert("please try again") });
   }
 
 }
