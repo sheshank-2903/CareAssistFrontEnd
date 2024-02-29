@@ -105,6 +105,5 @@ export class ClaimsService {
       'Access-Control-Allow-Origin': 'http://localhost:4200'
     }).set("Authorization", tokenString);
     return this._http.get<Patient>(this.baseUrl+`getPatientByClaimId/${claimId}`,{headers,responseType: 'json'})
-
   }
 }

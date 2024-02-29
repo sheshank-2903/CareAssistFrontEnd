@@ -33,6 +33,7 @@ export class LoginComponent {
   readFormData(formData: any) {
     this.authRequest.email = formData.form.value.email.toLowerCase();
     this.authRequest.password = formData.form.value.password;
+    this.cookieService.delete('userId', '/', 'localhost');
     this.getAccessToken(this.authRequest);
   }
 
