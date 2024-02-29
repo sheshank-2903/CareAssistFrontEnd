@@ -1,20 +1,19 @@
-<nav class="navbar sticky-top navbar-dark bg-dark navbar-toggler" style="width: 100%; min-width:100vh;">
+<nav class="navbar sticky-top navbar-dark bg-dark navbar-toggler" style="width: 100%; min-width:100vh; padding: 1.5%;">
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="true" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse" id="navbarTogglerDemo01">
         <div class="d-flex  flex-column flex-lg-row">
-            <a routerLink="/admin/home" class="nav-link">Home </a>
-            <a routerLink="/admin/patient" class="nav-link">Patient</a>
-            <a routerLink="/admin/healthCareProvider" class="nav-link">Health Care Provider</a>
-            <a routerLink="/admin/insuranceCompany" class="nav-link">Insurance Company</a>
-            <a routerLink="/admin/plans" class="nav-link">Plans</a>
-            <a routerLink="/admin/claims" class="nav-link">Claims</a>
-            <a routerLink="/admin/invoices" class="nav-link">Invoices</a>
-            <a routerLink="/admin/profile" class="nav-link">Profile</a>
-            <button class="btn btn-outline-primary m-lg-l-auto" (click)="logout()"><i
-                    class="bi bi-box-arrow-right"></i></button>
+            <a (click)="openTab('home')" routerLink="/admin/home" id="btn-home" class="nav-link tab active">Home </a>
+            <a (click)="openTab('patient')" routerLink="/admin/patient" id="btn-patient" class="nav-link tab">Patient</a>
+            <a (click)="openTab('healthCareProvider')" routerLink="/admin/healthCareProvider" id="btn-healthCareProvider" class="nav-link tab">Health Care Provider</a>
+            <a (click)="openTab('insuranceCompany')" routerLink="/admin/insuranceCompany" id="btn-insuranceCompany" class="nav-link tab">Insurance Company</a>
+            <a (click)="openTab('plans')" routerLink="/admin/plans" id="btn-plans" class="nav-link tab">Plans</a>
+            <a (click)="openTab('claims')" routerLink="/admin/claims" id="btn-claims" class="nav-link tab">Claims</a>
+            <a (click)="openTab('invoices')" routerLink="/admin/invoices" id="btn-invoices" class="nav-link tab">Invoices</a>
+            <a (click)="openTab('profile')" routerLink="/admin/profile" id="btn-profile" class="nav-link tab">Profile</a>
+            <button class="btn btn-outline-primary m-lg-l-auto" (click)="logout()" style="margin-left: auto;"><i class="bi bi-box-arrow-right"></i></button>
         </div>
     </div>
 </nav>

@@ -19,6 +19,7 @@ export class PatientInvoicesComponent {
   }
 
   getInvoicesByPatientId(){
+    this.search=undefined;
     this.invoiceService.getInvoiceByPatientId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
     .subscribe(invoices=>this.invoiceList=invoices,error=> alert("Failed to get Invoice"))
 

@@ -31,6 +31,7 @@ export class PatientRequestInvoiceComponent {
   }
 
   getHealthCareProviders() {
+    this.search=undefined;
     this.healthCareProviderService.getAllHealthCareProvider(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(healthCareProviders => this.healthCareProviderList = healthCareProviders,
         error=> alert("Failed to get Health Care Providers"))
@@ -73,7 +74,6 @@ export class PatientRequestInvoiceComponent {
         this.invoiceStatus = "";
 
         alert('Congratulations Invoice request generated');
-        location.reload();
         let content = document.getElementById('requestInvoiceDisplay');
         content?.classList.remove('active');
       }, (error) => {

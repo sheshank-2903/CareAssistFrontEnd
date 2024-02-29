@@ -12,9 +12,10 @@ export class HealthCareProviderPatientComponent {
   patientList: Patient[] = [];
   search: any;
   constructor(private patientService: PatientService, private cookieService: CookieService) {
-    this.getAllPlans();
+    this.getAllPatients();
   }
-  getAllPlans() {
+  getAllPatients() {
+    this.search=undefined;
     this.patientService.getAllPatients(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (patients) => {

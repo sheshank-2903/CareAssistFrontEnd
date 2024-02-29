@@ -13,11 +13,12 @@ export class HealthCareProviderHomeComponent {
   isAddAdminModelVisible: boolean = false;
   invoiceList: Invoices[] = [];
   currentInvoiceId!: number;
-  search!: number;
+  search!: any;
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
   }
   getAllInvoice() {
+    this.search=undefined;
     this.invoiceService.getInvoiceByHealthCareProviderId(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
       .subscribe(
         (patients) => {
@@ -31,7 +32,7 @@ export class HealthCareProviderHomeComponent {
       .subscribe((invoice) => {
         alert("Status Approved");
         this.toggleChangeStatus(0);
-        location.reload();
+        this.getAllInvoice();
       })
   }
   rejectInvoiceAction() {
@@ -39,13 +40,13 @@ export class HealthCareProviderHomeComponent {
       .subscribe(() => {
         alert("Status Rejected");
         this.toggleChangeStatus(0);
-        location.reload();
+        this.getAllInvoice();
       })
   }
 
   toggleChangeStatus(currentInvoiceId: number) {
     this.currentInvoiceId = currentInvoiceId;
-    let statusModel = document.getElementById("changeStatusModel"); 4
+    let statusModel = document.getElementById("changeStatusModel"); 
     if (this.isAddAdminModelVisible) {
       statusModel?.classList.remove("active");
       this.isAddAdminModelVisible = false;

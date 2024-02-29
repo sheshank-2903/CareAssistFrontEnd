@@ -29,6 +29,7 @@ export class PatientClaimsComponent {
   }
 
   getClaimsByPatientId(){
+    this.search=undefined;
     this.claimService.getClaimsByPatientId(JSON.parse(this.cookieService.get('userId')).userId,JSON.parse(this.cookieService.get('userId')).userToken)
     .subscribe(claims=>this.claimsList=claims,error=> alert("Failed to get Claims"))
   }

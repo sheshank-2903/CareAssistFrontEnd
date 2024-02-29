@@ -29,11 +29,14 @@ export class LoginComponent {
     new HomeComponent().openTab("register");
   }
 
-  constructor(private jwtService: JwtServiceService, private cookieService: CookieService, private router:Router) { }
+  constructor(private jwtService: JwtServiceService, private cookieService: CookieService, private router:Router) {
+    this.cookieService.delete('userId', '/', 'localhost');
+   }
+
+    
   readFormData(formData: any) {
     this.authRequest.email = formData.form.value.email.toLowerCase();
     this.authRequest.password = formData.form.value.password;
-    this.cookieService.delete('userId', '/', 'localhost');
     this.getAccessToken(this.authRequest);
   }
 

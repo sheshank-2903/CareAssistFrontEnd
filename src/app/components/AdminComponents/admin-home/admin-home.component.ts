@@ -27,6 +27,7 @@ export class AdminHomeComponent {
   }
 
   getAllAdmin() {
+    this.search=undefined;
     this.adminService.getAllAdmin(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (admin) => {
@@ -81,7 +82,7 @@ export class AdminHomeComponent {
     this.admin.password = this.addAdminForm.value.password;
     this.adminService.addAdmin(this.admin)
       .subscribe((admin) => {
-        alert('Form submitted successfully');
+        alert('New Admin Added');
         this.addAdminForm.reset();
         this.toggleAddAdmin();
         this.getAllAdmin();

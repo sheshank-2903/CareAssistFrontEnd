@@ -12,12 +12,13 @@ export class AdminInvoicesComponent {
 
   invoiceList: Invoices[] = [];
   deleteId!: number;
-  search!: number;
+  search!: any;
 
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
   }
   getAllInvoice() {
+    this.search=undefined;
     this.invoiceService.getAllInvoices(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (patients) => {

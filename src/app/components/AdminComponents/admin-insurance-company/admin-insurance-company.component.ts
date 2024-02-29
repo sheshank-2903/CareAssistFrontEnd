@@ -16,6 +16,7 @@ export class AdminInsuranceCompanyComponent {
     this.getAllInsuranceCompany();
   }
   getAllInsuranceCompany() {
+    this.search=undefined;
     this.insuranceCompanyService.getAllInsuranceCompany(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (insuranceCompany) => {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-about-us',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 
 export class AboutUsComponent {
+  
+  constructor(private cookieService:CookieService){
+    this.cookieService.delete('userId', '/', 'localhost');
+  }
 }
