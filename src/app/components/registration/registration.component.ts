@@ -187,6 +187,6 @@ export class RegistrationComponent {
       selectedTab.classList.add('active');
     }
 
-    new HomeComponent().setSelectedTabActive("registration");
+    new HomeComponent().setSelectedTabActive("register");
   }
 }
