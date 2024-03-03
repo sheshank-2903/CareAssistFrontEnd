@@ -87,7 +87,7 @@
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" [readOnly]="editable" class="form-control" id="email" formControlName="email" required
+      <input type="email" readOnly class="form-control" id="email" formControlName="email" required
         [ngClass]="{'is-invalid':f['email'].errors,'is-valid':!f['email'].errors}">
 
       <div *ngIf=" f['email'].errors" class="invalid-feedback"></div>

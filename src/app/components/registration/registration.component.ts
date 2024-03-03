@@ -168,9 +168,9 @@ export class RegistrationComponent {
   }
 
   openTab(tabId: string): void {
+
     const tabContents: NodeListOf<Element> = document.querySelectorAll('.tab-content');
     tabContents.forEach((content: Element) => {
-      
       content.classList.remove('active');
     });
     const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
@@ -182,11 +182,11 @@ export class RegistrationComponent {
     if (selectedTabContent) {
       selectedTabContent.classList.add('active');
     }
-    const selectedTab: Element | null = document.getElementById("button-" + tabId);
+    const selectedTab: Element | null = document.getElementById("button-"+tabId);
     if (selectedTab) {
       selectedTab.classList.add('active');
     }
 
-    new HomeComponent().setSelectedTabActive("registration");
+    new HomeComponent().setSelectedTabActive("register");
   }
 }

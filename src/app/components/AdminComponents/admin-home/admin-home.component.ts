@@ -16,6 +16,7 @@ export class AdminHomeComponent {
   deleteId!: number;
   adminList: Admin[] = [];
   search: any;
+  confirmation!:string;
   admin: Admin = {
     adminId: 0,
     adminName: "",
@@ -109,11 +110,13 @@ export class AdminHomeComponent {
   }
 
   closeDeleteModel() {
+    this.confirmation="";
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
   submitConfirmDelete() {
+    this.confirmation="";
     this.deleteAdminId(this.deleteId);
     alert('Delete completed');
     let content = document.getElementById('confirmDeleteDisplay');

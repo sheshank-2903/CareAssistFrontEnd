@@ -29,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let invoice of invoiceList">
+        <tr *ngFor="let invoice of invoiceList" [ngStyle]="{'display': getDisplayActionButton(invoice.invoiceStatus)}">
           <td>{{invoice.invoiceId}}</td>
           <td>{{invoice.invoiceDate}}</td>
           <td>{{invoice.invoiceDueDate}}</td>

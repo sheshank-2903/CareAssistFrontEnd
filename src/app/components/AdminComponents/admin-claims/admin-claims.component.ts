@@ -14,6 +14,7 @@ export class AdminClaimsComponent {
   claimList: Claims[] = [];
   deleteId!: number;
   search!: any;
+  confirmation!:string;
 
   patient: Patient = {
     "patientId": 0,
@@ -60,11 +61,13 @@ export class AdminClaimsComponent {
   }
 
   closeDeleteModel() {
+    this.confirmation="";
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
   submitConfirmDelete() {
+    this.confirmation="";
     this.deleteClaimId(this.deleteId);
     alert('delete completed');
     let content = document.getElementById('confirmDeleteDisplay');
