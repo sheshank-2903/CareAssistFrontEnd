@@ -46,6 +46,7 @@ export class AdminPatientComponent {
     alert('Delete completed');
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
+    this.getAllPatients();
   }
 
   deletePatientId(deleteId: number) {

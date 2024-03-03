@@ -53,7 +53,7 @@ export class AdminInsuranceCompanyComponent {
         (insuranceCompany) => {
           this.deleteId = 0;
           this.getAllInsuranceCompany();
-        },error=>{alert("Failed to delete Insurance Company");}
+        },error=>{alert("This Company has some active purchased plans cannot delete");}
       );
   }
   searchInsuranceCompanyByName() {
