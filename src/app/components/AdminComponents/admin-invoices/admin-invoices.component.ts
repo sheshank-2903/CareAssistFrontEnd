@@ -13,6 +13,7 @@ export class AdminInvoicesComponent {
   invoiceList: Invoices[] = [];
   deleteId!: number;
   search!: any;
+  confirmation!:string;
 
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
     this.getAllInvoice();
@@ -34,11 +35,13 @@ export class AdminInvoicesComponent {
   }
 
   closeDeleteModel() {
+    this.confirmation="";
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
   submitConfirmDelete() {
+    this.confirmation="";
     this.deleteInvoiceId(this.deleteId);
     alert('Delete completed');
     let content = document.getElementById('confirmDeleteDisplay');

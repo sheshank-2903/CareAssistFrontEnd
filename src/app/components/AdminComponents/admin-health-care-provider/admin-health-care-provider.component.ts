@@ -13,6 +13,9 @@ export class AdminHealthCareProviderComponent {
   healthCareProviderList: HealthCareProvider[] = [];
   deleteId!: number;
   search:any;
+  confirmation!:string;
+
+
   constructor(private healthCareProviderService: HealthCareProviderService, private cookieService: CookieService) {
     this.getAllHealthCareProvider();
   }
@@ -34,11 +37,13 @@ export class AdminHealthCareProviderComponent {
   }
 
   closeDeleteModel() {
+    this.confirmation="";
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
   submitConfirmDelete() {
+    this.confirmation="";
     this.deleteHealthcareProvider(this.deleteId);
     alert("delete Complete");
     let content = document.getElementById('confirmDeleteDisplay');

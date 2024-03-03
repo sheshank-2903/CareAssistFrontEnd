@@ -12,6 +12,8 @@ export class AdminInsuranceCompanyComponent {
   insuranceCompanyList: InsuranceCompany[] = [];
   deleteId!: number;
   search: any;
+  confirmation!:string;
+
   constructor(private insuranceCompanyService: InsuranceCompanyService, private cookieService: CookieService) {
     this.getAllInsuranceCompany();
   }
@@ -32,11 +34,13 @@ export class AdminInsuranceCompanyComponent {
   }
 
   closeDeleteModel() {
+    this.confirmation="";
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
   submitConfirmDelete() {
+    this.confirmation="";
     this.deleteInsuranceCompanyId(this.deleteId);
     alert('Delete completed');
     let content = document.getElementById('confirmDeleteDisplay');

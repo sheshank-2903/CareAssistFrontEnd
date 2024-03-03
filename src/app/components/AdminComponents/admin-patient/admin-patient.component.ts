@@ -12,6 +12,7 @@ export class AdminPatientComponent {
   patientList: Patient[] = [];
   deleteId!: number;
   search: any;
+  confirmation!:string;
 
   constructor(private patientService: PatientService, private cookieService: CookieService) {
     this.getAllPatients();
@@ -34,11 +35,13 @@ export class AdminPatientComponent {
   }
 
   closeDeleteModel() {
+    this.confirmation="";
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
   submitConfirmDelete() {
+    this.confirmation="";
     this.deletePatientId(this.deleteId);
     alert('Delete completed');
     let content = document.getElementById('confirmDeleteDisplay');

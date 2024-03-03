@@ -12,6 +12,7 @@ export class AdminPlansComponent {
 
   planList: Plans[] = [];
   search: any;
+
   constructor(private planService: PlansService, private cookieService: CookieService) {
     this.getAllPlans();
   }

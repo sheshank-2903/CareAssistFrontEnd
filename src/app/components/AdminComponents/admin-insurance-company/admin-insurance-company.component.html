@@ -48,7 +48,7 @@
 <div class="confirm-delete-popup" id="confirmDeleteDisplay">
   <form #purchaseForm="ngForm">
     <label style="display: block; ">Please confirm your purchase by typing "DELETE" below: </label>
-    <input type="text" style="margin: 2%;  width: 82%;" name="confirmation" ngModel required>
+    <input type="text" style="margin: 2%;  width: 82%;" name="confirmation" [(ngModel)]="confirmation" required>
     <div>
       <button class="btn btn-success" style="margin-right: 2%; margin-top:2% ; width: 40%;"
         (click)="submitConfirmDelete()" [disabled]="purchaseForm.value.confirmation!=='DELETE'">Confirm Delete</button>
