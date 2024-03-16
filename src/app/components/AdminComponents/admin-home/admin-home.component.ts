@@ -37,6 +37,7 @@ export class AdminHomeComponent {
       );
   }
 
+  
 
   toggleAddAdmin(input?: boolean) {
     let addModel = document.getElementById("addAdminFormModel");
@@ -158,7 +159,15 @@ export class AdminHomeComponent {
     if (adminId === JSON.parse(this.cookieService.get('userId')).userId)
       return "none";
     else
-      return ""
+      return "flex"
+  }
+
+  getRandomColor() {
+    const r = Math.floor(Math.random() * 128) + 128;
+  const g = Math.floor(Math.random() * 128) + 128;
+  const b = Math.floor(Math.random() * 128) + 128;
+    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+    return color;
   }
 
 }
