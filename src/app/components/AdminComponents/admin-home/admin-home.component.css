@@ -29,3 +29,36 @@
     padding: 2%;
     background-color: rgb(247, 242, 242);
 }
+
+.admin-card{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: row; 
+}
+.admin-card-component{
+    width: calc(33.33% - 5%);
+    margin-bottom : 5%;
+    margin-left :1%
+}
+
+.search-item{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+@media (max-width: 768px) {
+    .admin-card {
+        flex-direction: column;
+        width: 500px;
+    }
+    .admin-card-component{
+        width: 100%;
+        margin-bottom : 5%;
+    }
+    .search-item{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin-bottom: 2%;
+    }
+}
