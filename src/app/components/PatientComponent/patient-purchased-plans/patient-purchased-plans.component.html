@@ -30,7 +30,7 @@
         <td>{{plan.planName}}</td>
         <td>{{plan.description}}</td>
         <td>{{plan.dateOfIssue}}</td>
-        <td>{{plan.coverageAmount}}</td>
+        <td>{{plan.coverageAmount | currency:'INR'}}</td>
         <td><button type="button" class="btn btn-info" (click)="generateClaim(plan.planId)">
             +
             Generate Claim Request

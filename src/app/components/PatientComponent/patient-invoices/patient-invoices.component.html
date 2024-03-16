@@ -38,7 +38,7 @@
           <td>{{invoice.consultingFees}}</td>
           <td>{{invoice.diagnosticTestFees}}</td>
           <td>{{invoice.diagnosticScanFees}}</td>
-          <td>{{invoice.calculatedAmount}}</td>
+          <td>{{invoice.calculatedAmount | currency:'INR'}}</td>
           <td [ngStyle]="{'color': getStatusColor(invoice.invoiceStatus)}">{{invoice.invoiceStatus}}</td>
           <td>{{invoice.healthCareProviderId}}</td>
         </tr>
