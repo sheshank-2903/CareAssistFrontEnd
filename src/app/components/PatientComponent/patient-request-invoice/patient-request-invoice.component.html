@@ -1,5 +1,5 @@
 <div class="container" style="margin-top: 2%;">
-  <div class="d-flex" style="margin-bottom: 2%;">
+  <div class="search-item">
     <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="search">
     <button type="button" class="btn btn-outline-info ml-3" (click)="searchHealthCareProviderById()">
       <i class="bi bi-search"></i>
@@ -14,34 +14,24 @@
     </button>
 
   </div>
-  <table class="table mt-10% table-hover table-bordered text-center">
-    <thead class="thead-dark">
-      <tr>
-        <th>#HealthCareId</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Address</th>
-        <th>Email</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let healthcareProvider of healthCareProviderList">
-        <td>{{healthcareProvider.healthCareProviderId}}</td>
-        <td>{{healthcareProvider.healthCareProviderName}}</td>
-        <td>{{healthcareProvider.providerGender}}</td>
-        <td>{{healthcareProvider.address}}</td>
-        <td>{{healthcareProvider.email}}</td>
-        <td>
+  <div class="healthCareProvider-card">
+    <div *ngFor="let healthCareProvider of healthCareProviderList" class="healthCareProvider-card-component">
+      <div class="card" style="width: 100%;">
+        <div class="card-body" style="text-align: center;">
+          <h5 class="card-title">{{healthCareProvider.healthCareProviderId}}</h5>
+          <p class="card-text">{{healthCareProvider.healthCareProviderName}}</p>
+          <p class="card-text">{{healthCareProvider.providerGender}}</p>
+          <p class="card-text">{{healthCareProvider.address}}</p>
+          <p class="card-text">{{healthCareProvider.email}}</p>
           <button type="button" class="btn btn-info"
-            (click)="openInvoiceRequest(healthcareProvider.healthCareProviderId)">
+            (click)="openInvoiceRequest(healthCareProvider.healthCareProviderId)">
             +
             Request Invoice
           </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+    </div>
+</div>
 </div>
 
 <div class="request-invoice" id="requestInvoiceDisplay">

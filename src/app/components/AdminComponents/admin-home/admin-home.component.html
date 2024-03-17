@@ -18,8 +18,8 @@
 
   <div class="admin-card">
     <div *ngFor="let admin of adminList" class="admin-card-component"
-          [ngStyle]="{'display': getDisplay(admin.adminId),'background-color': getRandomColor() }">
-      <div class="card" style="width: 100%;" [ngStyle]="{'background-color': getRandomColor() }">
+      [ngStyle]="{'display': getDisplay(admin.adminId)}">
+      <div class="card" style="width: 100%;" >
         <div class="card-body" style="text-align: center;">
           <h5 class="card-title">{{admin.adminId}}</h5>
           <p class="card-text">{{admin.adminName}}</p>
@@ -36,6 +36,11 @@
     <div id="addAdminFormModel" class="addAdminDisplay">
       <form style="margin: auto; width: 80%;" [formGroup]="addAdminForm">
         <div class="form-group">
+          <input type="file" (change)="onFileSelected($event)" id="adminProfilePic" formControlName="adminProfilePic" required 
+          [ngClass]="{'is-invalid':getAdminForm['adminProfilePic'].errors,'is-valid': !getAdminForm['adminProfilePic'].errors}"><br>
+          <div *ngIf="getAdminForm['adminProfilePic'].errors?.['required']" style="color: red;">
+            Profile picture required
+          </div>
           <label for="adminName">Name:</label>
           <input type="text" class="form-control" id="adminName" formControlName="adminName" required
             [ngClass]="{'is-invalid':getAdminForm['adminName'].errors,'is-valid': !getAdminForm['adminName'].errors}">
@@ -74,18 +79,17 @@
         </div>
         <div class="form-group">
           <label for="confirm_password">Confirm Password:</label>
-          <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password"
-            required
+          <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password" required
             [ngClass]="{'is-invalid':getAdminForm['confirm_password'].errors,'is-valid':!getAdminForm['confirm_password'].errors}">
           <div *ngIf="getAdminForm['confirm_password'].errors?.['passwordMismatch']" class="invalid-feedback">
             Passwords do
             not match</div>
-          <div *ngIf="!getAdminForm['confirm_password'].errors" class="valid-feedback"
-            style="color: rgb(9, 199, 34);">
+          <div *ngIf="!getAdminForm['confirm_password'].errors" class="valid-feedback" style="color: rgb(9, 199, 34);">
             Looks good!</div>
         </div>
         <button type="submit" [disabled]="addAdminForm.invalid" (click)="onSubmit()" class="btn btn-primary"
-          style="width: 100%;">Create New Admin</button>
+          style="width: 100%;">Create New Admin
+        </button>
         <button type="button" style="  position: absolute; top: 0%; right: 0%;" class="btn btn-danger"
           (click)="toggleAddAdmin()">
           <i class="bi bi-x-circle"></i>
@@ -101,9 +105,10 @@
         <div>
           <button class="btn btn-success" style="margin-right: 2%; margin-top:2% ; width: 40%;"
             (click)="submitConfirmDelete()" [disabled]="purchaseForm.value.confirmation!=='DELETE'">Confirm
-            Delete</button>
-          <button class="btn btn-danger" style=" width: 40%; margin-top:2% ;"
-            (click)="closeDeleteModel()">Cancel</button>
+            Delete
+          </button>
+          <button class="btn btn-danger" style=" width: 40%; margin-top:2% ;" (click)="closeDeleteModel()">Cancel
+          </button>
         </div>
         <button type="button" style="position: absolute; top: 0%; right: 0%;" class="btn btn-danger"
           (click)="closeDeleteModel()">

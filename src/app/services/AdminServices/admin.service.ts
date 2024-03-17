@@ -13,8 +13,11 @@ export class AdminService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/admin/'
 
-  addAdmin(body:Admin):Observable<Admin>{
-    return this._http.post<Admin>(this.baseUrl+"register",body)
+  addAdmin(admin: Admin): Observable<Admin> {
+    const formData = new FormData();
+    formData.append('file', admin.adminProfilePic);
+    formData.append('adminDto', JSON.stringify(admin));
+    return this._http.post<Admin>(this.baseUrl + 'register', formData);
   }
 
   updateAdmin(body:Admin,token:string):Observable<Admin>{
