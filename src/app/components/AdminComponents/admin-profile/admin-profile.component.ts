@@ -17,6 +17,7 @@ export class AdminProfileComponent {
 
   admin: Admin = {
     "adminId": 0,
+    "adminProfilePic":"",
     "adminName": "",
     "email": "",
     "password": "",

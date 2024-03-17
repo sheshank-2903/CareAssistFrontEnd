@@ -69,12 +69,13 @@
     }
     .admin-card-component{
         width: 100%;
-        margin-bottom : 5%;
+        margin-bottom : 1%;
+
     }
     .search-item{
         display: flex;
         flex-direction: column;
         width: 500px;
-        margin-bottom: 2%;
+        margin-bottom: 1%;
     }
 }

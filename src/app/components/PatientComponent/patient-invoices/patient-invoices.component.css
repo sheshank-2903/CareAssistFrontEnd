@@ -1,0 +1,33 @@
+.invoice-card{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: row; 
+}
+.invoice-card-component{
+    width: calc(33.33% - 5%);
+    margin-bottom : 1%;
+    margin-left :1%;
+}
+
+.search-item{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+@media (max-width: 768px) {
+    .invoice-card {
+        flex-direction: column;
+        width: 500px;
+    }
+    .invoice-card-component{
+        width: 100%;
+        margin-bottom : 1%;
+
+    }
+    .search-item{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin-bottom: 1%;
+    }
+}

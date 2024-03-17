@@ -25,6 +25,7 @@
           <th>Calculated Amount</th>
           <th>Invoice Status</th>
           <th>Health Care Provider Id</th>
+          <th>Download PDF</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +42,11 @@
           <td>{{invoice.calculatedAmount | currency:'INR'}}</td>
           <td [ngStyle]="{'color': getStatusColor(invoice.invoiceStatus)}">{{invoice.invoiceStatus}}</td>
           <td>{{invoice.healthCareProviderId}}</td>
+          <td>
+            <button class="btn btn-success" (click)="downloadInvoiceAsPDF(invoice.invoiceId)">
+              <i class="bi bi-download"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -12,3 +12,37 @@
     padding: 2%;
     background-color: rgb(247, 242, 242);
 }
+
+.healthCareProvider-card{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: row; 
+}
+.healthCareProvider-card-component{
+    width: calc(33.33% - 5%);
+    margin-bottom : 1%;
+    margin-left :1%
+}
+
+.search-item{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+@media (max-width: 768px) {
+    .healthCareProvider-card {
+        flex-direction: column;
+        width: 500px;
+    }
+    .healthCareProvider-card-component{
+        width: 100%;
+        margin-bottom : 1%;
+        
+    }
+    .search-item{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin-bottom: 1%;
+    }
+}

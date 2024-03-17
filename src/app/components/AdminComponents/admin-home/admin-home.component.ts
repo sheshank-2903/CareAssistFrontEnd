@@ -13,12 +13,14 @@ import { AdminService } from 'src/app/services/AdminServices/admin.service';
 export class AdminHomeComponent {
   isAddAdminModelVisible: boolean = false;
   addAdminForm !: FormGroup;
+  profile_picture: File|string="";
   deleteId!: number;
   adminList: Admin[] = [];
   search: any;
-  confirmation!:string;
+  confirmation!: string;
   admin: Admin = {
     adminId: 0,
+    adminProfilePic: "",
     adminName: "",
     email: "",
     password: ""
@@ -28,16 +30,16 @@ export class AdminHomeComponent {
   }
 
   getAllAdmin() {
-    this.search=undefined;
+    this.search = undefined;
     this.adminService.getAllAdmin(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (admin) => {
           this.adminList = admin;
-        },error=>{alert("Please try Again! Error Occured");}
+        }, error => { alert("Please try Again! Error Occured"); }
       );
   }
 
-  
+
 
   toggleAddAdmin(input?: boolean) {
     let addModel = document.getElementById("addAdminFormModel");
@@ -62,6 +64,7 @@ export class AdminHomeComponent {
 
   ngOnInit() {
     this.addAdminForm = this.formBuilder.group({
+      adminProfilePic: ['',Validators.required],
       adminName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
@@ -74,6 +77,11 @@ export class AdminHomeComponent {
     return this.addAdminForm.controls;
   }
 
+  onFileSelected(event: any) {
+    this.profile_picture = event.target.files[0];
+    console.log(this.profile_picture);
+}
+
   onSubmit() {
     if (this.addAdminForm.invalid) {
       return;
@@ -82,13 +90,14 @@ export class AdminHomeComponent {
     this.admin.adminName = this.addAdminForm.value.adminName;
     this.admin.email = this.addAdminForm.value.email.toLowerCase();
     this.admin.password = this.addAdminForm.value.password;
+    this.admin.adminProfilePic=this.profile_picture;
     this.adminService.addAdmin(this.admin)
       .subscribe((admin) => {
         alert('New Admin Added');
         this.addAdminForm.reset();
         this.toggleAddAdmin();
         this.getAllAdmin();
-      },(error) => {alert('failed to add Admin');});
+      }, (error) => { alert('failed to add Admin'); });
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -111,13 +120,13 @@ export class AdminHomeComponent {
   }
 
   closeDeleteModel() {
-    this.confirmation="";
+    this.confirmation = "";
     let content = document.getElementById('confirmDeleteDisplay');
     content?.classList.remove('active');
   }
 
   submitConfirmDelete() {
-    this.confirmation="";
+    this.confirmation = "";
     this.deleteAdminId(this.deleteId);
     alert('Delete completed');
     let content = document.getElementById('confirmDeleteDisplay');
@@ -164,10 +173,10 @@ export class AdminHomeComponent {
 
   getRandomColor() {
     const r = Math.floor(Math.random() * 128) + 128;
-  const g = Math.floor(Math.random() * 128) + 128;
-  const b = Math.floor(Math.random() * 128) + 128;
+    const g = Math.floor(Math.random() * 128) + 128;
+    const b = Math.floor(Math.random() * 128) + 128;
     const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
     return color;
   }
-
+  
 }
