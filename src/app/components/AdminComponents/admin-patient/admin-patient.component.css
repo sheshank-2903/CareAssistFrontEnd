@@ -4,11 +4,44 @@
 
 .confirm-delete-popup.active{
     display: flex;
-    position: absolute;
+    position: fixed;
     top:30%;
     left: 30%;
     width: 40%;
     border-radius: 5%;
     padding: 2%;
     background-color: rgb(247, 242, 242);
+}
+
+.search-item{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.patient-card{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: row; 
+}
+.patient-card-component{
+    width: calc(33.33% - 5%);
+    margin-bottom : 5%;
+    margin-left :1%
+}
+
+@media (max-width: 768px) {
+    .patient-card {
+        flex-direction: column;
+        width: 500px;
+    }
+    .patient-card-component{
+        width: 100%;
+        margin-bottom : 5%;
+    }
+    .search-item{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin-bottom: 2%;
+    }
 }

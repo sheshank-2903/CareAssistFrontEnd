@@ -1,5 +1,5 @@
 <div class="container" style="margin-top: 2%;">
-  <div class="d-flex" style="margin-bottom: 2%;">
+  <div class="search-item">
     <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="search">
     <button type="button" class="btn btn-outline-info ml-3" (click)="searchPlanById()">
       <i class="bi bi-search"></i>
@@ -13,7 +13,26 @@
       <i class="bi bi-arrow-clockwise"></i>
     </button>
   </div>
-  <table class="table mt-10% table-hover table-bordered text-center">
+
+  <div class="plan-card">
+    <div *ngFor="let plan of plansList" class="plan-card-component">
+          <div class="card" style="width: 100%;" >
+            <div class="card-body" style="text-align: center;">
+              <h5 class="card-title">Plan Id: {{plan.planId}}</h5>
+              <p class="card-text">Plan Name: {{plan.planName}}</p>
+              <p class="card-text">Coverage Amount: {{plan.coverageAmount | currency:'INR'}}</p>
+              <p class="card-text">Description: {{plan.description}}</p>
+              <p class="card-text">Date Of Creation: {{plan.dateOfIssue}}</p>
+              <button type="button" class="btn btn-success" (click)="confirmPurchase(plan.planId)">
+                +
+                Purchase Plan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- <table class="table mt-10% table-hover table-bordered text-center">
     <thead class="thead-dark">
       <tr>
         <th>#planId</th>
@@ -40,7 +59,7 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 
 <div class="confirm-purchase-popup" id="confirmPurchaseDisplay">
   <form #purchaseForm="ngForm">
