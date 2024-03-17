@@ -29,6 +29,18 @@
     margin-left :1%
 }
 
+.card{
+    transition: background-color 0.3s ease;
+}
+.card:hover{
+    background-color: rgba(52, 58, 64, 0.85);
+    color: aliceblue;
+    font-size: 1.2em; 
+}
+.card:hover .card-title {
+    font-size: 1.2em; 
+}
+
 @media (max-width: 768px) {
     .plan-card {
         flex-direction: column;
