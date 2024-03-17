@@ -1,5 +1,5 @@
 <div class="container" style="margin-top: 2%;">
-  <div class="d-flex" style="margin-bottom: 2%;">
+  <div class="search-item">
     <input class="form-control" type="number" placeholder="Search" aria-label="Search" [(ngModel)]="search">
     <button type="button" class="btn btn-outline-info ml-3" (click)="searchClaimsById()">
       <i class="bi bi-search"></i>
@@ -13,7 +13,38 @@
       <i class="bi bi-arrow-clockwise"></i>
     </button>
   </div>
-  <table class="table mt-10% table-hover table-bordered text-center">
+
+  <div class="claims-card">
+    <div *ngFor="let claim of claimList" class="claims-card-component">
+          <div class="card" style="width: 100%;" >
+            <div class="card-body" style="text-align: center;">
+              <h5 class="card-title">Claim Id: {{claim.claimId}}</h5>
+              <p class="card-text">Claim Amount :{{claim.claimAmount}}</p>
+              <p class="card-text" [ngStyle]="{'color': getStatusColor(claim.claimStatus)}">Status: {{claim.claimStatus}}</p>
+              <button type="button" class="btn btn-info mb-3" (click)="showPatientModel(claim.claimId)">
+                <i class="bi bi-info-circle"></i> Patient Details</button>
+                <button type="button" class="btn btn-info mb-3" (click)="showPlanModel(claim.claimId)"><i
+                  class="bi bi-info-circle"></i> Plan Details</button>
+                  <div [ngStyle]="{'display': getDisplayActionButton(claim.claimStatus)}">
+                    <button type="button" class="btn btn-success" (click)="confirmApprove(claim.claimId)">
+                      <i class="bi bi-bag-check"></i>
+                      Approve
+                    </button> /
+                    <button type="button" class="btn btn-danger" (click)="confirmReject(claim.claimId)">
+                      <i class="bi bi-bag-x"></i>
+                      Reject
+                    </button>
+                  </div>
+                  <div [ngStyle]="{'display': getDisplayActionText(claim.claimStatus)}">
+                    No Action Required
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- <table class="table mt-10% table-hover table-bordered text-center">
     <thead class="thead-dark">
       <tr>
         <th>#claimId</th>
@@ -54,8 +85,8 @@
         </td>
       </tr>
     </tbody>
-  </table>
-</div>
+  </table> -->
+
 
 <!--Plan Form Modal -->
 <div id="showPlanModel" class="planDisplay">

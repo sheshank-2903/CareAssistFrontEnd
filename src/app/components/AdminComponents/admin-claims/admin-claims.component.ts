@@ -104,4 +104,5 @@ export class AdminClaimsComponent {
         return 'black';
     }
   }
+
 }

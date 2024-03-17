@@ -3,7 +3,7 @@
 }
 .confirm-delete-popup.active {
     display: flex;
-    position: absolute;
+    position: fixed;
     top: 30%;
     left: 30%;
     width: 40%;
@@ -29,4 +29,37 @@
 
 .patientDisplay {
     display: none;
+}
+
+.search-item{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.claims-card{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: row; 
+}
+.claims-card-component{
+    width: calc(33.33% - 5%);
+    margin-bottom : 5%;
+    margin-left :1%
+}
+
+@media (max-width: 768px) {
+    .claims-card {
+        flex-direction: column;
+        width: 500px;
+    }
+    .claims-card-component{
+        width: 100%;
+        margin-bottom : 5%;
+    }
+    .search-item{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin-bottom: 2%;
+    }
 }

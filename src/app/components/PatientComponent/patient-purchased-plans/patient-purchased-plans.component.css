@@ -12,3 +12,36 @@
     background-color: rgb(222, 221, 221);
     padding: 2%;
 }
+
+.search-item{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.plan-card{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: row; 
+}
+.plan-card-component{
+    width: calc(33.33% - 5%);
+    margin-bottom : 5%;
+    margin-left :1%
+}
+
+@media (max-width: 768px) {
+    .plan-card {
+        flex-direction: column;
+        width: 500px;
+    }
+    .plan-card-component{
+        width: 100%;
+        margin-bottom : 5%;
+    }
+    .search-item{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin-bottom: 2%;
+    }
+}

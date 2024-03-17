@@ -18,6 +18,7 @@
 
   <div class="admin-card">
     <div *ngFor="let admin of adminList" class="admin-card-component"
+
       [ngStyle]="{'display': getDisplay(admin.adminId)}">
       <div class="card" style="width: 100%;" >
         <div class="card-body" style="text-align: center;">
