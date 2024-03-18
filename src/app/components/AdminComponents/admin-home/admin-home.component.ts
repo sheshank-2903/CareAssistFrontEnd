@@ -33,8 +33,15 @@ export class AdminHomeComponent {
     this.search = undefined;
     this.adminService.getAllAdmin(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
-        (admin) => {
-          this.adminList = admin;
+        (admins) => {
+          this.adminList = admins.map(admin => {
+            const imageUrl = `data:image/jpg;base64,${admin.adminProfilePic}`; // Assuming the image is in JPEG format
+            return { ...admin, imageUrl };
+          });
+          console.log(this.adminList);
+  
+          // this.adminList = admin;
+          // console.log(this.adminList);
         }, error => { alert("Please try Again! Error Occured"); }
       );
   }
@@ -90,8 +97,8 @@ export class AdminHomeComponent {
     this.admin.adminName = this.addAdminForm.value.adminName;
     this.admin.email = this.addAdminForm.value.email.toLowerCase();
     this.admin.password = this.addAdminForm.value.password;
-    this.admin.adminProfilePic=this.profile_picture;
-    this.adminService.addAdmin(this.admin)
+    this.admin.adminProfilePic="";
+    this.adminService.addAdmin(this.admin,this.profile_picture)
       .subscribe((admin) => {
         alert('New Admin Added');
         this.addAdminForm.reset();
@@ -169,14 +176,6 @@ export class AdminHomeComponent {
       return "none";
     else
       return "flex"
-  }
-
-  getRandomColor() {
-    const r = Math.floor(Math.random() * 128) + 128;
-    const g = Math.floor(Math.random() * 128) + 128;
-    const b = Math.floor(Math.random() * 128) + 128;
-    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
-    return color;
   }
   
 }

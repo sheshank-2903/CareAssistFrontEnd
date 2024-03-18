@@ -1,7 +1,8 @@
 export interface Admin{
     adminId:number;
-    adminProfilePic:File|string;
+    adminProfilePic:string;
     adminName:string;
     email:string;
     password:string;
+    imageUrl?: string; 
 }

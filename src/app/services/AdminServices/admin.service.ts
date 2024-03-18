@@ -13,10 +13,10 @@ export class AdminService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/admin/'
 
-  addAdmin(admin: Admin): Observable<Admin> {
+  addAdmin(admin: Admin,profile_picture_file:File|string): Observable<Admin> {
     const formData = new FormData();
-    formData.append('file', admin.adminProfilePic);
-    formData.append('adminDto', JSON.stringify(admin));
+    formData.append('file', profile_picture_file);
+    formData.append('adminDtoStringified', JSON.stringify(admin));
     return this._http.post<Admin>(this.baseUrl + 'register', formData);
   }
 

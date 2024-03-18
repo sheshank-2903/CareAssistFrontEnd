@@ -22,6 +22,7 @@
       [ngStyle]="{'display': getDisplay(admin.adminId)}">
       <div class="card" style="width: 100%;" >
         <div class="card-body" style="text-align: center;">
+          <img [src]="admin.imageUrl" alt="Admin Profile Pic">
           <h5 class="card-title">{{admin.adminId}}</h5>
           <p class="card-text">{{admin.adminName}}</p>
           <p class="card-text">{{admin.email}}</p>
