@@ -32,6 +32,7 @@ export class InsuranceCompanyClaimsComponent {
     "email": "",
     "password": "",
     "patientGender": "",
+    patientProfilePic: ""
   }
 
 

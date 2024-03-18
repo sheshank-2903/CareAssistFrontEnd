@@ -35,13 +35,10 @@ export class AdminHomeComponent {
       .subscribe(
         (admins) => {
           this.adminList = admins.map(admin => {
-            const imageUrl = `data:image/jpg;base64,${admin.adminProfilePic}`; // Assuming the image is in JPEG format
+            const imageUrl = `data:image/jpg;base64,${admin.adminProfilePic}`;
             return { ...admin, imageUrl };
           });
-          console.log(this.adminList);
-  
-          // this.adminList = admin;
-          // console.log(this.adminList);
+
         }, error => { alert("Please try Again! Error Occured"); }
       );
   }

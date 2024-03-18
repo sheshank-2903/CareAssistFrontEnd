@@ -7,6 +7,19 @@
   <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" style="width: 60%;">
 
     <div class="form-group">
+      <img class="card-image" [src]="patient.imageUrl" alt="Patient Profile Pic">
+    
+      <button style="margin-bottom: 3%;" (click)="selectPicture()">Change Profile Picture <i class="bi bi-pencil-square btn btn-primary"></i></button>
+        <div class="form-group" *ngIf="updatePicture">
+          <input type="file" class="form-control" (change)="onFileSelected($event)" id="patientProfilePicture" formControlName="patientProfilePicture" required 
+              [ngClass]="{'is-invalid':f['patientProfilePicture'].errors,'is-valid': !f['patientProfilePicture'].errors}">
+          <div *ngIf="f['patientProfilePicture'].errors?.['required']" style="color: red; margin-bottom: 3%;">Please select a new Picture</div>
+          <div *ngIf="!f['patientProfilePicture'].errors" class="valid-feedback" style="color: rgb(9, 199, 34); margin-bottom: 3%;">Looks good!</div>
+          <button [disabled]="!f['patientProfilePicture'].value"  class="btn btn-primary" (click)="updateProfilePicture()">Update Profile Picture</button>   
+    </div>
+    </div>
+
+    <div class="form-group">
       <label for="patientId">Patient ID:</label>
       <input type="number" readOnly class="form-control" id="patientId" formControlName="patientId" required>
     </div>

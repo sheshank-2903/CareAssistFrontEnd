@@ -92,6 +92,16 @@
         </div>
 
         <div class="form-group">
+          <label for="patientProfilePic">Profile Picture:</label>
+          <input type="file" class="form-control" (change)="onFileSelected($event)" id="patientProfilePic" formControlName="patientProfilePic" required 
+          [ngClass]="{'is-invalid':getPatientForm['patientProfilePic'].errors,'is-valid': !getPatientForm['patientProfilePic'].errors}"><br>
+          <div *ngIf="getPatientForm['patientProfilePic'].errors?.['required']" style="color: red;">
+            Profile picture required
+          </div>
+      </div>
+      
+
+        <div class="form-group">
           <label for="password">Password:</label>
           <input type="password" class="form-control" id="password" formControlName="password" required
             [ngClass]="{'is-invalid':getPatientForm['password'].errors,'is-valid':!getPatientForm['password'].errors}">

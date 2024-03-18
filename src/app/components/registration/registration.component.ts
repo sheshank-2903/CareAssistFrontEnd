@@ -19,6 +19,7 @@ export class RegistrationComponent {
   patientRegistrationForm !: FormGroup;
   insuranceRegistrationForm !: FormGroup;
   HealthCareRegistrationForm !: FormGroup;
+  profile_picture: File|string="";
 
   constructor(private formBuilder: FormBuilder, private healthCareService: HealthCareProviderService
     , private patientService: PatientService, private insuranceService: InsuranceCompanyService,
@@ -38,6 +39,7 @@ export class RegistrationComponent {
       password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
       confirm_password: ['', Validators.required],
       patientGender: ['MALE', Validators.required],
+      patientProfilePic: ['',Validators.required]
     }, { validator: this.passwordMatchValidator });
 
     this.insuranceRegistrationForm = this.formBuilder.group({
@@ -75,6 +77,11 @@ export class RegistrationComponent {
     return this.patientRegistrationForm.controls;
   }
 
+  onFileSelected(event: any) {
+    this.profile_picture = event.target.files[0];
+    console.log(this.profile_picture);
+}
+
   onSubmitPatinet() {
     if (this.patientRegistrationForm.invalid) {
       return;
@@ -88,9 +95,11 @@ export class RegistrationComponent {
       descriptionOfTreatment: this.patientRegistrationForm.value.descriptionOfTreatment,
       email: this.patientRegistrationForm.value.email.toLowerCase(),
       password: this.patientRegistrationForm.value.password,
+      patientProfilePic: "",
       patientGender: this.patientRegistrationForm.value.patientGender
+      
     }
-    this.patientService.addPatient(patient)
+    this.patientService.addPatient(patient,this.profile_picture)
       .subscribe(
         (patient) => {
           alert('You have been registered successfully');

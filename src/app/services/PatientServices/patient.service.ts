@@ -13,8 +13,11 @@ export class PatientService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/patient/'
 
-  addPatient(body:Patient):Observable<Patient>{
-    return this._http.post<Patient>(this.baseUrl+"register",body);
+  addPatient(patient:Patient,profile_picture_file:File|string):Observable<Patient>{
+    const formData = new FormData();
+    formData.append('file', profile_picture_file);
+    formData.append('patientDtoStringified', JSON.stringify(patient));
+    return this._http.post<Patient>(this.baseUrl+"register",formData);
   }
 
   updatePatient(body:Patient,token:string):Observable<Patient>{
@@ -81,7 +84,18 @@ export class PatientService {
     });
     
     return this._http.put<any>(`${this.baseUrl}purchasePlan/${patientId}/${planId}`, {}, { headers: headers,responseType:'json' })
-    
+  }
+
+  updateProfilePicture(patientId:number,patientProfilePicture:File,token:string):Observable<Patient>{
+    let tokenString = "Bearer " + token;
+    const formData = new FormData();
+    formData.append('patientProfilePicture', patientProfilePicture);
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Authorization': tokenString 
+    });
+
+    return this._http.put<any>(`${this.baseUrl}updateProfilePicture/${patientId}`, formData, { headers: headers})
 
   }
   

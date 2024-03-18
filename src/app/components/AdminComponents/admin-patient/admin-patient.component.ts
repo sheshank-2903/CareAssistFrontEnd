@@ -23,7 +23,11 @@ export class AdminPatientComponent {
     this.patientService.getAllPatients(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (patients) => {
-          this.patientList = patients
+          this.patientList = patients.map(patient => {
+            const imageUrl = `data:image/jpg;base64,${patient.patientProfilePic}`;
+            return { ...patient, imageUrl };
+          });
+
         },error=>{alert("Please try Again! Error Occured");}
       );
   }

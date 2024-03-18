@@ -12,8 +12,10 @@ import { PatientService } from 'src/app/services/PatientServices/patient.service
 export class PatientHomeComponent {
 
   editable:boolean=true;
-
+  updatePicture:boolean=false;
   updateForm !: FormGroup;
+  newprofilePicture!: File;
+
 
   patient:Patient={
     patientId: 0,
@@ -24,7 +26,8 @@ export class PatientHomeComponent {
     descriptionOfTreatment: '',
     email: '',
     password: '',
-    patientGender: ''
+    patientGender: '',
+    patientProfilePic: ''
   }
 
   constructor(private formBuilder: FormBuilder,private patientService:PatientService,private cookieService:CookieService){
@@ -33,6 +36,7 @@ export class PatientHomeComponent {
     .subscribe(
       patient=>{
         this.patient=patient;
+        this.patient.imageUrl= `data:image/jpg;base64,${this.patient.patientProfilePic}`;
         this.updateForm=this.formBuilder.group({
           patientId:[this.patient.patientId],
           patientName:[this.patient.patientName,[Validators.required,Validators.pattern('^[a-zA-Z ]{3,20}$')]],
@@ -42,8 +46,9 @@ export class PatientHomeComponent {
           descriptionOfTreatment:[this.patient.descriptionOfTreatment,[Validators.required]],
           email:[this.patient.email,[Validators.required,Validators.email]],
           patientGender:[this.patient.patientGender],
+          patientProfilePicture:['',Validators.required],
           password:['',[Validators.required,Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
-          confirm_password: ['', Validators.required] 
+          confirm_password: ['', Validators.required]
         },{validator: this.passwordMatchValidator});
       },error=> alert("Failed to get Patient Information")
     )
@@ -100,13 +105,31 @@ export class PatientHomeComponent {
 
   getYesterdayDate(): string {
     const today = new Date();
-    today.setDate(today.getDate() - 1); // Subtract 1 day to get yesterday's date
+    today.setDate(today.getDate() - 1); 
     const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); 
     const yyyy = today.getFullYear();
   
     return `${yyyy}-${mm}-${dd}`;
   }
+
+  selectPicture(){
+    this.updatePicture=!this.updatePicture;
+  }
+
+  onFileSelected(event: any) {
+    this.newprofilePicture = event.target.files[0];
+    console.log(this.newprofilePicture);
+}
+
+updateProfilePicture(){
+  this.patientService.updateProfilePicture(JSON.parse(this.cookieService.get('userId')).userId,this.newprofilePicture,JSON.parse(this.cookieService.get('userId')).userToken)
+  .subscribe(patient=>{
+    alert('Profile Picture updated successfully');
+    location.reload();
+  },error=>alert("Failed to update Profile Picture"));
+  // location.reload();
+}
 }
 
 

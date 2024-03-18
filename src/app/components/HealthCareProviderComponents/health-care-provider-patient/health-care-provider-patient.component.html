@@ -1,5 +1,5 @@
 <div class="container" style="margin-top: 2%;">
-  <div class="d-flex" style="margin-bottom: 2%;">
+  <div class="search-item" >
     <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="search">
     <button type="button" class="btn btn-outline-info ml-3" (click)="searchPatientById()">
       <i class="bi bi-search"></i>
@@ -14,7 +14,28 @@
     </button>
 
   </div>
-  <table class="table mt-10% table-hover table-bordered text-center">
+  <div class="patient-card">
+    <div *ngFor="let patient of patientList" class="patient-card-component">
+          <div class="card" style="width: 100%;" >
+            <div class="card-body" style="text-align: center;">
+              <h5 class="card-title">Patient Id: {{patient.patientId}}</h5>
+              
+              <img class="card-image" [src]="patient.imageUrl" alt="Patient Profile Pic">
+              
+              <p class="card-text">Name: {{patient.patientName}}</p>
+              <p class="card-text">Email: {{patient.email}}</p>
+              <p class="card-text">DOB: {{patient.dob}}</p>
+              <p class="card-text">Contact: {{patient.contact}}</p>
+              <p class="card-text">Address: {{patient.address}}</p>
+              <p class="card-text">Description Of Treatment: {{patient.descriptionOfTreatment}}</p>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+  <!-- <table class="table mt-10% table-hover table-bordered text-center">
     <thead class="thead-dark">
       <tr>
         <th>#patientId</th>
@@ -37,5 +58,4 @@
         <td>{{patient.email}}</td>
       </tr>
     </tbody>
-  </table>
-</div>
+  </table> -->

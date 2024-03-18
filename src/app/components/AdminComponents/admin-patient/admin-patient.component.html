@@ -19,6 +19,9 @@
           <div class="card" style="width: 100%;" >
             <div class="card-body" style="text-align: center;">
               <h5 class="card-title">Patient Id: {{patient.patientId}}</h5>
+              
+              <img class="card-image" [src]="patient.imageUrl" alt="Patient Profile Pic">
+              
               <p class="card-text">Name: {{patient.patientName}}</p>
               <p class="card-text">Email: {{patient.email}}</p>
               <p class="card-text">DOB: {{patient.dob}}</p>

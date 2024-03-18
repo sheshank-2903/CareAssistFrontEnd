@@ -26,6 +26,7 @@ export class AdminClaimsComponent {
     "email": "",
     "password": "",
     "patientGender": "",
+    patientProfilePic: ""
   }
 
   constructor(private claimService: ClaimsService, private cookieService: CookieService) {
