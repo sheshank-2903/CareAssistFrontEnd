@@ -5,4 +5,7 @@ export interface HealthCareProvider{
     address:string;
 	email:string;
 	password:string;
+	healthCareProviderProfilePic:string;
+	imageUrl?: string; 
+
 }

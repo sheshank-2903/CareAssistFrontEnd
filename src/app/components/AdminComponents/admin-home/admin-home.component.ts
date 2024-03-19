@@ -152,7 +152,10 @@ export class AdminHomeComponent {
     else {
       this.adminService.getAdminByName(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((adminList) => {
-          this.adminList = adminList;
+          this.adminList = adminList.map(admin => {
+            const imageUrl = `data:image/jpg;base64,${admin.adminProfilePic}`;
+            return { ...admin, imageUrl };
+          });
         })
     }
 
@@ -165,6 +168,10 @@ export class AdminHomeComponent {
       this.adminService.getAdminById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((admin) => {
           this.adminList = this.adminList.concat(admin);
+          this.adminList=this.adminList.map(admin => {
+            const imageUrl = `data:image/jpg;base64,${admin.adminProfilePic}`;
+            return { ...admin, imageUrl };
+          });          
         })
     }
   }

@@ -17,7 +17,7 @@ export class AdminProfileComponent {
 
   admin: Admin = {
     "adminId": 0,
-    "adminProfilePic":"",
+    "adminProfilePic": "",
     "adminName": "",
     "email": "",
     "password": "",
@@ -27,7 +27,9 @@ export class AdminProfileComponent {
     this.adminservice.getAdminById(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (admin) => {
+          console.log(admin)
           this.admin = admin;
+          this.admin.imageUrl= `data:image/jpg;base64,${this.admin.adminProfilePic}`;
           this.updateForm = this.formBuilder.group({
             adminId: [this.admin.adminId, []],
             adminName: [this.admin.adminName, [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
@@ -64,7 +66,6 @@ export class AdminProfileComponent {
       }, error => alert("Failed to update Profile"))
   }
 
-
   passwordMatchValidator(control: AbstractControl) {
     const password = control.get('password')?.value;
     const confirm_password = control.get('confirm_password')?.value;
@@ -74,5 +75,14 @@ export class AdminProfileComponent {
     } else {
       return null;
     }
+  }
+
+  onFileSelected(event: any) {
+    console.log(event.target.files[0]);
+    this.adminservice.updateProfilePicture(JSON.parse(this.cookieService.get('userId')).userId, event.target.files[0], JSON.parse(this.cookieService.get('userId')).userToken)
+      .subscribe(admin => {
+        alert('Profile Picture updated successfully');
+        location.reload();
+      }, error => alert("Failed to update Profile Picture"));
   }
 }
