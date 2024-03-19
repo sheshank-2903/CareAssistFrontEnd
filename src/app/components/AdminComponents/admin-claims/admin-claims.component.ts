@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Claims } from 'src/app/model/Claims';
 import { Patient } from 'src/app/model/Patient';
 import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-claims',
@@ -30,6 +31,7 @@ export class AdminClaimsComponent {
   }
 
   constructor(private claimService: ClaimsService, private cookieService: CookieService) {
+    AdminComponent.setSelectedTab("claims");
     this.getAllClaims();
   }
   getAllClaims() {

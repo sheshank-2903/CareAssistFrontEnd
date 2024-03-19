@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Patient } from 'src/app/model/Patient';
 import { PatientService } from 'src/app/services/PatientServices/patient.service';
+import { HealthCareProviderComponent } from '../health-care-provider/health-care-provider.component';
 
 @Component({
   selector: 'app-health-care-provider-patient',
@@ -12,6 +13,7 @@ export class HealthCareProviderPatientComponent {
   patientList: Patient[] = [];
   search: any;
   constructor(private patientService: PatientService, private cookieService: CookieService) {
+    HealthCareProviderComponent.setSelectedTab("patient");
     this.getAllPatients();
   }
   getAllPatients() {
@@ -33,7 +35,10 @@ export class HealthCareProviderPatientComponent {
     else {
       this.patientService.getPatientByName(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((patientList) => {
-          this.patientList = patientList;
+          this.patientList = patientList.map(patient => {
+            const imageUrl = `data:image/jpg;base64,${patient.patientProfilePic}`;
+            return { ...patient, imageUrl };
+          });;
         })
     }
   }
@@ -46,6 +51,10 @@ export class HealthCareProviderPatientComponent {
       this.patientService.getPatientById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((patient) => {
           this.patientList = this.patientList.concat(patient);
+          this.patientList=this.patientList.map(patient => {
+            const imageUrl = `data:image/jpg;base64,${patient.patientProfilePic}`;
+            return { ...patient, imageUrl };
+          });
         })
     }
 

@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Admin } from 'src/app/model/Admin';
 import { AdminService } from 'src/app/services/AdminServices/admin.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-home',
@@ -26,6 +27,7 @@ export class AdminHomeComponent {
     password: ""
   };
   constructor(private adminService: AdminService, private cookieService: CookieService, private formBuilder: FormBuilder, private router: Router) {
+    AdminComponent.setSelectedTab("home");
     this.getAllAdmin();
   }
 

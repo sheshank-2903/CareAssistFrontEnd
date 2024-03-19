@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Admin } from 'src/app/model/Admin';
 import { AdminService } from 'src/app/services/AdminServices/admin.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-profile',
@@ -24,6 +25,7 @@ export class AdminProfileComponent {
   }
 
   constructor(private formBuilder: FormBuilder, private cookieService: CookieService, private adminservice: AdminService) {
+    AdminComponent.setSelectedTab("profile");
     this.adminservice.getAdminById(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (admin) => {

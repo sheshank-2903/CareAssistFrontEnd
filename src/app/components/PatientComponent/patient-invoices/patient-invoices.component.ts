@@ -6,6 +6,7 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Alignment, Margins } from 'pdfmake/interfaces';
 import { style } from '@angular/animations';
+import { PatientComponent } from '../patient/patient.component';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -20,7 +21,7 @@ export class PatientInvoicesComponent {
   search!:any;
 
   constructor(private invoiceService:InvoicesService,private cookieService: CookieService){
-
+    PatientComponent.setSelectedTab("myinvoices");
     this.getInvoicesByPatientId();
   }
 

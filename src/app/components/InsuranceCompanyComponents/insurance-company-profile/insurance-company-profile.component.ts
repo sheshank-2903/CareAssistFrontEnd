@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { InsuranceCompany } from 'src/app/model/InsuranceCompany';
 import { InsuranceCompanyService } from 'src/app/services/InsuranceCompanyServices/insurance-company.service';
+import { InsuranceCompanyComponent } from '../insurance-company/insurance-company.component';
 
 @Component({
   selector: 'app-insurance-company-profile',
@@ -26,7 +27,7 @@ export class InsuranceCompanyProfileComponent {
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private insuranceCompanyService: InsuranceCompanyService, private cookieService: CookieService) {
-
+    InsuranceCompanyComponent.setSelectedTab("profile");
     this.insuranceCompanyService.getInsuranceCompanyById(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(insuranceCompany => {
         this.insuranceCompany = insuranceCompany;

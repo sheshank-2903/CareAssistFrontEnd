@@ -14,7 +14,7 @@
 
 .patientDisplay.active {
     display: flex;
-    position: absolute;
+    position: fixed;
     background-color: rgb(222, 221, 221);
     top: 9%;
     left: 30%;

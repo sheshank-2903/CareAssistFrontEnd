@@ -5,6 +5,7 @@ import { Invoices } from 'src/app/model/Invoices';
 import { HealthCareProviderService } from 'src/app/services/HealthCareProviderServices/health-care-provider.service';
 import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.service';
 import { PlansService } from 'src/app/services/PlansServices/plans.service';
+import { PatientComponent } from '../patient/patient.component';
 
 @Component({
   selector: 'app-patient-request-invoice',
@@ -27,13 +28,19 @@ export class PatientRequestInvoiceComponent {
   invoiceStatus!: string;
 
   constructor(private healthCareProviderService: HealthCareProviderService, private invoiceService: InvoicesService, private cookieService: CookieService) {
+    PatientComponent.setSelectedTab("requestInvoice");
     this.getHealthCareProviders();
   }
 
   getHealthCareProviders() {
     this.search=undefined;
     this.healthCareProviderService.getAllHealthCareProvider(JSON.parse(this.cookieService.get('userId')).userToken)
-      .subscribe(healthCareProviders => this.healthCareProviderList = healthCareProviders,
+      .subscribe((healthCareProviders) => {
+        this.healthCareProviderList = healthCareProviders.map(healthCareProvider => {
+          const imageUrl = `data:image/jpg;base64,${healthCareProvider.healthCareProviderProfilePic}`;
+          return { ...healthCareProvider, imageUrl };
+        });
+      },
         error=> alert("Failed to get Health Care Providers"))
   }
 
@@ -93,7 +100,10 @@ export class PatientRequestInvoiceComponent {
     else {
       this.healthCareProviderService.getHealthCareProviderByName(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((healthCareProviderList) => {
-          this.healthCareProviderList = healthCareProviderList;
+          this.healthCareProviderList = healthCareProviderList.map(healthCareProvider => {
+            const imageUrl = `data:image/jpg;base64,${healthCareProvider.healthCareProviderProfilePic}`;
+            return { ...healthCareProvider, imageUrl };
+          });
         })
     }
   }
@@ -106,14 +116,11 @@ export class PatientRequestInvoiceComponent {
       this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken, this.search)
         .subscribe((healthcareprovider) => {
           this.healthCareProviderList = this.healthCareProviderList.concat(healthcareprovider);
+          this.healthCareProviderList = this.healthCareProviderList.map(healthCareProvider => {
+            const imageUrl = `data:image/jpg;base64,${healthCareProvider.healthCareProviderProfilePic}`;
+            return { ...healthCareProvider, imageUrl };
+          });
         })
     }
-  }
-  getRandomColor() {
-    const r = Math.floor(Math.random() * 128) + 128;
-    const g = Math.floor(Math.random() * 128) + 128;
-    const b = Math.floor(Math.random() * 128) + 128;
-    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
-    return color;
   }
 }

@@ -2,7 +2,7 @@
     text-align: center;
     justify-content: center;
     display: flex;
-    position: absolute;
+    position: fixed;
     background-color: rgb(222, 221, 221);
     top: 50%;
     left: 50%;

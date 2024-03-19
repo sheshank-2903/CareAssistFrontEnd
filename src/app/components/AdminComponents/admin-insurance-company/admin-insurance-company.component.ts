@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { InsuranceCompany } from 'src/app/model/InsuranceCompany';
 import { InsuranceCompanyService } from 'src/app/services/InsuranceCompanyServices/insurance-company.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-insurance-company',
@@ -15,6 +16,7 @@ export class AdminInsuranceCompanyComponent {
   confirmation!:string;
 
   constructor(private insuranceCompanyService: InsuranceCompanyService, private cookieService: CookieService) {
+    AdminComponent.setSelectedTab("insuranceCompany");
     this.getAllInsuranceCompany();
   }
   getAllInsuranceCompany() {

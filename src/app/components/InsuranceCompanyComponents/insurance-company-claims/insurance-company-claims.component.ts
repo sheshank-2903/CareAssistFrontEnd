@@ -5,6 +5,7 @@ import { Patient } from 'src/app/model/Patient';
 import { Plans } from 'src/app/model/Plans';
 import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 import { PlansService } from 'src/app/services/PlansServices/plans.service';
+import { InsuranceCompanyComponent } from '../insurance-company/insurance-company.component';
 
 @Component({
   selector: 'app-insurance-company-claims',
@@ -44,6 +45,7 @@ export class InsuranceCompanyClaimsComponent {
 
 
   constructor(private claimService: ClaimsService, private cookieService: CookieService, private planService: PlansService) {
+    InsuranceCompanyComponent.setSelectedTab("claims");
     this.getClaimsByCompanyId();
   }
 
