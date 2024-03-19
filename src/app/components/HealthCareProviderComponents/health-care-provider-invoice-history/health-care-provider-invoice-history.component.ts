@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Invoices } from 'src/app/model/Invoices';
 import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.service';
+import { HealthCareProviderComponent } from '../health-care-provider/health-care-provider.component';
 
 @Component({
   selector: 'app-health-care-provider-invoice-history',
@@ -13,6 +14,7 @@ export class HealthCareProviderInvoiceHistoryComponent {
   invoiceList: Invoices[] = [];
   search!:any;
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
+    HealthCareProviderComponent.setSelectedTab("invoiceHistory");
     this.getAllInvoice();
   }
   getAllInvoice() {

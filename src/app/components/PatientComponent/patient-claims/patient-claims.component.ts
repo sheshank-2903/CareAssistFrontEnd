@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Claims } from 'src/app/model/Claims';
 import { Plans } from 'src/app/model/Plans';
 import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
+import { PatientComponent } from '../patient/patient.component';
 
 @Component({
   selector: 'app-patient-claims',
@@ -24,7 +25,9 @@ export class PatientClaimsComponent {
 
 
   constructor(private claimService:ClaimsService,private cookieService: CookieService){
+    PatientComponent.setSelectedTab("claims");
     this.getClaimsByPatientId();
+
 
   }
 

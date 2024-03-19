@@ -17,6 +17,7 @@
     <div *ngFor="let healthCareProvider of healthCareProviderList" class="healthCareProvider-card-component">
       <div class="card" style="width: 100%;">
         <div class="card-body" style="text-align: center;">
+          <img [src]="healthCareProvider.imageUrl" alt="Profile Pic" style="height: 100px; width: 100px; border-radius: 50%;">
           <h5 class="card-title">{{healthCareProvider.healthCareProviderId}}</h5>
           <p class="card-text">{{healthCareProvider.healthCareProviderName}}</p>
           <p class="card-text">{{healthCareProvider.providerGender}}</p>

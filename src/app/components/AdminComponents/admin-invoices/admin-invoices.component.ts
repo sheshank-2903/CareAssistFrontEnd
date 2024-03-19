@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Invoices } from 'src/app/model/Invoices';
 import { InvoicesService } from 'src/app/services/InvoicesServices/invoices.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-invoices',
@@ -16,6 +17,7 @@ export class AdminInvoicesComponent {
   confirmation!:string;
 
   constructor(private invoiceService: InvoicesService, private cookieService: CookieService) {
+    AdminComponent.setSelectedTab("invoices");
     this.getAllInvoice();
   }
   getAllInvoice() {

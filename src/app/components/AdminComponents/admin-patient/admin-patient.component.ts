@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Patient } from 'src/app/model/Patient';
 import { PatientService } from 'src/app/services/PatientServices/patient.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-patient',
@@ -15,6 +16,7 @@ export class AdminPatientComponent {
   confirmation!:string;
 
   constructor(private patientService: PatientService, private cookieService: CookieService) {
+    AdminComponent.setSelectedTab("patient");
     this.getAllPatients();
   }
 
@@ -68,7 +70,10 @@ export class AdminPatientComponent {
     else {
       this.patientService.getPatientByName(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((patientList) => {
-          this.patientList = patientList;
+          this.patientList = patientList.map(patient => {
+            const imageUrl = `data:image/jpg;base64,${patient.patientProfilePic}`;
+            return { ...patient, imageUrl };
+          });
         })
     }
 
@@ -81,6 +86,10 @@ export class AdminPatientComponent {
       this.patientService.getPatientById(this.search, JSON.parse(this.cookieService.get('userId')).userToken)
         .subscribe((patient) => {
             this.patientList = this.patientList.concat(patient);
+            this.patientList=this.patientList.map(patient => {
+              const imageUrl = `data:image/jpg;base64,${patient.patientProfilePic}`;
+              return { ...patient, imageUrl };
+            });
         }
       )
     }

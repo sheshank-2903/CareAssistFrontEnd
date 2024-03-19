@@ -27,4 +27,17 @@ export class AdminComponent {
       selectedTab.classList.add('active');
     }
   }
+
+  static setSelectedTab(tabId: string): void {
+  
+    const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
+    tab.forEach((content: Element) => {
+      content.classList.remove('active');
+    });
+
+    const selectedTab: Element | null = document.getElementById("btn-" + tabId);
+    if (selectedTab) {
+      selectedTab.classList.add('active');
+    }
+  }
 }

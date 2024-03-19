@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { HealthCareProvider } from 'src/app/model/HealthCareProvider';
 import { HealthCareProviderService } from 'src/app/services/HealthCareProviderServices/health-care-provider.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-health-care-provider',
@@ -17,6 +18,7 @@ export class AdminHealthCareProviderComponent {
 
 
   constructor(private healthCareProviderService: HealthCareProviderService, private cookieService: CookieService) {
+    AdminComponent.setSelectedTab("healthCareProvider");
     this.getAllHealthCareProvider();
   }
 
@@ -69,7 +71,10 @@ export class AdminHealthCareProviderComponent {
     else{
       this.healthCareProviderService.getHealthCareProviderByName(this.search,JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe((healthCareProviderList)=>{
-        this.healthCareProviderList=healthCareProviderList;
+        this.healthCareProviderList = healthCareProviderList.map(healthCareProvider => {
+          const imageUrl = `data:image/jpg;base64,${healthCareProvider.healthCareProviderProfilePic}`;
+          return { ...healthCareProvider, imageUrl };
+        });
       })
     }
 
@@ -83,6 +88,10 @@ export class AdminHealthCareProviderComponent {
       this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken,this.search)
       .subscribe((healthcareprovider)=>{
         this.healthCareProviderList = this.healthCareProviderList.concat(healthcareprovider);
+        this.healthCareProviderList = this.healthCareProviderList.map(healthCareProvider => {
+          const imageUrl = `data:image/jpg;base64,${healthcareprovider.healthCareProviderProfilePic}`;
+          return { ...healthCareProvider, imageUrl };
+        });
       })
     }
   }

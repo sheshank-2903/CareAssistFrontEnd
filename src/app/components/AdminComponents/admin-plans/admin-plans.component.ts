@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Plans } from 'src/app/model/Plans';
 import { PlansService } from 'src/app/services/PlansServices/plans.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-admin-plans',
@@ -14,6 +15,7 @@ export class AdminPlansComponent {
   search: any;
 
   constructor(private planService: PlansService, private cookieService: CookieService) {
+    AdminComponent.setSelectedTab("plans");
     this.getAllPlans();
   }
   getAllPlans() {

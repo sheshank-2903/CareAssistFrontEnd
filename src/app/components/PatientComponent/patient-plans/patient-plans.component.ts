@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Plans } from 'src/app/model/Plans';
 import { PatientService } from 'src/app/services/PatientServices/patient.service';
 import { PlansService } from 'src/app/services/PlansServices/plans.service';
+import { PatientComponent } from '../patient/patient.component';
 
 @Component({
   selector: 'app-patient-plans',
@@ -19,6 +20,7 @@ export class PatientPlansComponent {
 
 
   constructor(private plansService: PlansService, private patientService: PatientService, private cookieService: CookieService) {
+    PatientComponent.setSelectedTab("browsePlans");
     this.getAllPlans();
   }
 

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { CookieService } from 'ngx-cookie-service';
 import { Patient } from 'src/app/model/Patient';
 import { PatientService } from 'src/app/services/PatientServices/patient.service';
+import { PatientComponent } from '../patient/patient.component';
 
 @Component({
   selector: 'app-patient-home',
@@ -31,7 +32,7 @@ export class PatientHomeComponent {
   }
 
   constructor(private formBuilder: FormBuilder,private patientService:PatientService,private cookieService:CookieService){
-
+    PatientComponent.setSelectedTab("home");
     this.patientService.getPatientById(JSON.parse(this.cookieService.get('userId')).userId, JSON.parse(this.cookieService.get('userId')).userToken)
     .subscribe(
       patient=>{

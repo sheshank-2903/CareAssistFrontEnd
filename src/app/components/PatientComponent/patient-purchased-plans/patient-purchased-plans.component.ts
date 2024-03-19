@@ -4,6 +4,7 @@ import { Claims } from 'src/app/model/Claims';
 import { Plans } from 'src/app/model/Plans';
 import { ClaimsService } from 'src/app/services/ClaimsServices/claims.service';
 import { PlansService } from 'src/app/services/PlansServices/plans.service';
+import { PatientComponent } from '../patient/patient.component';
 
 @Component({
   selector: 'app-patient-purchased-plans',
@@ -21,6 +22,7 @@ export class PatientPurchasedPlansComponent {
   patientId = JSON.parse(this.cookieService.get('userId')).userId;
 
   constructor(private plansService: PlansService, private claimService: ClaimsService, private cookieService: CookieService) {
+    PatientComponent.setSelectedTab("activePlans");
     this.getPlansByPatientid();
 
   }

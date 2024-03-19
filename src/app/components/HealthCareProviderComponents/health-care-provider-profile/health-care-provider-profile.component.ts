@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { CookieService } from 'ngx-cookie-service';
 import { HealthCareProvider } from 'src/app/model/HealthCareProvider';
 import { HealthCareProviderService } from 'src/app/services/HealthCareProviderServices/health-care-provider.service';
+import { HealthCareProviderComponent } from '../health-care-provider/health-care-provider.component';
 
 @Component({
   selector: 'app-health-care-provider-profile',
@@ -34,7 +35,8 @@ onFileSelected(event: any) {
 
 
   constructor(private formBuilder: FormBuilder, private healthCareProviderService: HealthCareProviderService, private cookieService: CookieService) {
-    this.healthCareProviderService.getCompleteHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
+    HealthCareProviderComponent.setSelectedTab("profile");
+    this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
       .subscribe(data => {
         this.healthCareProvider = data;
         this.healthCareProvider.imageUrl= `data:image/jpg;base64,${this.healthCareProvider.healthCareProviderProfilePic}`;

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Plans } from 'src/app/model/Plans';
 import { PlansService } from 'src/app/services/PlansServices/plans.service';
+import { InsuranceCompanyComponent } from '../insurance-company/insurance-company.component';
 
 @Component({
   selector: 'app-insurance-company-plans',
@@ -22,6 +23,7 @@ export class InsuranceCompanyPlansComponent {
 
 
   constructor(private formBuilder: FormBuilder, private plansService: PlansService, private cookieService: CookieService) {
+    InsuranceCompanyComponent.setSelectedTab("home");
     this.getPlansByCompanyId();
   }
 

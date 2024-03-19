@@ -19,7 +19,7 @@
 
 .editPlanDisplay.active {
     display: flex;
-    position: absolute;
+    position: fixed;
     background-color: rgb(222, 221, 221);
     top: 13%;
     left: 30%;
@@ -43,7 +43,7 @@
 
 .confirm-delete-popup.active {
     display: flex;
-    position: absolute;
+    position: fixed;
     top: 30%;
     left: 30%;
     width: 40%;
