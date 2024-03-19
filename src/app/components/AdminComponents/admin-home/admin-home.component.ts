@@ -83,7 +83,6 @@ export class AdminHomeComponent {
 
   onFileSelected(event: any) {
     this.profile_picture = event.target.files[0];
-    console.log(this.profile_picture);
 }
 
   onSubmit() {
