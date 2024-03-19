@@ -25,7 +25,11 @@ export class AdminHealthCareProviderComponent {
     this.healthCareProviderService.getAllHealthCareProvider(JSON.parse(this.cookieService.get('userId')).userToken)
       .subscribe(
         (healthCareProviders) => {
-          this.healthCareProviderList = healthCareProviders
+          this.healthCareProviderList = healthCareProviders.map(healthCareProvider => {
+            const imageUrl = `data:image/jpg;base64,${healthCareProvider.healthCareProviderProfilePic}`;
+            return { ...healthCareProvider, imageUrl };
+          });
+
         },error=>{alert("Please try Again! Error Occured");}
       );
   }

@@ -58,6 +58,7 @@ export class RegistrationComponent {
       password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&./+]{8,}$')]],
       confirm_password: ['', Validators.required],
       providerGender: ['MALE', Validators.required],
+      healthCareProviderProfilePic: ['',Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
 
@@ -119,9 +120,10 @@ export class RegistrationComponent {
       address: this.HealthCareRegistrationForm.value.address,
       email: this.HealthCareRegistrationForm.value.email.toLowerCase(),
       password: this.HealthCareRegistrationForm.value.password,
-      providerGender: this.HealthCareRegistrationForm.value.providerGender
+      providerGender: this.HealthCareRegistrationForm.value.providerGender,
+      healthCareProviderProfilePic: ''
     };
-    this.healthCareService.addHealthCareProvider(healthCareProvider)
+    this.healthCareService.addHealthCareProvider(healthCareProvider,this.profile_picture)
       .subscribe(
         (healthCareProviders) => {
           alert('You have been Registered Successfully');

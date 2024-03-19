@@ -12,8 +12,11 @@ export class HealthCareProviderService {
 
   baseUrl:string = 'http://localhost:8080/api/v1/healthcareprovider/'
 
-  addHealthCareProvider(body:HealthCareProvider):Observable<HealthCareProvider>{
-    return this._http.post<HealthCareProvider>(this.baseUrl+"register",body)
+  addHealthCareProvider(body:HealthCareProvider,profile_picture_file:File|string):Observable<HealthCareProvider>{
+    const formData = new FormData();
+    formData.append('file', profile_picture_file);
+    formData.append('healthCareProviderDtoStringified', JSON.stringify(body));
+    return this._http.post<HealthCareProvider>(this.baseUrl+"register",formData)
   }
 
   updateHealthCareProvider(token:string, body:HealthCareProvider):Observable<HealthCareProvider>{
@@ -32,6 +35,15 @@ export class HealthCareProviderService {
       'Access-Control-Allow-Origin': 'http://localhost:4200'
     }).set("Authorization", tokenString);
     return this._http.get<HealthCareProvider>(this.baseUrl+`get/${HealthCareProviderId}`, { headers, responseType: 'json' })
+  }
+
+  getCompleteHealthCareProviderById(token:string,HealthCareProviderId:number):Observable<HealthCareProvider>{
+    let tokenString = "Bearer " + token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    }).set("Authorization", tokenString);
+    return this._http.get<HealthCareProvider>(this.baseUrl+`getCompleteHealthCareProviderById/${HealthCareProviderId}`, { headers, responseType: 'json' })
   }
 
   getHealthCareProviderByName(HealthCareProviderName:string,token:string):Observable<HealthCareProvider[]>{
@@ -61,5 +73,16 @@ export class HealthCareProviderService {
       'Access-Control-Allow-Origin': 'http://localhost:4200'
     }).set("Authorization", tokenString);
     return this._http.get<HealthCareProvider[]>(this.baseUrl+`getAll`,{headers,responseType: 'json'});
+  }
+
+  updateProfilePicture(healthCareProviderId:number,healthCareProviderProfilePicture:File,token:string):Observable<HealthCareProvider>{
+    let tokenString = "Bearer " + token;
+    const formData = new FormData();
+    formData.append('healthCareProviderProfilePicture', healthCareProviderProfilePicture);
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Authorization': tokenString 
+    });
+    return this._http.put<any>(`${this.baseUrl}updateProfilePicture/${healthCareProviderId}`, formData, { headers: headers})
   }
 }

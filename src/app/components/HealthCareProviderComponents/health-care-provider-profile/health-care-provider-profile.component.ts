@@ -10,6 +10,14 @@ import { HealthCareProviderService } from 'src/app/services/HealthCareProviderSe
   styleUrls: ['./health-care-provider-profile.component.css']
 })
 export class HealthCareProviderProfileComponent {
+onFileSelected(event: any) {
+    console.log(event.target.files[0]);
+  this.healthCareProviderService.updateProfilePicture(JSON.parse(this.cookieService.get('userId')).userId,event.target.files[0],JSON.parse(this.cookieService.get('userId')).userToken)
+  .subscribe(patient=>{
+    alert('Profile Picture updated successfully');
+    location.reload();
+  },error=>alert("Failed to update Profile Picture"));
+}
   editable: boolean = true;
 
   updateForm !: FormGroup;
@@ -20,14 +28,17 @@ export class HealthCareProviderProfileComponent {
     providerGender: '',
     address: '',
     email: '',
-    password: ''
+    password: '',
+    healthCareProviderProfilePic: ''
   }
 
 
   constructor(private formBuilder: FormBuilder, private healthCareProviderService: HealthCareProviderService, private cookieService: CookieService) {
-    this.healthCareProviderService.getHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
+    this.healthCareProviderService.getCompleteHealthCareProviderById(JSON.parse(this.cookieService.get('userId')).userToken, JSON.parse(this.cookieService.get('userId')).userId)
       .subscribe(data => {
         this.healthCareProvider = data;
+        this.healthCareProvider.imageUrl= `data:image/jpg;base64,${this.healthCareProvider.healthCareProviderProfilePic}`;
+        console.log(this.healthCareProvider);
         this.updateForm = this.formBuilder.group({
           healthCareProviderId: [this.healthCareProvider.healthCareProviderId],
           healthCareProviderName: [this.healthCareProvider.healthCareProviderName, [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],

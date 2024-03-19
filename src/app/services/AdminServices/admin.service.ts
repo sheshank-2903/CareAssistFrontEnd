@@ -65,5 +65,16 @@ export class AdminService {
     }).set("Authorization", tokenString);
     return this._http.get<Admin[]>(this.baseUrl+`getAll`, { headers, responseType: 'json' })
   }
+
+  updateProfilePicture(adminId:number,adminProfilePicture:File,token:string):Observable<Admin>{
+    let tokenString = "Bearer " + token;
+    const formData = new FormData();
+    formData.append('adminProfilePicture', adminProfilePicture);
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Authorization': tokenString 
+    });
+    return this._http.put<any>(`${this.baseUrl}updateProfilePicture/${adminId}`, formData, { headers: headers})
+  }
 }
 
