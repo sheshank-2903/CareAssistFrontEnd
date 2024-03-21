@@ -9,7 +9,7 @@
     <div class="form-group" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
       <img class="card-image" [src]="healthCareProvider.imageUrl" alt="Profile Pic" style="height: 200px; width: 200px; border-radius: 50%;">
         <i class="bi bi-pencil-square btn btn-primary" (click)="triggerFileInput.click()" style="position: relative; bottom: 35px;left: 80px;">
-          <input type="file" #triggerFileInput style="display: none" (change)="onFileSelected($event)">
+          <input type="file" accept="image/jpeg, image/jpg, image/png" #triggerFileInput style="display: none" (change)="onFileSelected($event)">
         </i>
     </div>
 

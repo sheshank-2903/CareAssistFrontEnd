@@ -38,7 +38,7 @@
     <div id="addAdminFormModel" class="addAdminDisplay">
       <form style="margin: auto; width: 80%;" [formGroup]="addAdminForm">
         <div class="form-group">
-          <input type="file" (change)="onFileSelected($event)" id="adminProfilePic" formControlName="adminProfilePic" required 
+          <input type="file" accept="image/jpeg, image/jpg, image/png" (change)="onFileSelected($event)" id="adminProfilePic" formControlName="adminProfilePic" required 
           [ngClass]="{'is-invalid':getAdminForm['adminProfilePic'].errors,'is-valid': !getAdminForm['adminProfilePic'].errors}"><br>
           <div *ngIf="getAdminForm['adminProfilePic'].errors?.['required']" style="color: red;">
             Profile picture required

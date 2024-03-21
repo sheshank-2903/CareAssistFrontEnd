@@ -11,7 +11,7 @@
     
       <button style="margin-bottom: 3%;" (click)="selectPicture()">Change Profile Picture <i class="bi bi-pencil-square btn btn-primary"></i></button>
         <div class="form-group" *ngIf="updatePicture">
-          <input type="file" class="form-control" (change)="onFileSelected($event)" id="patientProfilePicture" formControlName="patientProfilePicture" required 
+          <input type="file" accept="image/jpeg, image/jpg, image/png" class="form-control" (change)="onFileSelected($event)" id="patientProfilePicture" formControlName="patientProfilePicture" required 
               [ngClass]="{'is-invalid':f['patientProfilePicture'].errors,'is-valid': !f['patientProfilePicture'].errors}">
           <div *ngIf="f['patientProfilePicture'].errors?.['required']" style="color: red; margin-bottom: 3%;">Please select a new Picture</div>
           <div *ngIf="!f['patientProfilePicture'].errors" class="valid-feedback" style="color: rgb(9, 199, 34); margin-bottom: 3%;">Looks good!</div>

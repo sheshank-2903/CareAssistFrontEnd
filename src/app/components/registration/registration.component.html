@@ -93,7 +93,7 @@
 
         <div class="form-group">
           <label for="patientProfilePic">Profile Picture:</label>
-          <input type="file" class="form-control" (change)="onFileSelected($event)" id="patientProfilePic" formControlName="patientProfilePic" required 
+          <input type="file" accept="image/jpeg, image/jpg, image/png" class="form-control" (change)="onFileSelected($event)" id="patientProfilePic" formControlName="patientProfilePic" required 
           [ngClass]="{'is-invalid':getPatientForm['patientProfilePic'].errors,'is-valid': !getPatientForm['patientProfilePic'].errors}">
           <div *ngIf="getPatientForm['patientProfilePic'].errors?.['required']" style="color: red;">
             Profile picture required
@@ -182,7 +182,7 @@
 
         <div class="form-group">
           <label for="healthCareProviderProfilePic">Profile Picture:</label>
-          <input type="file" class="form-control" (change)="onFileSelected($event)" id="healthCareProviderProfilePic" formControlName="healthCareProviderProfilePic" required 
+          <input type="file" accept="image/jpeg, image/jpg, image/png" class="form-control" (change)="onFileSelected($event)" id="healthCareProviderProfilePic" formControlName="healthCareProviderProfilePic" required 
           [ngClass]="{'is-invalid':getHealthCareProvider['healthCareProviderProfilePic'].errors,'is-valid': !getHealthCareProvider['healthCareProviderProfilePic'].errors}">
           <div *ngIf="getHealthCareProvider['healthCareProviderProfilePic'].errors?.['required']" style="color: red;">
             Profile picture required
