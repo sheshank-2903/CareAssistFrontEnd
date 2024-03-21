@@ -17,6 +17,7 @@ export class FeedbackComponent {
     const recipient = 'sheshanksharma2903@gmail.com,yashdubey415@gmail.com';
     const subject = encodeURIComponent('Feedback of CareAssist from ' + formData.form.value.name);
     const body = encodeURIComponent(formData.form.value.message);
+    formData.reset()
 
     const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`;
     window.open(mailtoLink, '_blank');
